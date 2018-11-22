@@ -1,0 +1,4 @@
+sometimes we need to delete the VMWare software
+```bash
+sudo vmware-installer -u vmware-player
+```

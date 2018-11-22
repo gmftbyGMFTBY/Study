@@ -1,0 +1,12 @@
+2017.10.20
+convert 命令可以用来转换图像格式，支持jpg,bmp,pcx,png,tiff等众多格式转换
+
+1.图像格式转换
+    convert xxx.jpg yyy.png   将jpg转换成png
+2.改变像素
+    convert -resize 1024x768 xxx.jpg yyy.png  1024x768(小写x) 像素转换成1024*768
+3.缩减图像
+    convert -sample 50%x50% xxx.jpg yyy.png    图片缩减(两个维度)
+4.旋转图像
+    convert -rotate 270 xxx.jpg yyy.jpg    顺时针旋转图片270
+

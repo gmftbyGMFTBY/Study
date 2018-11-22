@@ -1,0 +1,17 @@
+class a():
+    def __init__(self,wid = 0,leng = 0):
+        self.wid,self.leng = wid,leng
+    def __getattr__(self,name):
+        if name == 'size':return self.wid,self.leng
+        else : return None
+    def __setattr__(self,name,value):
+        if name == 'size':self.wid,self.leng = value
+        elif name == 'wid' or name == 'leng':print("Leng or Wid")
+        else : print("A")#self.__dict__[name] = value
+
+p = a()
+print(p.size)
+p.w = 2
+p.size = 3,3
+print(p.size)
+print(p.w)

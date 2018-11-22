@@ -1,0 +1,109 @@
+## Python - subprocess模块
+
+1. 大致说明，我们都知道，Python中存在有多进程模块multiprocessing，但是那么这个subprocess子进程模块的作用是什么呢
+    * multiprocessing 和 threading 模块基本一致，是为了发挥多核处理器的优势引入的，通过拆分当前的任务到多个任务中，我们可以使用multiprocessing发挥多个处理器的计算功能
+    * subprocessing模块主要是为了让python可以运行和控制其他的任意程序引入的，主要是用在python和其他的外部程序交互的时候使用
+        * 执行系统调用
+        * 获取调用的标准输出
+        * 获取调用的标准输入
+        * 实现和开启的子进程的复杂通信
+
+2. 可以用来执行其他的外部命令，即执行外部程序，相当于是对Linux的os.fork() / os.execve() 做了一次封装，并且使用subprocess模块的开销相对来说比较小
+    * subprocess不会将父进程加载的模块重新加载，但是multiprocessing会重新加载一遍
+
+3. 引入目的
+    * 替换老旧的函数
+        1. os.system
+        2. os.popen
+        3. os.commands ...
+
+4. 模块学习
+    subprocess中只有一个Popen类，使用该类实现创建进程病和进程实现复杂的交互
+
+
+    1. 调用函数
+        * subprocess.call(*popenargs, timeout = None)
+            1. 运行带参数的命令，然后返回返回值
+            2. timeout控制时间，超过timeout，进程自动结束,并返回一个TimeoutExpired的异常
+            3. 子进程无法交互
+        * subprocess.check_all()
+            父进程等待子进程完成，如果执行失败(返回值不是0或者返回异常),程序弹出CalledProcessError异常
+        * subprocess.check_output():
+            返回子进程向标准输出中输出的输出结果，检出推出信息，返回值不是0报错,返回是以一个二进制字符串
+
+---------- 需要小心，Popen不是阻塞的等待子进程结束，上面的那些函数是阻塞等待的 ----------
+---------- 我们只有调用了Popen的wait之后父进程才会阻塞等待子进程               ----------
+
+    2. Popen细节
+        上面的函数无非是对Popen的一次封装，实际上本质都是运行Popen函数,**生成对象代表子进程**,当我们需要对子进程进行特定的定义的时候，我们需要创建该类的实例
+        * subprocess.Popen(args, bufsize=0, executable=None, stdin=None, stdou=None, stderr = None, preexec_fn=None, close_fds=False, shell=False, cwd=False, env=None, universial_newlines=False, startupinfo=None, creationflags=0)
+            1. args :
+                * 字符串
+                * 序列元素 list / tuple : 可执行文件名和参数声明
+            2. bufsize : 指定缓冲
+            3. executable : 制定可执行程序,指定使用的shell
+            4. shell : True使用shell执行，如果参数是一个字符串，会将字符串在一个shell中执行,否则字符串在普通的情况下运行会报错,只能使用列表
+            5. stdin / stdou / sdterr : 程序的标准输入，标准输出，标准错误
+---
+                如果stdin设置为PIPE，此时的stdin其实是个file对象，用来提供输入到新创建的子进程；如果stdout设置为PIPE，此时stdout其实是个file对象，用来保存新创建的子进程的输出；如果stderr设置为PIPE，此时的stderr其实是个file对象，用来保存新创建的子进程的错误输出
+---
+
+                PIPE / STDIN / STDOUT/ STDERR 都是整数
+                * PIPE : 
+                    subprocess.PIPE = -1是一个整数用来标志着我们的程序的运行状态
+                    PIPE为文本流提供了一个缓冲区,**表明管道开放**
+                * 文件对象
+                * None : 父进程继承
+
+                e.g.
+                    # 从标准输入读取数据，结果返回到文件中
+                    c = subprocess.Popen(['python', 'test.py'], stdin=subprocess.PIPE, stdout = open('result', 'w'))
+
+
+            6. preexec_fn : 只有Unix平台有用，指定一个可执行对象在子进程之前运行
+            7. cwd : 设定自己成的当前执行目录
+
+                e.g.
+                    # 程序的运行环境是 /home/lantian/tensortest, ls现实的内容是当前目录下的内容
+                    c = sb.Popen(['ls'], stdin = sb.PIPE, stdout = open('data', 'w'), cwd = '/home/lantian/tensortest')
+
+            8. env : 字典类型，设定环境变量，None从父进程执行
+            9. Universial_newline : Windows(\r\n), Linux('\n')
+        * subprocess.PIPE : 初始化子进程stdin, stdout, stderr，表示和子进程通信的标准流
+        * subprocess.STDOUT : 将stderr转移到stdout上
+        * 类函数
+            1. Popen.poll() : 检查子进程是否结束，并返回状态信息
+            2. Popen.wait() : 等待子进程结束，并返回状态信息,Popen不会阻塞等待子进程结束
+            3. Popen.communicate(input=None, timeout) : 
+                和子进程交互，向stdin发送数据，或者从stdou / stderr读取数据，input表示发送到子进程的参数和命令信息，返回**元组**,如果希望可以通过stdin发送信息，stdin = PIPE(将读入数据送到PIPE4kb的缓冲区中), 同理如果需要从stdout / stderr 中获取数据，必须将其设定为PIPE
+                会阻塞父进程,等待子进程的结束，使用communicate而不是wait来获取子进程的运行状况
+                1. input = None : 从PIPE中取出数据
+                2. input != None : 向子进程发送消息,input必须是二进制对象(字符串)
+                返回(stdout, stderr)的元组，里面的东西是字符串或者是二进制字符串
+
+                e.g.
+                    import subprocess as sb
+                    p = sb.Popen(['ls'], stdout = sb.PIPE)
+                    stdout, stderr = p.communicate()
+            4. Poen.send_signal(signal) : 向子进程发送信号,系统信号
+            5. Popen.terminate() : 终止进程
+            6. Popen.kill() : 杀死子进程
+---------- stdin, stdout, stderr 是文件对象，我们可以用对基本文件对象的方法读写 ----------
+---------- read / write                                                         ----------
+            7. Popen.stdin
+            8. Popen.stdout
+            9. Popen.stderr
+                    e.g.
+                        p1 = subprocess.Popen(cmd, stdout = subprocess.PIPE)
+                        p2 = subprocess.Popen(cmd, stdin = p1.stdout)
+                    e.g.
+                        # 声明stdout不是标准输出，而是一个自定义的缓冲区PIPE,这样数据就可以读取出来，这样可以始终保证缓冲区永远不会溢出(注水漏水问题)
+                        p1 = subprocess.Popen(cmd, shell=True, stdout = subprocess.PIPE)
+                        for line in p1.stdout:
+                              print(line)
+            10. Popen.pid : 子进程的PID
+            11. Popen.returncode : 获取进程的返回值，进程没有结束，返回None
+
+    3. Popen使用方法
+        Python 3.5 新增特性
+            c = subprocess.run(cmd, stdout = subprocess.PIPE)    # 不捕获输出，输出可以直接通过c.stdout获得(stdout = subprocess.PIPE必须加上)

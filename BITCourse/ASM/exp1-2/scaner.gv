@@ -1,0 +1,22 @@
+digraph finit_state_machine {
+    rankdir=LR;
+    size="50,50";
+   
+    /*
+    node [shape = circle, label = "600", fontsize = 10]; 600;             
+    node [shape = doublecircle, label = "identifier", fontsize = 10]; 601;             //
+    
+    0       ->      200    [label=",;white_space:.()[]{}"];
+    */
+    node [shape = circle, label = "Begin", fontsize = 10]; begin;
+    node [shape = circle, label= "send", fontsize = 10]; send;
+    node [shape = circle, label = "recv", fontsize = 10]; recv;
+    node [shape = circle, label = "end", fontsize = 10]; end;
+
+    begin       ->      send    [label="begin send"];
+    send        ->      recv    [label="no character"];
+    send        ->      recv    [label="permit to send"];
+    send        ->      error   [label="error"]
+    recv        ->      send    [label="no character"];
+    recv        ->      end     [label="error"];
+}

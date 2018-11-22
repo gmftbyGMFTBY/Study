@@ -1,0 +1,9 @@
+2018.5.26
+    因为在 Linux/Ubuntu 18.04 上出现了强拔U盘导致的U盘文件系统损坏，变成只读文件系统的修复措施
+
+    1. 查看U盘对应的设备号
+        df -h    # 一般都是 /dev/sdb1 ...
+    2. 手动卸载U盘
+        umount /media/lantian/usb_name
+    3. 回复U盘分区
+        dosfsck -a /dev/sdb1     # 第一步获得的U盘设备号

@@ -1,0 +1,33 @@
+1. 截取全屏
+    scrot
+        1. 默认截屏的结果存放在当前目录中,默认使用时间戳表示文件名
+        2. 指定图片的保存名称和保存的位置
+            scrot path/name.png | scrot path/name.jpg
+
+2. 获取版本号
+    scrot -v
+
+3. 抓取当前焦点
+    1. scrot -u path/name.png
+    2. 抓取包含边框
+        scrot -ub path/name.png
+
+4. 抓取鼠标选定窗口截屏
+   在没有鼠标选定区域之前，该进程不会结束
+   鼠标划定区域进行截屏
+    scrot -s
+
+5. 截屏延时
+    1. scrot --delay [NUM]
+       e.g.
+            scrot --delay 5    # 延时5秒截屏，提供准备时间
+    2. 截屏倒数
+       scrot -d 5 -c
+
+6. 图片质量
+    scrot -q [NUM]
+    NUM : 1 - 100 (默认75)
+
+7. 截屏的缩略图
+    scrot --thumb [NUM]
+    [NUM] 缩略的百分比

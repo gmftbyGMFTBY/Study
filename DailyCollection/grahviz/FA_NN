@@ -1,0 +1,92 @@
+[参考连接](https://martin-thoma.com/how-to-draw-a-finite-state-machine/)
+文中采用了 graphviz 使用 dot 画出了非常好看的 DFA 和 NFA
+**意还可以用来画 神经网络中的计算流程图**
+
+1. 构建 DFA / NFA 的图
+    * test.gv 文件
+    * NFA
+        ```graphviz
+        digraph finite_state_machine {
+            rankdir=LR;                     // 绘图的方式， LR 是从左向右, LF 是从上到下
+            size="8,8"                      // 设置图片的显示大小，好像并不准确的样子
+                                            // 8 * 8 英寸
+
+            node [shape = doublecircle]; S;
+            node [shape = point]; qi;
+
+            node [shape = circle];          // 定义了下面的没有定义的节点(q1, q2) 都是 circle 类型的
+            qi -> S;
+            S -> q1 [label = "a"];
+            S -> S  [label = "a"];
+            q1 -> S [label = "a"];
+            q1 -> q2 [label = "b"];
+            q2 -> q1 [label = "b"];
+            q2 -> q2 [label = "b"];
+        }
+        ```
+    * DFA
+        ```graphviz
+        digraph finit_state_machine {
+            rankdir=LR;
+            size="8,5";
+
+            // box - 长方形的边框, triangle - 三角子那个的边框, circle - 圆形的边框
+            node [shape = doublecircle, label="{f}", fontsize = 12] f;
+            node [shape = doublecircle, label="{q2, f}", fontsize = 10] q2f;
+
+            node [shape = circle, label = "S", fontsize = 14]; S;
+            node [shape = circle, label = "{q1}", fontsize = 12]; q1;
+            node [shape = circle, label = "{q2}", fontsize = 12]; q2;
+
+            node [shape = point]; qi;
+            qi -> S;
+
+            S  -> q1  [label = "a"];
+            S  -> q2f [label = "b"];
+            S  -> q2  [label = "c"];
+
+            q1 -> q2  [label = "b"];
+
+            q2f -> f  [label = "b"];
+            q2f -> q2 [label = "c"];
+
+            q2  -> f  [label = "b"];
+            q2  -> q2 [label = "c"];
+        }
+        ```
+2. dot 画图 - 转 png 图片
+    ```shell
+    dot -Tpng test.gv -o test.png
+    ```
+
+3. graphviz 一些总结的要点
+    1. 图的种类
+        * diagrpah: 有向图
+        * graph: 无向图
+    2. 边的种类
+        * -> : 有向边
+        * -- : 无向边
+    3. 节点
+        * graphviz 中的节点是有形状的，通过 shape 属性来调节，默认参数是 shape = ellipse (椭圆形)
+        * 单纯的 node 是用来设置所有点的形状的,除非在后面特殊指明
+        * 其他的形状
+            1. ellipse: 椭圆型
+            2. box: 矩阵
+            3. circle: 圆形
+            4. record: 记录型，方角
+            5. Mrecord: 记录型，圆角
+            6. plaintext: 纯文本无边框
+            7. invtriangle: 三角形
+            8. polygon: 多边形,当是多边形的时候，可以使用属性 sides= 来设置多边形的边数
+            9. point: 点
+            ...
+        * 颜色
+            color 属性
+            node [color = red]
+        * label 属性
+            标记显示
+    4. 边
+        1. 颜色
+            a -> [color = red]
+    5. 注释
+        注释的方式如上 //, /**/

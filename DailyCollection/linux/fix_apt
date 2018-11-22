@@ -1,0 +1,3 @@
+apt 坏了重新下载的方法
+1. http://security.ubuntu.com/ubuntu/pool/main/a/apt/xxxxx_amd64.deb
+2. sudo dpkg -i xxx_amd64.deb

@@ -1,0 +1,34 @@
+io - 文件处理模块
+
+![可以参考的链接](http://blog.csdn.net/jeryjeryjery/article/details/72794796)
+
+首先我们需要知道，并不是我们的所有的读写操作都是针对文件的，有时候我们有时候是要针对内存中的数据进行文件的读写操作，本质上就是讲内存中的数据包装成一个文件,比如说我们pandas库中的文件读写模块中
+好处是我们得到的是可读可写的双向的读写对象
+
+eg:
+    pd.read_csv("文件名字符串" / 文件对象 / io对象)
+
+Python中我们存在两种字符串，字节字符串和Unicode字符串
+
+1.StringIO:
+    输入是字符串，讲字符串包装成io对象，可以执行文件操作的
+    readline , readlines , getvalue , write , seek 等函数操作
+    seek(pos, whence):    # whence 是 0, 1, 2. pos 是在 `whence` 基础上的偏移距离
+        0 x  - 流开头后x字节偏移
+        1 x  - 流当前位置偏移
+        2 x  - 流尾位置偏移
+
+    eg:
+        import io
+        p = io.StringIO("lantian....")
+        p.write(...)
+        p.getvalue()
+        p.seek(0 , 0)    # beck to the begining
+        p.readlines()
+
+2.BytesIO:
+    有时候我们的内存中的数据并不是string类型，而是二进制的字节字符串
+    eg:
+        p = b'lantian'
+    这时候我们只能用BytesIO来进行读取
+    所有的用法和上面的类似，返还一个文件对象

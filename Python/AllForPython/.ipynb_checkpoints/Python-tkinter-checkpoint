@@ -1,0 +1,455 @@
+Python GUI
+1. 步骤
+    1. 导入GUI
+    2. 创建指定控件
+    3. 指定控件的master属主
+    4. 通知管理器控件产生
+
+2. 框架
+    ```Python
+    import tkinter
+    # 建立窗口
+    window = tkinter.Tk()
+    window.title('窗口标题')
+    window.geometry('200x200')    # 设定窗口大小
+    window.mainloop()    # 进入消息循环
+
+    # 退出窗口环境
+    window.quit()    # 有时候会失败，可以使用destroy
+    window.destroy()
+
+    # 禁止修改window的大	小
+    window.resizable(False, False)
+
+    # window 居中的函数处理
+    # root是window, width = 300, height = 240
+    def center_window(root, width, height):  
+        screenwidth = root.winfo_screenwidth()  
+        screenheight = root.winfo_screenheight()  
+        size = '%dx%d+%d+%d' % (width, height, (screenwidth - width)/2, (screenheight - height)/2)  
+        print(size)  
+        root.geometry(size) 
+        
+    # window刷新操作，对于像聊天室一样的程序，需要定时刷新
+    window.update()    # window.update_idletasks()
+    ```
+
+3. 组件
+    1. tk.Var : 
+
+       * tk.IntVar : 
+
+         就算提供给变量字符串或者是float会自动装换成int类型并在.get()中返回
+
+         1. .get()
+         2. .set()
+
+       * tk.StringVar :
+
+         - .get() : 返回字符串变量
+         - .set('text') : 设定字符串变量
+
+    2. Button : 
+
+       ```python
+       # window 声明属主
+       # function_name 声明点击动作执行的函数
+       button = tk.Button(window, text = 'button', width = 15, height = 1, command = function_name)
+
+       button.pack()    # 打包button到window上
+       ```
+
+    3. Canvas
+
+       画布 : 规定一块区域放入图片等等自己画线和图形，可以调整位置
+
+       P.S. : 可以自己做游戏玩
+
+       ```python
+       # height & width 不要超过window否则显示效果欠缺
+       canvas = tk.Canvas(window, bg = 'blue', height = 100. width = 200)
+
+       # 加入图片，仅限gif,不常用
+       image_file = tk.PhotoImage('filepath')
+       # 这里的image需要拉出来一个引用，可以为之后的位置移动的canvas.move函数提供句柄, anchor是一个区域位置,0, 0 是在这个区域上的坐标，image指向一个tk打开的图片句柄
+       # NW     N    NE
+       #
+       #
+       # W   CENTER   E
+       #
+       # 
+       # SW     S    SE
+       image = canvas.create_image(0, 0, anchor = 'nw', image = image_file)
+
+       # 划线,(50, 50) -> (80, 80)的直线
+       # 每一个canvas元素都可以加上一个属性tags用来分类
+       line = canvas.create_line(50, 50, 80, 80, tags = 'line')
+       # 划圆形,fill决定填充颜色
+       oval = canvas.create_oval(50, 50, 80, 80, fill="#ff0000",
+                outline = "#000000",   # 轮廓白色
+                tags = "node")
+       # 划扇形,start -> extent是张开的角度
+       arc  = canvas.create_arc(50, 50, 80, 80, start = 0, extent = 180)
+       # 正方形
+       rect = canvas.create_rectangle(50, 50, 80, 80)
+
+       # 移动某一个画布上的元素, rect, line, oval, arc , image ... 
+       # (0, 2) -> x坐标移动0,y坐标移动2px
+       canvas.move(rect, 0, 2)
+       canvas.pack(side = 'top')
+
+       # 清空canvas
+       canvas.delete("all")
+       canvas.delete('line')    # 可以使用tags统一清空
+       ```
+
+
+4. Checkbutton
+
+   多选框
+
+   ```python
+   # window 说明属主
+   # text 显示多选框的说明
+   # variable 将选中后的值喂给variable
+   # onvalue 选中的值
+   # offvalue 没选中的值
+   # command 选中后的触发函数
+
+   # value 的值可以提供给command制定的函数去处理逻辑
+   cb = tk.Checkbutton(window, text = 'text', variable = var, onvalue = 1, offvalue = 0, command = print_selection)
+   ```
+
+5. Entry
+
+   输入文本框
+
+   ```python
+   # show 决定显示的输入信息，None表示正常输入回显，如果改成特定字符比如'*' / ''会变成类似密码输入或者linux密码输入的状态
+   # textvariable存储输入数据
+   e = tk.Entry(window, show=None, textvariable = var)
+   e.pack()
+
+   var = e.get()    # 获得用户的输入并返回字符串类型,也可以使用上面的textvariable来获得输入的返回值
+   ```
+
+6. Frame
+
+   一个框架，用来布局
+
+   ```python
+   # 主frmae
+   frm = tk.Frame(window)
+   frm.pack()    # 这个pack是相对与window
+
+   # 子frame
+   frm_l = tk.Frame(frm)
+   frm_l.pack(side = 'left')    # 这个pack是相对与frm的
+   frm_r = tk.Frame(frm)
+   frm_r.pack(side = 'right')
+
+   # 加入其他组件,属主是左边的子frame
+   tk.Label(frm_l, text = 'on the frm_l').pack()
+   ```
+
+7. Label
+
+   ```python
+   # 建立tk专用的字符串变量，如果不适用字符串变量现实label中的文字，可以直接用text而不是textvariable
+   msg = tk.StringVar()
+   msg.set('set the string as this')    # 将字符串变量的值设定
+   # 声明属主，加入字符串变量，背景颜色，字体和大小，长宽
+   label = tk.Label(window, textvariable = msg, bg='red', font=('Arial', 12), width = 15,height = 2)
+
+   label.pack(side='left')    # left, right, bottom, top
+
+   # 重新配置选项
+   label.config(text = var.get())
+   ```
+
+8. Listbox
+
+   下拉菜单
+
+   ```python
+   var = tk.StringVar()
+   var.set([1, 2, 3, 4, 5, 6])    # 内部可以设置成tuple, list都可以
+   lb = tk.Listbox(wndow, listvariable = var)    # 利用变量构建listbox
+
+   # 加入新的表单
+   lb.insert('end', 7)            # 末尾插入7
+   lb.insert(1, 8)                # 在1号位置插入，0号开始计数
+   lb.delete(2)				   # 删除第2号位置的表单，0开始计数
+   lb.pack()
+
+   # 获取用户的选定表单内容
+   value = lb.get(lb.curselection())    # 如果用户的光标没有获取报错，返回的内容是用户插入表单的python元素的类型,int / string / ...
+   # lb.curselection 返回元组
+   ```
+
+9. Menubutton
+
+10. Menu
+
+  屏幕最上面的一层菜单栏(mac \ linux) / 应用最上面的菜单栏(windows)
+
+  ```python
+  # 声明属主，属主可以是window,也可以是另一个menu,第一级menu就是窗口最上面一行
+  # menu.add_cascade(label='File', menu=menubar)    # menu 是menubar的上一层menu
+  menubar = tk.Menu(window, tearoff = 0)
+  filemenu = tk.Menu(menubar, tearoff = 0)
+  menubar.add_cascade(label = 'File', menu = filemenu)
+  # command代表当前的这个menu的其中一个操作，指向一个函数:w
+
+  filemenu.add_command(label = 'New', command = do_job)
+  filemenu.add_command(label = 'Save', command = do_job)
+  filemenu.add_separator()    # 添加分割线
+  filemenu.add_command(label = 'Exit', command = window.quit)
+
+  window.config(menu = menubar)
+  ```
+
+11. Message
+
+12. Radiobutton
+
+    单选框组件
+
+    ```python
+    var = tk.StringVar()
+    # window是属主
+    # text是选项的名称
+    # value是要选中时要返回的数据
+    # variable是返回数据要喂给的对象
+    # command是触发函数
+    rb = tk.Radionbutton(window, text='option A', variable = var, value = 'A', command = print_selection)
+    rb.pack()
+    ```
+
+13. Scale
+
+    返回具体数值的滚动条，类似于音量调节的滚动条
+
+    ```python
+    def print_selection(s):
+        l.config(text = v)
+
+    # label 是滚动条的名称
+    # from_, to 是数值的范围
+    # origent 是选择竖直还是水平方向
+    # 	1. tk.HORIZONTAL : 水平
+    # 	2. tk.VERTIVAL	 : 竖直
+    # length : 200px长度的滚动条
+    # showvalue : 是否在滚动条上显示数值
+    # tickinterval : 显示间隔
+    # resolution   : 显示数据的精度,[1, 0.1, 0.01, 0.001, ...]
+    # command      : 触发函数，出发函数有一点特别就是默认有一个参数表示当前的数值,是字符串类型的
+    s = tk.Scale(window, label='this is scale', from_ = 5, to = 10\
+                orient = tk.HORIZONTAL, length = 200, showvalue=0\
+                tickinterval = 4, resolution = 0.1,command = print_)
+    ```
+
+14. Scrollbar
+
+    和listbox / canvas / text 等一起使用,滚动条
+
+    ```python
+    import tkinter as tk
+
+    # 下面的用法, listbox / text / canvas　都是一致的，只需要换组件就可以
+
+    window = tk.Tk()  
+
+    # 创建滑动组件，打包在右侧,并且滑块指定(tk.Y)
+    sb = tk.Scrollbar(window)  
+    sb.pack(side='right', fill=tk.Y)  
+
+    listbox = tk.Listbox(window, yscrollcommand=sb.set)  
+    for i in range(1000):  
+        listbox.insert('end', str(i))  
+    listbox.pack(side='left')  
+
+    # 配置scrollbar,使得和listbox之间可以响应
+    sb.config(command=listbox.yview)  
+      
+    window.mainloop() 
+    ```
+
+15. Text
+
+    ```python
+    t = tk.Text(window, height = 2,width = 15)
+    t.pack()
+
+    # 文本插入
+    t.insert('insert', var)    # var 是字符串类型,采用insert插入光标指定位置
+    t.insert('end', var)    # end插入到最后一处
+    t.insert(1.5, var)      # 插入到1行5列(列从0计数)
+
+    # 清空text
+    text.delete(1.0,tk.END)
+
+    # 获得text内容
+    text.get(0.0, 'end')
+    ```
+
+16. Toplevel
+
+    * 叠加窗口，不需要主循环，使用window的主循环
+    * 子window
+    * 可以作为我们的之后的frame或者其他的组件的master
+
+    ```python
+    tw = tk.Toplevel(window)
+    tw.geometry('350x200')
+    tw.title('Sign up')
+
+    # 没有pack方法
+
+    # 删除子windwo, toplevel
+    tw.destroy()
+    ```
+
+17. Spinbox
+
+18. PanedWindow
+
+19. LabelFrame
+
+20. Filedialog
+
+    tkinter打开文件管理器，获取文件路径
+
+    ```python
+    import tkinter as tk
+    from tkinter import filedialog
+
+    root = tk.Tk()
+    fpath = filedialog.askopenfilename()    # fpath是获取点击的文件的路径
+
+    # 保存文件，获得保存的文件的句柄，可以执行写入操作
+    with filedialog.asksaveasfile() as f:
+        f.write("something into file")
+    ```
+
+21. MessageBox
+
+    弹出窗口，弹出提示信息
+
+    ```python
+    from tkinter import messagebox
+    messagebox.showinfo(title = 'hi', message = 'show info')
+    messagebox.showwarning(title = 'hi', message = 'show warning')
+    messagebox.showerror(title = 'hi', message = 'show error')
+    # res返回是yes / no的字符串
+    res = messagebox.askquestion(title = 'hi', message = 'show question')
+    # res返回是True / False
+    res = messagebox.askyesno(title = 'hi', message = 'show yesno')
+    ```
+
+22. scrolledtext
+    带滚轮的text
+    ```python
+    from tkinter import scrolledtext
+    scr = scrolledtext.ScrolledText(window, width = 30, height = 3, wrap = tk.WORD
+    ```
+---
+
+4. 组件的放置方式
+
+    1. pack : 
+
+       ```python
+       .pack(side = 'left')    # left / right / bottom / top
+       ```
+
+    2. grid : 
+
+          格式放置
+
+          ```python
+             for i in range(4):
+                for j in range(3):
+                    # padx, pady 是外扩展边距，ipadx . [iady 是内扩展边距]
+                    tk.Label(window, text = 1).grid(row = i, column = j, padx = 10, pady = 10, ipadx = 10, ipady = 10)
+          ```
+
+
+    3. place : 
+
+       ```python
+       # 防止在 (0, 100) 坐标的点上，使用px作为单位
+       tk.Label(window, text = 1).place(x = 10, y = 100)
+       ```
+
+
+5. 实例
+
+    1. 登录界面
+
+       ```python
+       import tkinter as tk
+       from tkinter import messagebox
+
+       # 建立窗口
+       window = tk.Tk()
+       # 窗口的名称
+       window.title('my window')
+       # 长宽设定
+       window.geometry('450x300')
+
+       canvas = tk.Canvas(window, height = 200, width = 500)
+       image_file = tk.PhotoImage(file = 'welcome.gif')
+       iamge = canvas.create_image(0, 0, anchor = 'nw', image = image_file)
+       canvas.pack(side = 'top')
+
+       tk.Label(window, text = 'User name').place(x = 50, y =150)
+       tk.Label(window, text = 'Password').place(x = 50, y =190)
+
+       var_user_name = tk.StringVar()
+       var_user_name.set('18811371908@163.com')
+       entry1 = tk.Entry(window, textvariable = var_user_name)
+       entry1.place(x = 160, y = 150)
+
+       var_pass_name = tk.StringVar()
+       entry2 = tk.Entry(window, textvariable = var_pass_name, show = '*')
+       entry2.place(x = 160, y = 190)
+
+       def user_login():
+           user_name = var_user_name.get()
+           user_pass = var_pass_name.get()
+           try:
+               # 打开数据库检验是不是存在
+               messagebox.showinfo(title = 'welcome', message = 'how are you !')
+               return True
+           except:
+               pass
+           
+           def user_sign():
+               def destroy():
+                   # 删除内部函数
+                   tw.destroy()
+               tw = tk.Toplevel(window)
+               tw.geometry('350x200')
+               tw.title('Sign up')
+        
+               tk.Button(tw, text = 'destroy', width = 15, height = 1, command = destroy).pack()
+
+           b1 = tk.Button(window, text = 'login', command = user_login)
+           b1.place(x =80, y = 230)
+         
+           b2 = tk.Button(window, text = 'sign up', command = user_sign)
+           b2.place(x = 220, y = 230)
+           
+              # 刷新的主循环,循环更新GUI的数据
+           window.mainloop()
+       ```
+
+6. command需要传递参数的时候，可以对command使用lambda表达式
+
+    ```python
+    btn = Tkinter.Button(text=u'按钮', command=lambda : handler(a=1, b=2, c=3))  
+    ```
+
+    ​
+

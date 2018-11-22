@@ -1,0 +1,5 @@
+python中
+import os
+os.system在子shell中开一个进程执行shell命令
+这个是有返回值的
+os.system函数的返回值就是子shell中命令的返回值，如果非0就是执行出现异常

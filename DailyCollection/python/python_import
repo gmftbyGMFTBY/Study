@@ -1,0 +1,12 @@
+1. python模块导入的一些需要注意的要点
+    导入模块的关键就是要配置 sys.path 环境变量的值，找到具体的模块的路径
+    test.py 调用 need.py
+    1. 如果test.py和need.py在同一目录下
+        在test.py中
+        import need
+    2. 如果test.py和need.py的父目录在同一目录下
+        1. 在need.py目录中加入 __init__.py 声明包
+        2. from need_package import need
+    3. 如果test.py需要导入的need.py在上层目录模块中或者其他的模块中
+        import sys
+        sys.path.append('..')    # 加入上层目录的路径

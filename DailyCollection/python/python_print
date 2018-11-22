@@ -1,0 +1,16 @@
+2017.1.10
+    今天看了看python的print的联机文档，学会了几招比较方便的调用
+    print(...)
+        print(value, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
+        将数据输出到file对应的制定文件对象中，默认是输出到标准输出
+        可选参数
+            * file : 一个文件对象，默认是当前的输出流
+                print('this is a string', file=open('lantian.py', 'w'))
+                将字符串输出到一个文件中，文件不存在默认创建文件,文件存在清空重新输入
+            * sep  : 数值间的插入的字符，默认是空格
+                print(1, 2, 3, 4, 5, sep='this is a inserted string')
+            * end  : 输出结束后的输出字符，默认是换行'\n'
+                print('this is string1', end='\r')
+                print('this is string2', end='\n')
+                输出的结果只有this is string2，\r是回车符号，第一个输出被第二个输出覆盖
+            * flush : 是否强制的刷新流缓冲

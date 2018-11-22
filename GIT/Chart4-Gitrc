@@ -1,0 +1,10 @@
+配置命令：
+１．git config --global color.ui true
+２．git add -f [file] - 强制添加，无视ignore
+３．git check-ignore -v [file]　- 查看忽视条件
+４．git config --global alias.[anothername] [commit,branch,checkout,....] - 起别名，global全局参数，该电脑下的所有的git仓库都有效
+５．git config --global alias.last 'log -1' - 带参数的别名，我们用字符串代替
+６．git config --global alias.drawb 'log --graph --pretty=oneline'
+７．git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+８．--global参数是针对整个电脑的所有的git仓库的，吐过不加的话，只针对当前的git仓库有效，我们所有的配置信息都存放在了我们每个git的.git/config文件中
+９．全局的git配置文件在我们的主目录下的.gitconfig中

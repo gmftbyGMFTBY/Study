@@ -1,0 +1,2 @@
+2017.2.16
+    Linux-Ubuntu中添加开机启动项，编辑/etc/rc.local文件中的脚本，Ubuntu在开机之后会自动执行/etc/rc.local文件中的脚

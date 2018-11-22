@@ -1,0 +1,6 @@
+# this script to save the cheatsheet to my repo
+
+tar -cvf cheat.tar.gz /home/lantian/.cheat/*
+mv cheat.tar.gz /home/lantian/File/Study/Linux/cheat
+
+echo "The cheat.tar.gz has been moved to ~/File/Study/Linux/cheat"

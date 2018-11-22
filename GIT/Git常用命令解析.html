@@ -1,0 +1,1067 @@
+
+<link rel="stylesheet" href="http://static.blog.csdn.net/code/prettify.css" />
+<script type="text/javascript" src="http://static.blog.csdn.net/code/prettify.js"></script>
+
+<script type="text/javascript">
+    var username = "jtracydy";
+    var _blogger = username;
+    var blog_address = "http://blog.csdn.net/jtracydy";
+    var static_host = "http://static.blog.csdn.net";
+    var currentUserName = "";  
+
+    var fileName = '70402663';
+    var commentscount = 1;
+    var islock = false
+
+    
+
+   window.quickReplyflag = true;
+            
+             var isBole = false;
+    
+    
+
+            
+            var isDigg = false;
+    
+    
+      
+      var isExpert=false;
+        
+
+</script>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="http://c.csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="http://static.csdn.net/public/common/toolbar/css/index.css">
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/static/css/avatar.css">
+    <link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+    <link rel="stylesheet" href="http://static.blog.csdn.net/Skin/skin3-template/css/style.css?v=2">
+    <script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/fonts/iconfont.js"></script>
+    <script src="//csdnimg.cn/rabbit/tracking-ad/main.js"></script>
+    <script type="text/javascript" src="http://csdnimg.cn/pubfooter/js/tracking.js" charset="utf-8"></script>
+    <script type="text/javascript" src="http://static.blog.csdn.net/scripts/cnick.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        // Traffic Stats of the entire Web site By baidu
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        // Traffic Stats of the entire Web site By baidu end
+
+
+
+    </script>
+    <meta name="description" content="Workspace：工作区
+&#160; Index / Stage：暂存区
+&#160; Repository：仓库区（或本地仓库）
+&#160; Remote：远程仓库
+
+一、新建代码库
+
+&#160; # 在当前目录新建一个Git代码库
+&#160; $ git init
+&#160; # 新建一个目录，将其初始化为Git代码库
+&#160; $ git init[project-name]
+&#160; # 下载一个项目和它的整个代码历史" />
+    <meta name="keywords" content="" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+
+
+    <title>git命令-远程仓库拉取、本地仓库更新、工作空间提交等等 - CSDN博客</title>
+</head>
+<body>
+<header class="clearfix">
+    <nav class="clearfix tracking-ad"  data-mod="popu_366">
+        <ul>
+            <li><a href="http://blog.csdn.net" target="_blank">CSDN博客</a></li>
+
+            
+            <li><a href="http://blog.csdn.net/mobile/newarticle.html" target="_blank">移动开发</a></li>
+            
+            <li><a href="http://blog.csdn.net/enterprise/newarticle.html" target="_blank">架构</a></li>
+            
+            <li><a href="http://blog.csdn.net/cloud/newarticle.html" target="_blank">云计算/大数据</a></li>
+            
+            <li><a href="http://blog.csdn.net/www/newarticle.html" target="_blank">互联网</a></li>
+            
+            <li><a href="http://blog.csdn.net/system/newarticle.html" target="_blank">运维</a></li>
+            
+
+            <li>
+                <div class="dropdown">
+                    <a href="#" target="_self" id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">更多</a>
+                    <ul class="dropdown-menu" aria-labelledby="dLabel">
+                        
+                        <li><a href="http://blog.csdn.net/database/newarticle.html" target="_blank">数据库</a></li>
+                        
+                        <li><a href="http://blog.csdn.net/web/newarticle.html" target="_blank">前端</a></li>
+                        
+                        <li><a href="http://blog.csdn.net/code/newarticle.html" target="_blank">编程语言</a></li>
+                        
+                        <li><a href="http://blog.csdn.net/software/newarticle.html" target="_blank">研发管理</a></li>
+                        
+                        <li><a href="http://blog.csdn.net/other/newarticle.html" target="_blank">综合</a></li>
+                        
+                        <li class="arr_top"> </li>
+                    </ul>
+                </div>
+            </li>
+
+        </ul>
+        <div class="right">
+            <div class="search tracking-ad" data-mod="popu_369">
+                <input type="text" class="btn btn-small btn-gray">
+                <a href="" class="sub_search"><i class="icon iconfont icon-sousuo"></i></a>
+            </div>
+            <span class="tracking-ad" data-mod="popu_370"><a href="http://write.blog.csdn.net/postedit" target="_blank" class="btn btn-small btn-red">写博客</a></span>
+            <div class="notLogin">
+                <a href="https://passport.csdn.net/account/login?ref=toolbar">登录</a> <span>|</span>
+                <a href="http://passport.csdn.net/account/mobileregister?ref=toolbar&action=mobileRegister">注册</a>
+            </div>
+            <dl class="alrLogin">
+                <dt class="trackgin-ad" data-mod="popu_368">
+                    <a href="http://blog.csdn.net/" target="_blank"><img src="" class="user_img"></a>
+                </dt>
+                <dd class="trackgin-ad" data-mod="popu_367"><a href="http://blog.csdn.net/" target="_blank"></a><span>|</span><a class="icon-signout" href="https://passport.csdn.net/account/logout?ref=toolbar">退出</a> </dd>
+            </dl>
+        </div>
+    </nav>
+    
+    <div class="topbox clearfix  tracking-ad" data-mod="popu_371">
+        <div class="text">
+            <a href="http://blog.csdn.net/pk.html?id=9948" target="_blank">【第22期】观点：IT 行业加班，到底有没有价值？</a>
+        </div>
+        <img src="http://img.blog.csdn.net/20170811134344074" alt="【第22期】观点：IT 行业加班，到底有没有价值？" title="【第22期】观点：IT 行业加班，到底有没有价值？" class="con">
+    </div>
+    
+</header>
+<div class="container clearfix">
+    <main>
+        <article>
+            <h1 class="csdn_top">git命令-远程仓库拉取、本地仓库更新、工作空间提交等等</h1>
+            <div class="article_bar clearfix">
+                <div class="artical_tag">
+                    <span class="original">原创</span>
+                    <span class="time">2017年04月22日 11:47:37</span>
+                </div>
+                <ul class="right_bar">
+                    <li><button class="btn-noborder"><i class="icon iconfont icon-yuedu"></i><span class="txt">1864</span></button></li>
+                    <li><button class="btn-noborder but-comment-topicon"><i class="icon iconfont icon-pinglun"></i><span class="txt">1</span></button></li>
+                    <li><button class="btn-noborder btn-like"><i  class="icon iconfont icon-xihuan-"></i><span class="txt">7</span></button></li>
+                    <!--<li><button class="btn-noborder"><i class="icon iconfont icon-dashang-"></i><span class="txt">0</span></button></li>-->
+
+                    <li class="edit">
+                        <a class="btn-noborder" href="" >
+                            <i class="icon iconfont icon-bianji"></i><span class="txt">编辑</span>
+                        </a>
+                    </li>
+                    <li class="del">
+                        <a class="btn-noborder" onclick="javascript:deleteArticle(fileName);return false;">
+                            <i class="icon iconfont icon-shanchu"></i><span class="txt">删除</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div id="article_content" class="article_content tracking-ad" data-mod="popu_307" data-dsm="post">
+                
+<p align="left">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:18px">这个可以虽然不是自己写的，但是也不是转载的</span></p>
+<p align="left"><img src="http://img.blog.csdn.net/20170422114557808?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanRyYWN5ZHk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""><br>
+</p>
+<p align="left"><a target="_blank" target="_blank" href="http://192.168.251.250/wiki/lib/exe/detail.php?id=git%3A%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4&amp;media=git:bg2015120901.png" title="&quot;git:bg2015120901.png&quot; "></a></p>
+<div style="background:#FBFAF9">
+<p align="left"><span style="color:#333333">&nbsp; Workspace</span><span style="color:#333333">：工作区</span></p>
+<p align="left"><span style="color:#333333">&nbsp; Index / Stage</span><span style="color:#333333">：暂存区</span></p>
+<p align="left"><span style="color:#333333">&nbsp; Repository</span><span style="color:#333333">：仓库区（或本地仓库）</span></p>
+<p align="left"><span style="color:#333333">&nbsp; Remote</span><span style="color:#333333">：远程仓库</span></p>
+</div>
+<p align="left"><strong><span style="color:#333333">一、新建代码库</span></strong></p>
+<div style="background:#FBFAF9">
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">在当前目录新建一个</span><span style="color:#333333">Git</span><span style="color:#333333">代码库</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git init</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">新建一个目录，将其初始化为</span><span style="color:#333333">Git</span><span style="color:#333333">代码库</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git init[project-name]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">下载一个项目和它的整个代码历史</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git clone [url]</span></p>
+</div>
+<p align="left"><strong><span style="color:#333333">二、配置</span></strong></p>
+<p align="left"><span style="color:#333333">Git</span><span style="color:#333333">的设置文件为</span><span style="color:#333333">.gitconfig</span><span style="color:#333333">，它可以在用户主目录下（全局配置），也可以在项目目</span></p>
+<p align="left"><span style="color:#333333">录下（项目配置）。</span></p>
+<div style="background:#FBFAF9">
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">显示当前的</span><span style="color:#333333">Git</span><span style="color:#333333">配置</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git config--list</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">编辑</span><span style="color:#333333">Git</span><span style="color:#333333">配置文件</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git config -e[--global]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">设置提交代码时的用户信息</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git config[--global] user.name &quot;[name]&quot;</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git config[--global] user.email &quot;[email address]&quot;</span></p>
+</div>
+<p align="left"><strong><span style="color:#333333">三、增加</span><span style="color:#333333">/</span><span style="color:#333333">删除文件</span></strong></p>
+<div style="background:#FBFAF9">
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">添加指定文件到暂存区</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git add [file1][file2] ...</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">添加指定目录到暂存区，包括子目录</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git add [dir]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">添加当前目录的所有文件到暂存区</span></p>
+<p align="left"><span style="color:#333333">&nbsp;&nbsp;$ git add .</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">添加每个变化前，都会要求确认</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">对于同一个文件的多处变化，可以实现分次提交</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git add -p</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">删除工作区文件，并且将这次删除放入暂存区</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git rm [file1][file2] ...</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">停止追踪指定文件，但该文件会保留在工作区</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git rm --cached[file]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">改名文件，并且将这个改名放入暂存区</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git mv[file-original] [file-renamed]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; </span></p>
+</div>
+<p align="left"><strong><span style="color:#333333">四、代码提交</span></strong></p>
+<div style="background:#FBFAF9">
+<p align="left"><span style="color:#333333">&nbsp;&nbsp;# </span><span style="color:#333333">提交暂存区到仓库区</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git commit -m[message]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">提交暂存区的指定文件到仓库区</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git commit[file1] [file2] ... -m [message]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">提交工作区自上次</span><span style="color:#333333">commit</span><span style="color:#333333">之后的变化，直接到仓库区</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git commit -a</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">提交时显示所有</span><span style="color:#333333">diff</span><span style="color:#333333">信息</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git commit -v</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">使用一次新的</span><span style="color:#333333">commit</span><span style="color:#333333">，替代上一次提交</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">如果代码没有任何新变化，则用来改写上一次</span><span style="color:#333333">commit</span><span style="color:#333333">的提交信息</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git commit--amend -m [message]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">重做上一次</span><span style="color:#333333">commit</span><span style="color:#333333">，并包括指定文件的新变化</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git commit--amend [file1] [file2] ...</span></p>
+</div>
+<p align="left"><strong><span style="color:#333333">五、分支</span></strong></p>
+<div style="background:#FBFAF9">
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">列出所有本地分支</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git branch</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">列出所有远程分支</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git branch -r</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">列出所有本地分支和远程分支</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git branch -a</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">新建一个分支，但依然停留在当前分支</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git branch[branch-name]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">新建一个分支，并切换到该分支</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git checkout -b[branch]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">新建一个分支，指向指定</span><span style="color:#333333">commit</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git branch[branch] [commit]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">新建一个分支，与指定的远程分支建立追踪关系</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git branch--track [branch] [remote-branch]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">切换到指定分支，并更新工作区</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git checkout[branch-name]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">切换到上一个分支</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git checkout -</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">建立追踪关系，在现有分支与指定的远程分支之间</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git branch--set-upstream [branch] [remote-branch]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">合并指定分支到当前分支</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git merge[branch]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">选择一个</span><span style="color:#333333">commit</span><span style="color:#333333">，合并进当前分支</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git cherry-pick[commit]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">删除分支</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git branch -d[branch-name]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">删除远程分支</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git push origin--delete [branch-name]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git branch -dr[remote/branch]</span></p>
+</div>
+<p align="left"><strong><span style="color:#333333">六、标签</span></strong></p>
+<div style="background:#FBFAF9">
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">列出所有</span><span style="color:#333333">tag</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git tag</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">新建一个</span><span style="color:#333333">tag</span><span style="color:#333333">在当前</span><span style="color:#333333">commit</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git tag [tag]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">新建一个</span><span style="color:#333333">tag</span><span style="color:#333333">在指定</span><span style="color:#333333">commit</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git tag [tag][commit]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">删除本地</span><span style="color:#333333">tag</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git tag -d[tag]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">删除远程</span><span style="color:#333333">tag</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git push origin:refs/tags/[tagName]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">查看</span><span style="color:#333333">tag</span><span style="color:#333333">信息</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git show [tag]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">提交指定</span><span style="color:#333333">tag</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git push[remote] [tag]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">提交所有</span><span style="color:#333333">tag</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git push[remote] --tags</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">新建一个分支，指向某个</span><span style="color:#333333">tag</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git checkout -b[branch] [tag]</span></p>
+</div>
+<p align="left"><strong><span style="color:#333333">七、查看信息</span></strong></p>
+<div style="background:#FBFAF9">
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">显示有变更的文件</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git status</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">显示当前分支的版本历史</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git log</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">显示</span><span style="color:#333333">commit</span><span style="color:#333333">历史，以及每次</span><span style="color:#333333">commit</span><span style="color:#333333">发生变更的文件</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git log --stat</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">搜索提交历史，根据关键词</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git log -S[keyword]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">显示某个</span><span style="color:#333333">commit</span><span style="color:#333333">之后的所有变动，每个</span><span style="color:#333333">commit</span><span style="color:#333333">占据一行</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git log [tag]HEAD --pretty=format:%s</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">显示某个</span><span style="color:#333333">commit</span><span style="color:#333333">之后的所有变动，其</span><span style="color:#333333">&quot;</span><span style="color:#333333">提交说明</span><span style="color:#333333">&quot;</span><span style="color:#333333">必须符合搜索条件</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git log [tag]HEAD --grep feature</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">显示某个文件的版本历史，包括文件改名</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git log --follow[file]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git whatchanged[file]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">显示指定文件相关的每一次</span><span style="color:#333333">diff</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git log -p[file]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">显示过去</span><span style="color:#333333">5</span><span style="color:#333333">次提交</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git log -5--pretty --oneline</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">显示所有提交过的用户，按提交次数排序</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git shortlog-sn</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">显示指定文件是什么人在什么时间修改过</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git blame[file]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">显示暂存区和工作区的差异</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git diff</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">显示暂存区和上一个</span><span style="color:#333333">commit</span><span style="color:#333333">的差异</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git diff--cached [file]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">显示工作区与当前分支最新</span><span style="color:#333333">commit</span><span style="color:#333333">之间的差异</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git diff HEAD</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">显示两次提交之间的差异</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git diff[first-branch]...[second-branch]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">显示今天你写了多少行代码</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git diff--shortstat &quot;@{0 day ago}&quot;</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">显示某次提交的元数据和内容变化</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git show[commit]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">显示某次提交发生变化的文件</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git show--name-only [commit]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">显示某次提交时，某个文件的内容</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git show[commit]:[filename]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">显示当前分支的最近几次提交</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git reflog</span></p>
+</div>
+<p align="left"><strong><span style="color:#333333">八、远程同步</span></strong></p>
+<div style="background:#FBFAF9">
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">下载远程仓库的所有变动</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git fetch[remote]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">显示所有远程仓库</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git remote -v</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">显示某个远程仓库的信息</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git remote show[remote]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">增加一个新的远程仓库，并命名</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git remote add[shortname] [url]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">取回远程仓库的变化，并与本地分支合并</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git pull[remote] [branch]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">上传本地指定分支到远程仓库</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git push[remote] [branch]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">强行推送当前分支到远程仓库，即使有冲突</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git push[remote] --force</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">推送所有分支到远程仓库</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git push[remote] --all</span></p>
+</div>
+<p align="left"><strong><span style="color:#333333">九、撤销</span></strong></p>
+<div style="background:#FBFAF9">
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">恢复暂存区的指定文件到工作区</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git checkout[file]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">恢复某个</span><span style="color:#333333">commit</span><span style="color:#333333">的指定文件到暂存区和工作区</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git checkout[commit] [file]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">恢复暂存区的所有文件到工作区</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git checkout .</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">重置暂存区的指定文件，与上一次</span><span style="color:#333333">commit</span><span style="color:#333333">保持一致，但工作区不变</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git reset[file]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">重置暂存区与工作区，与上一次</span><span style="color:#333333">commit</span><span style="color:#333333">保持一致</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git reset--hard</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">重置当前分支的指针为指定</span><span style="color:#333333">commit</span><span style="color:#333333">，同时重置暂存区，但工作区不变</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git reset[commit]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">重置当前分支的</span><span style="color:#333333">HEAD</span><span style="color:#333333">为指定</span><span style="color:#333333">commit</span><span style="color:#333333">，同时重置暂存区和工作区，与指定</span><span style="color:#333333">commit</span><span style="color:#333333">一致</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git reset--hard [commit]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">重置当前</span><span style="color:#333333">HEAD</span><span style="color:#333333">为指定</span><span style="color:#333333">commit</span><span style="color:#333333">，但保持暂存区和工作区不变</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git reset--keep [commit]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">新建一个</span><span style="color:#333333">commit</span><span style="color:#333333">，用来撤销指定</span><span style="color:#333333">commit</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">后者的所有变化都将被前者抵消，并且应用到当前分支</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git revert[commit]</span></p>
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">暂时将未提交的变化移除，稍后再移入</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git stash</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git stash pop</span></p>
+</div>
+<p align="left"><strong><span style="color:#333333">十、其他</span></strong></p>
+<div style="background:#FBFAF9">
+<p align="left"><span style="color:#333333">&nbsp; # </span><span style="color:#333333">生成一个可供发布的压缩包</span></p>
+<p align="left"><span style="color:#333333">&nbsp; $ git archive</span></p>
+</div>
+<p>&nbsp;</p>
+<link rel="stylesheet" href="http://static.blog.csdn.net/public/res-min/markdown_views.css?v=1.0" />
+            </div>
+        </article>
+        <div class="readall_box tracking-ad" data-mod="popu_376">
+            <a class="btn btn-large btn-gray-fred read_more_btn" target="_self">阅读全文</a>
+        </div>
+        <div class="article_copyright">
+            版权声明：本文为博主原创文章，未经博主允许不得转载。
+            <span class="r_ico"><i class="icon iconfont icon-jubao"></i><span class="txt" id="reportBtn">举报</span></span>
+        </div>
+        <!--  <div class="reward_box">
+            <div class="tit">
+              <button class="btn_reward"><i class="icon iconfont icon-dashang-"></i></button>
+            </div>
+            <dl class="clearfix">
+              <dt><a href="#" target="_blank">近期打赏</a></dt>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+            </dl>
+          </div>-->
+        <ul class="article_tags clearfix tracking-ad" data-mod="popu_377">
+            <li class="tit">标签：</li>
+            
+        </ul>
+        <ul class="article_collect clearfix tracking-ad"  data-mod="popu_378">
+            <li class="tit">本文已收录于以下专栏：</li>
+            
+        </ul>
+        <div class="comment_box clearfix">
+            <div id="comment_form">
+                <div id="commentsbmitarear">
+                    <h6><span>1</span>条评论</h6>
+                    <dl class="clearfix" id="commentbox">
+                        <dt>
+                            <a href="http://my.csdn.net/"><img src="" ></a>
+                        </dt>
+                        <dd>
+                            <a href="http://my.csdn.net/" target="_blank"></a>
+                        </dd>
+                        <dd class="txt_tip"><span id="tip_comment" class="tip"></span></dd>
+                    </dl>
+                    <div class="comment_area clearfix">
+                        <form action="/jtracydy/comment/submit?id=70402663" method="post" onsubmit="return subform(this);" id="commentform">
+                            <textarea class="comment_content" name="comment_content" id="comment_content"></textarea>
+                            <div class="bot_bar clearfix">
+                                <div id="ubbtools" class="add_code">
+                                    <a href="#insertcode" code="code" target="_self"><i class="icon iconfont icon-daima"></i></a>
+                                </div>
+
+                                <input type="hidden" id="comment_replyId" name="comment_replyId">
+                                <input type="hidden" id="comment_userId" name="comment_userId" value="">
+                                <input type="hidden" id="commentId" name="commentId" value="">
+                                <input type="submit" class="btn btn-redborder" value="发表评论">
+                                <div style="display: none;" class="tracking-ad" data-mod="popu_384"><a href="#" target="_blank" class="comment_area_btn">发表评论</a></div>
+
+                                <div id="lang_list" code="code">
+                                    <a href="#html" style="width:95px;" class="long_name" target="_self">HTML/XML</a>
+                                    <a href="#objc" style="width:95px;" class="long_name" target="_self">objective-c</a>
+                                    <a href="#delphi" style="width:58px;" class="zhong_name" target="_self">Delphi</a>
+                                    <a href="#ruby" class="zhong_name" target="_self">Ruby</a>
+                                    <a href="#php" target="_self">PHP</a>
+                                    <a href="#csharp" class="duan_name" target="_self">C#</a>
+                                    <a style=" border-right: none;" href="#cpp" class="duan_name" target="_self">C++</a>
+                                    <a style=" border-bottom:none;width:95px;" href="#javascript" class="long_name" target="_self">JavaScript</a>
+                                    <a style=" border-bottom:none;width:95px;" href="#vb" class="long_name" target="_self">Visual Basic</a>
+                                    <a style=" border-bottom:none;" href="#python" class="zhong_name" target="_self">Python</a>
+                                    <a style=" border-bottom:none;" href="#java" class="zhong_name" target="_self">Java</a>
+                                    <a style="border-bottom:none;" href="#css" class="duan_name" target="_self">CSS</a>
+                                    <a style="border-bottom:none;" href="#sql" class="duan_name" target="_self">SQL</a>
+                                    <a style="border:none; " href="#plain" class="duan_name" target="_self">其它</a>
+                                    <span class="arrb"></span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="comment_li_outbox">
+            <div id="comment_list"></div>
+        </div>
+
+        <div class="more_comment">
+            <div id="comment_bar" class="trackgin-ad" data-mod="popu_385"></div>
+        </div>
+
+        <h3 class="recommend_tit">相关文章推荐</h3>
+        <div class="recommend_list clearfix">
+            
+            <dl class="clearfix tracking-ad" data-mod="popu_387">
+                <dd>
+                    <h2><a href="/u014540717/article/details/54314126"  target="_blank" strategy="BlogCommendFromBaidu_0">git命令－切换分支</a></h2>
+                    <div class="summary">
+                        git一般有很多分支，我们clone到本地的时候一般都是master分支，那么如何切换到其他分支呢？主要命令如下
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/u014540717" target="_blank" strategy="BlogCommendFromBaidu_0"><img src="http://avatar.csdn.net/1/9/C/2_u014540717.jpg" alt="u014540717" title="u014540717"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/u014540717">u014540717</a></li>
+                        <li class="time">2017-01-10 15:10</li>
+                        <li class="visited_num"><i class="icon iconfont icon-yuedu"></i><span>37969</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix tracking-ad" data-mod="popu_387">
+                <dd>
+                    <h2><a href="/arkblue/article/details/9568249"  target="_blank" strategy="BlogCommendFromBaidu_1">git 查看远程分支、本地分支、创建分支、把分支推到远程repository、删除本地分支</a></h2>
+                    <div class="summary">
+                        $ git branch -a
+* br-2.1.2.2
+  master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/br-2.1...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/arkblue" target="_blank" strategy="BlogCommendFromBaidu_1"><img src="http://avatar.csdn.net/5/3/7/2_arkblue.jpg" alt="arkblue" title="arkblue"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/arkblue">arkblue</a></li>
+                        <li class="time">2013-07-28 18:22</li>
+                        <li class="visited_num"><i class="icon iconfont icon-yuedu"></i><span>471092</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix tracking-ad" data-mod="popu_393">
+                <dt><a href="http://edu.csdn.net/huiyiCourse/detail/491?utm_source=blog10" target="_blank"><img class="maxwidth" src="http://img.blog.csdn.net/20170821172007352" alt="" title=""></a></dt>
+                <dd>
+                    <div class="summary">
+                        <h2>程序员升职加薪指南！还缺一个“证”！</h2>  <div class="summary">CSDN出品，立即查看！ </div> 
+                    </div>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix tracking-ad" data-mod="popu_387">
+                <dd>
+                    <h2><a href="/chailyuan/article/details/53292031"  target="_blank" strategy="BlogCommendFromBaidu_2">Git更新远程仓库代码到本地</a></h2>
+                    <div class="summary">
+                        当我们在多台电脑上开发一个项目的时候，需要经常修改提交内容并在另一台电脑上更新远程最新的代码，今天看了一下如何从远程代码仓库获取更新到本地，总结了一下网上的文章，采用如下的方式比较简单。
+ 
+查看...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/chailyuan" target="_blank" strategy="BlogCommendFromBaidu_2"><img src="http://avatar.csdn.net/B/E/C/2_chailyuan.jpg" alt="chailyuan" title="chailyuan"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/chailyuan">chailyuan</a></li>
+                        <li class="time">2016-11-22 21:23</li>
+                        <li class="visited_num"><i class="icon iconfont icon-yuedu"></i><span>3455</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix tracking-ad" data-mod="popu_387">
+                <dd>
+                    <h2><a href="/u012150179/article/details/17172211"  target="_blank" strategy="BlogCommendFromBaidu_3">git fetch 的简单用法:更新远程代码到本地仓库</a></h2>
+                    <div class="summary">
+                        Git中从远程的分支获取最新的版本到本地方式如下，
+如何更新下载到代码到本地，请参阅ice的博客基于Github参与eoe的开源项目指南
+方式一
+1. 查看远程仓库
+
+
+
+
+
+1
+2...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/u012150179" target="_blank" strategy="BlogCommendFromBaidu_3"><img src="http://avatar.csdn.net/A/5/7/2_u012150179.jpg" alt="u012150179" title="u012150179"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/u012150179">u012150179</a></li>
+                        <li class="time">2013-12-06 19:32</li>
+                        <li class="visited_num"><i class="icon iconfont icon-yuedu"></i><span>19818</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix tracking-ad" data-mod="popu_387">
+                <dd>
+                    <h2><a href="/hanqingsong412/article/details/50466622"  target="_blank" strategy="BlogCommendFromBaidu_4">git 从远程服务器更新本地项目</a></h2>
+                    <div class="summary">
+                        从远程服务器上更新别人上传的文件
+1.使用git fetch更新，相当于是从远程获取最新版本到本地，不会自动merge
+git fetch origin master
+git log -p mas...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/hanqingsong412" target="_blank" strategy="BlogCommendFromBaidu_4"><img src="http://avatar.csdn.net/5/8/2/2_hanqingsong412.jpg" alt="hanqingsong412" title="hanqingsong412"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/hanqingsong412">hanqingsong412</a></li>
+                        <li class="time">2016-01-06 09:15</li>
+                        <li class="visited_num"><i class="icon iconfont icon-yuedu"></i><span>1502</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix tracking-ad" data-mod="popu_387">
+                <dd>
+                    <h2><a href="/wangbaochu/article/details/49470453"  target="_blank" strategy="BlogCommendFromBaidu_5">Git remote 同步远程仓库，保持fork出来的项目和原有项目同步</a></h2>
+                    <div class="summary">
+                        我们在在克隆完某个git工程项目后, 至少可以看到一个名为 origin 的远程库,git 默认使用这个名字来标识你所克隆的原始仓库。要查看当前配置有哪些远程仓库,可以用 git remote 命令,...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/wangbaochu" target="_blank" strategy="BlogCommendFromBaidu_5"><img src="http://avatar.csdn.net/D/A/D/2_wangbaochu.jpg" alt="wangbaochu" title="wangbaochu"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/wangbaochu">wangbaochu</a></li>
+                        <li class="time">2015-10-28 17:14</li>
+                        <li class="visited_num"><i class="icon iconfont icon-yuedu"></i><span>7744</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix tracking-ad" data-mod="popu_387">
+                <dd>
+                    <h2><a href="/chai_132/article/details/48783575"  target="_blank" strategy="BlogCommendFromBaidu_6">Git笔记之通过ssh从git服务器拉取代码</a></h2>
+                    <div class="summary">
+                        背景要想在公司中与其他同事一起工作，首先要学会使用版本控制工具。我所在的公司使用的是git，那么在这里记录一下在公司使用git的过程。通过ssh从git服务器拉取远程仓库通过ssh-keygen命令在...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/chai_132" target="_blank" strategy="BlogCommendFromBaidu_6"><img src="http://avatar.csdn.net/F/3/6/2_chai_132.jpg" alt="chai_132" title="chai_132"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/chai_132">chai_132</a></li>
+                        <li class="time">2015-09-28 22:41</li>
+                        <li class="visited_num"><i class="icon iconfont icon-yuedu"></i><span>3517</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix tracking-ad" data-mod="popu_387">
+                <dd>
+                    <h2><a href="/liang0000zai/article/details/50724632"  target="_blank" strategy="BlogCommendFromBaidu_7">Git更新远程仓库代码到本地 git fetch</a></h2>
+                    <div class="summary">
+                        当我们在多台电脑上开发一个项目的时候，需要经常修改提交内容并在另一台电脑上更新远程最新的代码，今天看了一下如何从远程代码仓库获取更新到本地，总结了一下网上的文章，采用如下的方式比较简单。
+
+ 
+...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/liang0000zai" target="_blank" strategy="BlogCommendFromBaidu_7"><img src="http://avatar.csdn.net/B/9/B/2_liang0000zai.jpg" alt="liang0000zai" title="liang0000zai"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/liang0000zai">liang0000zai</a></li>
+                        <li class="time">2016-02-23 17:15</li>
+                        <li class="visited_num"><i class="icon iconfont icon-yuedu"></i><span>22781</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix tracking-ad" data-mod="popu_387">
+                <dd>
+                    <h2><a href="/a7442358/article/details/50407448"  target="_blank" strategy="BlogCommendFromBaidu_8">Git的使用教程（七）远程仓库</a></h2>
+                    <div class="summary">
+                        之前的操作我们只是把Git当做了一个仓库，做本地的一个版本管理，这对Git来说简直大材小用。Git作为分布式版本控制系统，分布才是其特色，如何分布呢？肯定要有一台机器充当原始的版本库，其他的机器“克隆...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/a7442358" target="_blank" strategy="BlogCommendFromBaidu_8"><img src="http://avatar.csdn.net/5/7/9/2_a7442358.jpg" alt="a7442358" title="a7442358"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/a7442358">a7442358</a></li>
+                        <li class="time">2016-03-02 09:57</li>
+                        <li class="visited_num"><i class="icon iconfont icon-yuedu"></i><span>2940</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix tracking-ad" data-mod="popu_387">
+                <dd>
+                    <h2><a href="/qq_28003535/article/details/71089161"  target="_blank" strategy="BlogCommendFromBaidu_9">git从远程仓库拉取代码的常用指令</a></h2>
+                    <div class="summary">
+                        其实我想说从git上拉代码布环境的血与泪。。。。。。。还没有写完。。to be continued。。。。。。一种（比较麻烦的）拉代码的方法git clone //克隆代码库，与远程代码库的主干建立连...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/qq_28003535" target="_blank" strategy="BlogCommendFromBaidu_9"><img src="http://avatar.csdn.net/3/F/4/2_qq_28003535.jpg" alt="qq_28003535" title="qq_28003535"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/qq_28003535">qq_28003535</a></li>
+                        <li class="time">2017-05-02 18:27</li>
+                        <li class="visited_num"><i class="icon iconfont icon-yuedu"></i><span>521</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+
+            
+
+            
+        </div>
+    </main>
+    <aside>
+        <div class="right_box user_info">
+            <dl class="inf_bar clearfix">
+                <dt class="tracking-ad" data-mod="popu_381">
+                    <a href="http://blog.csdn.net/jtracydy" target="_blank">
+                        <img src="http://avatar.csdn.net/6/6/B/1_jtracydy.jpg" class="avatar_pic">
+                    </a>
+                    <span class="medals" title="">
+                <svg class="icon" aria-hidden="true">
+                    
+                </svg>
+              </span>
+                </dt>
+                <dd>
+                    <h3 class="tracking-ad"  data-mod="popu_380"><a href="http://blog.csdn.net/jtracydy" target="_blank" id="uid">jtracydy</a></h3>
+                    <span  class="tracking-ad" data-mod="popu_379"><a class="btn btn-redborder-small "  id="span_add_follow" target="_self">＋关注</a></span>
+                </dd>
+            </dl>
+            <div class="inf_number_box clearfix">
+                <dl>
+                    <dt>原创</dt>
+                    <dd>29</dd>
+                </dl>
+                <dl>
+                    <dt>粉丝</dt>
+                    <dd>5</dd>
+                </dl>
+                <dl>
+                    <dt>喜欢</dt>
+                    <dd>0</dd>
+                </dl>
+            </div>
+            <ul class="inf_list clearfix tracking-ad" data-mod="popu_382">
+                
+                <li class="clearfix">
+                    <span><i class="icon iconfont icon-youjiantou"></i></span>
+                    <a href="/jtracydy/article/details/77477392" target="_blank">maven核心，pom.xml详解</a>
+                </li>
+                
+                <li class="clearfix">
+                    <span><i class="icon iconfont icon-youjiantou"></i></span>
+                    <a href="/jtracydy/article/details/77330751" target="_blank">Socket浅析通信原理和java编程（二）</a>
+                </li>
+                
+                <li class="clearfix">
+                    <span><i class="icon iconfont icon-youjiantou"></i></span>
+                    <a href="/jtracydy/article/details/77323170" target="_blank">Socket浅析通信原理和java编程（一）</a>
+                </li>
+                
+                <li class="clearfix">
+                    <span><i class="icon iconfont icon-youjiantou"></i></span>
+                    <a href="/jtracydy/article/details/77092666" target="_blank">static关键字</a>
+                </li>
+                
+            </ul>
+            <div class="public_signal clearfix tracking-ad" data-mod="popu_383">
+                <!--<a href="#" target="_blank" class="left"><i></i><span>作者公众号</span></a>-->
+                <a href="http://blog.csdn.net/jtracydy" target="_blank" class="more"><span>更多文章</span></a>
+            </div>
+        </div>
+        <div class="extension_other tracking-ad" data-mod="popu_389">
+            <script type="text/javascript">
+                /*PC端-博客内容页-右侧视窗1（新皮肤）-2017/7/11*/
+                var cpro_id = "u3032528";
+            </script>
+            <script type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/c.js"></script>
+        </div>
+        
+        <div class="fixRight">
+            <div class="right_box padb0 tracking-ad" data-mod="popu_391">
+                <h3 class="tit"><span><em>在线课程</em></span></h3>
+                <dl class="edu_li clearfix">
+                    
+                    <dd>
+                        <a href="http://edu.csdn.net/huiyiCourse/series_detail/52?utm_source=blog7" target="_blank">
+                            <img src="http://img.bss.csdn.net/201708231552457813.gif" alt="【直播】计算机视觉原理及实战--屈教授" title="【直播】计算机视觉原理及实战--屈教授">
+                        </a>
+                    </dd>
+                    <dt><a href="http://edu.csdn.net/huiyiCourse/series_detail/52?utm_source=blog7" target="_blank">【直播】计算机视觉原理及实战--屈教授</a></dt>
+                    
+                    <dd>
+                        <a href="http://edu.csdn.net/huiyiCourse/detail/491?utm_source=blog7" target="_blank">
+                            <img src="http://img.bss.csdn.net/201708231550411510.jpg" alt="【直播】CSDN软考一站通--任铄" title="【直播】CSDN软考一站通--任铄">
+                        </a>
+                    </dd>
+                    <dt><a href="http://edu.csdn.net/huiyiCourse/detail/491?utm_source=blog7" target="_blank">【直播】CSDN软考一站通--任铄</a></dt>
+                    
+                </dl>
+            </div>
+            <div class="extension_other tracking-ad baidu_box" data-mod="popu_395">
+                <script type="text/javascript">
+                    /*PC端-博客内容页-右侧视窗2（新皮肤）-2017/7/11*/
+                    var cpro_id = "u3032529";
+                </script>
+                <script type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/c.js"></script>
+            </div>
+        </div>
+    </aside>
+</div>
+
+<div class="left_fixed">
+    <ul class="left_menu">
+        <li id="blog_artical_directory">
+            <button class="left-fixed-btn left_menu_btn tracking-ad" data-mod="popu_372" target="_self">
+                <span class="iconbox border_black"><i class="icon iconfont icon-mulu"></i></span>
+                <span class="txt">目录</span>
+            </button>
+        </li>
+        <li class="menu_con">
+            <div class="list_father">
+                <div class="arr_box">
+                    <button class="btn-noborder arr-btn scroll-down  left_scroll_down"><i class="icon iconfont icon-xiajiantou"></i></button>
+                    <button class="btn-noborder arr-btn scroll-up left_scroll_top"><i class="icon iconfont icon-shangjiantou"></i></button>
+                </div>
+                <div class="arr"></div>
+                <div id="csdnBlogDir"></div>
+            </div>
+        </li>
+        <li>
+            <button class="left-fixed-btn btn-like tracking-ad" data-mod="popu_373" target="_self">
+                <span class="iconbox border_red"><i class="icon iconfont icon-xihuan-"></i></span>
+                <span class="txt">喜欢</span>
+                <span class="untxt">取消喜欢</span>
+            </button>
+        </li>
+        <li>
+            <button class="left-fixed-btn tracking-ad" data-mod="popu_374"  id="com-quick-collect" target="_self">
+                <span class="iconbox border_purple"><i class="icon iconfont icon-shoucang"></i></span>
+                <a class="txt" title="收藏">收藏</a>
+            </button>
+        </li>
+        <li id="share_box">
+            <button class="left-fixed-btn  tracking-ad"  data-mod="popu_375" target="_self">
+                <span class="iconbox border_orange"><i class="icon iconfont icon-fenxiang"></i></span>
+                <span class="txt">分享</span>
+            </button>
+            <div class="bdsharebuttonbox tracking-ad" data-mod="popu_172">
+                <div class="outside">
+                    <span class="iconbox border_red2"><i class="icon iconfont icon-xinlang"></i></span>
+                    <span class="text">微博</span>
+                    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"> </a>
+                </div>
+                <div class="outside">
+                    <span class="iconbox border_green"><i class="icon iconfont icon-pinglun"></i></span>
+                    <span class="text">微信</span>
+                    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"> </a>
+                </div>
+                <div class="outside">
+                    <span class="iconbox border_blue"><i class="icon iconfont icon-QQ"></i></span>
+                    <span class="text">QQ</span>
+                    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"> </a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<div id="pop_win"></div>
+<div id="popup_mask"></div>
+<div class="pop_CA_cover" ></div>
+<div class="pop pop_CA" >
+    <div class="CA_header">
+        收藏助手
+        <span class="cancel_icon"  id="fapancle" ></span>
+    </div>
+    <iframe src="" id="collectIframe" frameborder="0" width="100%" height="360"  scrolling="no" ></iframe>
+</div>
+<!--举报-->
+<div id="report_dialog" style="top: 250px; left: 343.5px;"><div id="panel_report">
+    <div class="panel_head">不良信息举报</div>
+    <form method="post" id="frmReport" class="panel_body">
+        <table border="0" cellpadding="0" cellspacing="4" class="pop_table">
+            <tbody><tr><td colspan="2">您举报文章：<a href="http://blog.csdn.net/raintungli/article/details/76583070" target="_blank">深度学习：神经网络中的前向传播和反向传播算法推导</a></td></tr>
+            <tr>
+                <th style="width:60px;">举报原因：</th>
+                <td id="panel_reporttype">
+                    <label><input type="radio" class="report_type" id="report_sex" name="report_type" value="1">色情</label>
+                    <label><input type="radio" class="report_type" id="report_Politics" name="report_type" value="2">政治</label>
+                    <label><input type="radio" class="report_type" id="report_copy" name="report_type" value="3">抄袭</label>
+                    <label><input type="radio" class="report_type" id="report_ad" name="report_type" value="4">广告</label>
+                    <label><input type="radio" class="report_type" id="report_want" name="report_type" value="5">招聘</label>
+                    <label><input type="radio" class="report_type" id="report_call" name="report_type" value="6">骂人</label>
+                    <br>
+                    <label><input type="radio" class="report_type" id="report_other" name="report_type" value="7">其他</label>
+                    <input type="text" name="report_other_content" id="report_other_content" maxlength="30" style="display: none;">
+                </td>
+            </tr>
+            <tr id="panel_originalurl" style="display: none;">
+                <th>原文地址：</th>
+                <td>
+                    <input id="originalurl" value="http://" name="originalurl" type="text" style="width: 90%;">
+                </td>
+            </tr>
+            <tr>
+                <th id="sp_reason">原因补充：</th>
+                <td>
+                    <textarea id="report_description" style="width: 300px;" rows="3" name="report_description"></textarea>
+                    <p id="sp_n" style="color:#999;margin:0px;padding:0px;">(最多只允许输入30个字)</p>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input id="btnSubmitReport" name="submit" type="image" align="middle" class="btn_1" src="http://static.blog.csdn.net/images/btn_submit.jpg">
+                    <span style="padding-left:20px;"></span>
+                    <img id="btnCloseReportDialog" src="http://static.blog.csdn.net/images/btn_cancel.jpg" align="middle">
+                    <div id="error" style="color: Red">
+                    </div>
+                </td>
+            </tr>
+            </tbody></table>
+    </form>
+</div>
+    <script language="javascript" type="text/javascript">
+        var isComment=0;
+        //显示隐藏地址
+        $(function () {
+            if(isComment){
+                $("#report_description").attr("disabled",true);
+                $("#sp_n").hide();
+                $("#sp_reason").html("评论内容：");
+            }
+            $(".report_type").click(function () {
+                $("#panel_originalurl,#report_other_content").hide();
+                switch ($(this).val()) {
+                    case '3':
+                        $("#panel_originalurl").show();
+                        $("#originalurl").focus();
+                        break;
+                    case '7':
+                        if(isComment){
+                            $("#report_other_content").show().focus();
+                        }
+                        break;
+                }
+
+            });
+
+            $("#frmReport").submit(function () {
+                if (!currentUserName) {
+
+                    if (confirm("您的操作必须登录，是否登录？")) {
+                        location.href = "http://passport.csdn.net/account/login?from=" + encodeURIComponent(location.href);
+                        return false;
+                    }
+                    return false;
+                }
+
+                var reportType = $("input[name=report_type]:checked").val();
+                if(!reportType){
+                    alert("请选择举报原因！");
+                    return false;
+                }
+                var otherInfo = "";
+                switch (reportType) {
+                    case '3':
+                        otherInfo = $("#originalurl").val();
+                        if (otherInfo == ""||otherInfo=="http://") {
+                            alert("举报抄袭必须提供原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        } else if(!checkeURL(otherInfo)) {
+                            alert("请输入正确的原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        }
+                        break;
+                    case '7':
+                        otherInfo = $("#report_other_content").val();
+                        if (isComment && !otherInfo) {
+                            alert("请填写举报的具体原因！");
+                            $("#report_other_content").focus();
+                            return false;
+                        }
+                        if(!isComment){
+                            if(!$("#report_description").val()){
+                                alert("请填写举报的具体原因！");
+                                $("#report_description").focus();
+                                return false;
+                            }
+                        }
+                        break;
+                }
+                if(!isComment){
+                    if($("#report_description").val().length>30){
+                        alert("举报原因最多只允许输入30个字！");
+                        return false;
+                    }
+                }
+
+                var data = {
+                    articleId: 76583070,
+                    commentId: 0,
+                    reportType: reportType,
+                    originalurl: $("#originalurl").val(),
+                    report_other_content: $("#report_other_content").val(),
+                    report_description: $("#report_description").val(),
+                    currentUserName: currentUserName,
+                    updatetime: "2017/8/8 16:54:12",
+                    blogUser: "raintungli"
+                };
+                if(!isComment){//如果是举报文章
+                    data.report_other_content = data.report_description;
+                    data.report_description = "1. 神经网络这是一个常见的神经网络的图：这是一个常见的三层神经网络的基本构成，Layer L1是输入层，Layer L2是隐含层";
+                }
+
+                $.post(blog_address + "/common/report?id=76583070&t=2", data, function (data) {
+                    if (data.result == 1){
+                        SetError("感谢您的举报，我们会尽快审核！");
+                    }else{
+                        if (data.content) alert(data.content);
+                    }
+
+                });
+                return false;
+            });
+
+            $("#btnCloseReportDialog").click(function () {
+                CloseDiv();
+            });
+
+        });
+
+        //提示后关闭方法
+        function SetError(error) {
+            $("#btnCloseReportDialog").trigger("click");
+            alert(error);
+            CloseDiv();
+        }
+
+        //关闭方法
+        function CloseDiv() {
+
+            $.removeMask();
+            $("#report_dialog").hide().html("");
+            return false;
+        }
+
+        //验证url
+        function checkeURL(url){
+            return /^http(s)?:\/\/([\w-]+\.)+[\w-]+/i.test(url);
+        }
+    </script>
+</div>
+
+<script src="http://c.csdnimg.cn/public/common/libs/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+<script type="text/javascript" src="http://passport.csdn.net/content/loginbox/login.js"></script>
+
+<script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/js/blog_ver.js?v=2"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/js/skin2017.js?v=2"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/cnick.js"></script>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+<script type="text/javascript" >
+    if($(".article_collect li").length==1){$(".article_collect").hide();}
+    if($(".article_tags li").length==1){$(".article_tags").hide();}
+    $(".edit a").attr("href","http://write.blog.csdn.net/postedit/"+fileName);
+    $.each($(".edu_li a"),function(){$(this).attr("href",$(this).attr("href").replace("blog7","blog9"))});
+    new CNick('#uid').showNickname();
+</script>
+</body>
+</html>
+
+<script  type="text/javascript">
+    var fromjs=$("#fromjs");
+    if(fromjs.length>0)
+    {                  
+        $("#fromjs .markdown_views pre").addClass("prettyprint");       
+        prettyPrint();
+
+        $('pre.prettyprint code').each(function () {
+            var lines = $(this).text().split('\n').length;
+            var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+            $(this).addClass('has-numbering').parent().append($numbering);
+            for (i = 1; i <= lines; i++) {
+                $numbering.append($('<li/>').text(i));
+            };
+            $numbering.fadeIn(1700);
+        });
+
+        $('.pre-numbering li').css("color","#999");             
+    }
+
+    $(function(){
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },500);         
+       
+
+    });
+
+    setTimeout(function () {
+        $(".toc a[target='_blank']").attr("target", "");
+    }, 500);
+
+</script>
+

@@ -1,0 +1,34 @@
+2017.1.6
+    今天我过生日，在这一天中，我尝试将Sumsung C5 手机的MTP模式启动加入并使用adb shell对android设备进行驱动，但是发现好像是android 6新手机的问题，我更换了手机到android 4之后既可以实现对MTP的驱动
+
+    1. Linux主机对手机的MTP的驱动需要必要的连接库
+        sudo apt-get install mptfs ... 
+    2. 如果adb devices没有找到设备的话
+        1. cmd
+            lsusb : 查找设备的唯一的驱动号
+            su
+            cd /etc/udev/rules.d/
+            vim 51-android.rules
+            SUBSYSTEM=="usb", ATTRS{idVendor}=="9bb5", ATTRS{idProduct}=="0c02",MODE="0666"
+                * idVendor : 16进制驱动号
+                * idProduct : 16进制驱动号
+            cd .android
+            touch adb_usb.ini
+            vim adb_usb.ini
+                # ANDROID 3RD PARTY USB VENDOR ID LIST -- DO NOT EDIT.
+                # USE 'android update adb' TO GENERATE
+                # 1 USB VENDOR ID PER LINE
+                0x9bb5
+            其中的0x9bb5是设备的唯一驱动号
+        2. 重启android设备
+            1. adb kill-server
+            2. adb start-server
+            3. adb devices     # 可能就可以使用
+        3. 记住，必须在手机上打开USB**调试**模式才可以成功
+        4. 不需要使用sudo也可以成功，USB调试模式必须要打开
+            android设备不需要root也可以实现连接
+        5. 目前我的 : 
+            * Vivo      android 4.2 
+            * Sumsung   android 6.0
+            均可实现连接
+

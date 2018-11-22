@@ -1,0 +1,22 @@
+vscode latex 配置的参考博客
+![](http://ddswhu.com/visual-studio-code-latex/)
+
+具体只需要这一段:
+在我们编写 LaTeX 文档的时候，有两个命令很特殊，一个是 %!TEX program = xelatex，一个是 % !TEX root = relative/or/absolute/path/to/root/file.tex，前者指定编译方式，后者指定主（根）文件，借助这个，我们可以对不同文档设定不同的编译方式，这就简化了编译时的麻烦。如果我们指定了文档的编译方式，则只需要按照下面配置就可以编译 LaTeX 文档了。
+
+具体做法是，在 VS Code 左下角，点击齿轮图案的按钮，选择 设置，在右侧添加 LaTeX Workshop 的配置命令
+
+"latex-workshop.latex.clean.enabled": false,
+"latex-workshop.view.pdf.hand": true,
+// 可变编译方式
+"latex-workshop.latex.toolchain": [
+  {
+    "command": "", // 注意这里是留空的
+    "args": [
+      "-synctex=1",
+      "-interaction=nonstopmode",
+      "-file-line-error",
+      "%DOC%"
+    ]
+  }
+],

@@ -1,0 +1,4 @@
+2018.3.10
+    deb 包是 debian 中的一种安装包格式，安装的方式是
+    sudo dpkg -i xxx.deb
+    没有管理员权限可能会出错c

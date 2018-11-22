@@ -1,0 +1,58 @@
+Python3 - MySQL 基本操作：
+
+一.Pymysql
+
+1.连接MySQL数据库:
+    1.connect:
+        1.host:数据库主机的名称或者IP地址，本地数据库主机采用localhost关键字，远程主机的连接方式键入相应的IP地址      127.0.0.1
+        2.port:端口号，我们采用什么端口选择连接数据库，连接本地数据库也需要制定相应端口　　　　　　　　　　　　　　　　　3306
+        3.user:指定登录mysql的用户名                                                                          root
+        4.passwd:指定登录mysql的用户的密码                                                                    lt970106
+        5.db:制定登录的数据库 
+        6.charset:utf8 制定编码方式                                                                          utf8
+    2.cursor:
+        我们成功的连接了相应的数据库之后，需要有相应的游标来对数据库进行操作，在数据库中，我们对游标的概念并不陌生，首先，我们的对数据的读取和对数据的修改全部都是利用游标实现的
+        利用connect获得对象我们调用cursor函数可以获取我们的游标实现对数据的读取
+2.关闭数据库：
+    关闭数据库之前我们还需要进行关闭我们的游标的操作
+    我们每次连接数据库之后都需要对数据库进行正常的关闭，否则会造成错误
+    关闭函数采用close
+3.提交数据：
+    我们对与游标中的数据如果进行修改的话，在关闭我们的连接之前，我们都需要利用commit函数对我们的修改进行提交以便与我们可以将修改同步到我们的数据中,注意数据是通过我们的connect连接对象的不是cursor对象的函数
+
+4.基本函数：
+    1.execute函数：利用我们的python中的引号的规则，将字符串MySQL命令进行提交并执行，第一个参数是我们的MySQL语句，第二个参数是我们的执行语句中的可变参数的元组，可以用于批量的处理我们的元组中数据
+    2.executemany函数：和上述的函数的功能是一样的，但是我们可以批量的执行同一条命令，但是利用第二个参数改变成元组的列表可以实现我们将数据批量的实现,可以将我们的语句执行更多的次数，这个次数的变量等于我们的列表的大小
+    3.查询：
+        1.在Python中我们的查询命令的执行是不会像我们预期　的那样返回大量的列表的，相反只是简简单单的返回我们查询的数据的容量大小
+        2.想要获取我们的查询的数据，我们需要用到游标的里外一些函数
+        3.fetchone函数：
+            以元组的形式返回我们的当前的游标在缓冲区中读取的当前数据
+        4.fetchmany()函数：参数是读取的个数,如果给的参数大于的话不会报错只会返回所有的查询数据,返回的是结果元组
+          fetchall()函数：返回结果列表，列表中每一个元素都是一个元组，每一个元组是一个获取数据/元组
+        5.scroll(x,'absolute'):函数将我们的游标强制的移动到缓冲区的x位置开头是0，之后递增
+            mode = 'relative'表示是根据当前位置的移动
+    4.插入：
+        插入的时候，我们可以利用execute进行逐条的插入，我们亦可以采用execute进行批量插入，我们插入的时候在mysql中使用%s作为我们的控制符，但是在我们的sqlie3中我们一律采用?来表示控制符，反正插入的时候都是采用元组为基本单位，在executemany中我们利用list来封装我们的tuple
+
+
+二.Sqlalchemy
+
+sqlalchemy - Python的SQL工具集和对象关系映射器
+首先我们需要声明，sqlalchemy本身没有办法操作数据库，但是我们一旦和第三方插件结合起来使用的话，我们就可以方便的利用各种数据库软件，通过python进行数据库的操作行为
+eg : pymysql - python3
+    mysql+pymysql://<username>:<password>@<host>/<dbname>[?<options>]
+    更多参见 : http://docs.sqlalchemy.org/en/latest/dialects/index.html
+
+1.导入
+    import sqlalchemy
+2.组成:
+    1.Engine:
+        Connection Pooling : sqlalchemy利用该成员连接对应的数据库
+        Dialect : sqlalchemy利用该成员执行SQL语句
+    2.Scheme / Types
+    3.SQL Expression Language
+3.执行语句：
+    engine = sqlalchemy.create_engine("mysql+pymysql://root:lt970106@localhost/test")
+  　cur = engine.execute(...)   该语句的执行方式和pymysql是一样的，所有的操作都是执行在cur上
+    help(engine.execute() ...)

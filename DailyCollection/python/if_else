@@ -1,0 +1,10 @@
+2017.1.26
+    python中if else的新写法
+    ```a = 0 if option else 1```
+    =>
+    ```
+    if option:
+        a = 0
+    else:
+        a = 1
+    ```

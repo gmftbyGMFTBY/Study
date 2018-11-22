@@ -1,0 +1,70 @@
+如何发布代码到pypi
+
+我的pypi账号
+账号 : GMFTBY
+密码 : 打开python , import math , math.pi
+
+本文采用setuptools的python内置的包来实现这样的功能
+
+１．项目目录结构：
+这是生成的之后的结果
+.
+├── README.md# 说明文档
+├── dist# 打包目录
+│   ├── wallpaperkiller-1.6.tar.gz
+│   └── wallpaperkiller-1.7.tar.gz
+├── git-push.sh
+├── setup.py# 项目建立文件
+├── stretch# 项目源代码目录
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   └── __init__.cpython-36.pyc
+│   └── stretch.py
+└── wallpaperkiller.egg-info# 项目的基本信息
+├── PKG-INFO
+├── SOURCES.txt
+├── dependency_links.txt
+├── requires.txt
+└── top_level.txt
+
+2.在家目录下比那些这样的~/.pypirc文件
+[distutils]
+index-servers=pypi
+
+[pypi]
+repository = https://upload.pypi.org/legacy/
+username = <username>
+password = <password>
+
+3.上传打包文件
+python setup.py register sdist upload
+
+4.setup.py文件
+
+from setuptools import setup
+PACKAGE = "wallpaperkiller"
+NAME = "wallpaperkiller"
+DESCRIPTION = "This package can change the wallpaper under the GNOME Linux / Ubuntu16.04"
+AUTHOR = "GMFTBY"
+AUTHOR_EMAIL = "18811371908@163.com"
+URL = "https://github.com/gmftbyGMFTBY"
+VERSION = 1.7
+
+setup(
+    name=NAME,
+    version=VERSION,
+    description=DESCRIPTION,
+    # long_description=read("README.md"),
+    author=AUTHOR,
+    author_email=AUTHOR_EMAIL,
+    url=URL,
+    packages=["stretch"],
+    install_requires = ['requests' , 'bs4']
+)
+
+5.注意要点
+    在上述的一些细节中，最终要的就是我们的packages属性参数，这个参数决定了我们要将我们项目代码中的那些加入我们的pypi上传的目录中
+    报的层级关系之间采用.连接
+    1.blogrunner
+    2.blogrunner.AI
+    3. ...

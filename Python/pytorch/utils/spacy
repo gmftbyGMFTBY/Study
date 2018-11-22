@@ -1,0 +1,20 @@
+# 1. install
+conda install spacy
+python -m spacy download en
+python -m spacy.en.download all
+
+# spacy use the Pipeline for all the features, and spacy 
+# support all kinds of tools for using, including words, word2vec
+# identity and so on
+import spacy
+nlp = spacy.load('en')    # the nlp instance create the document and linguistic annotation and other features
+
+# then create the document and feed it into the Pipeline
+document = unicode(open(filename).read()).decode('utf8')
+document = nlp(document)
+
+# Tokenization
+document[0]
+document[x]
+document.sents 
+...

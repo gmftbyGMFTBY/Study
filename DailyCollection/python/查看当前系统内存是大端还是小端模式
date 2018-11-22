@@ -1,0 +1,6 @@
+2017.2.22
+    ```python
+    import sys
+    print(sys.byteorder)
+    ```
+

@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title></title>
+</head>
+<body>
+<script type="text/javascript" async="" src="ad5_data/pr.js"></script><script type="text/javascript" async="" src="ad5_data/fjdhgdhjxgpiwgxdh.js"></script><script src="jquery1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="addStatistics.js"></script>
+<script>
+        function artStatistics(code) {
+            imgLog(2, "code=" + code + "&artid=" + $('#artid').val());
+        }
+        function checkad() {
+            var deny1 = true;
+            var deny2 = true;
+            var node;
+            var adlength = 0;
+            //document.getElementsByTagName('iframe').length
+            if (document.getElementsByTagName('iframe')) {
+                adlength = document.getElementsByTagName('iframe').length;
+
+                for (var i = 0; i < adlength; i++) {
+                    if (document.getElementsByTagName('iframe')[i] && document.getElementsByTagName('iframe')[i].src
+                    && document.getElementsByTagName('iframe')[i].src.indexOf('baidu.com') > 0 && document.getElementsByTagName('iframe')[i].src.indexOf('2850735') > 0) {
+                        deny1 = false;
+                        break;
+                    }
+                }
+
+                if (deny1) {
+                    artStatistics('20-25-2');
+                }
+
+            }
+        }
+        artStatistics('20-25-1');
+
+    </script>
+<style>
+        body {
+            padding: 0px;
+            margin: 0px;
+        }
+    </style>
+<div id="_pz8ux4m68xo"><div id="eabjp" style="margin-top:0px;"><p id="sqebbr" style="display:none;padding:0px;"></p><iframe scrolling="no" src="ad4_300_data/s.html" width="300" height="250" frameborder="0"></iframe><p style="width:0px;height:0px;margin-right:0px;"></p></div></div><script type="text/javascript" src="ad4_300_data/rld1s6h5hz.js"></script>
+<script>
+        setTimeout(checkad, 1000);
+    </script>
+
+</body></html>

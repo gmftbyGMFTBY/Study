@@ -1,0 +1,55 @@
+PreWords:
+    We should forget about small efficiencies,say about 97% of the time:premature optimization is the root of all evil. - Donald Knuth.
+    优化我们的Python代码的过程不应该是盲目的，相反，这应该是一种相对享受的过程，去寻找代码真正的耗时的地方，只有针对性的优化才会逐渐的提高我们的代码的性能
+    本文就是如此，通过介绍Python中的性能分析器模块高效率的查找到我们的Python代码中的性能瓶颈
+Module cProfiler:
+    eg:
+    >>>tool.run("for i in range(100000000):pass")
+    3 function calls in 20.970 seconds
+    Ordered by: standard name
+    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    1    　　9.063    9.063   20.969   20.969 　<string>:1(<module>)
+    1    　　0.001    0.001    0.001    0.001 　{method 'disable' of '_lsprof.Profiler' objects}
+    1   　　11.906   11.906   11.906   11.906 　{range}
+    我们首先从上述的调用规则可以看出来，这一个语句涉及了3个函数调用被监控到,如果有说明primitive calls代表非递归调用，原生调用
+    执行了20.970秒，排序方式是标准名称
+    在如上的表格：
+        ncalls - 函数调用的次数
+        totime - 函数内部的调用的时间，这里不包括他调用的其他函数的时间，仅仅是在该函数内的时间消耗
+        percall(totime / ncalls) - 函数的平均的调用时间
+        cumtime - 累计调用时间，这里包含了他调用的函数的执行时间，表示的是在该函数的操作范围内的执行时间
+        filename - 文件名，行号或者函数名
+Use:
+    1.Command Line:
+        python -m cProfile .py - 评测结果输出到终端
+        python -m cProfile -o log.out .py　 - 评测结果导入到文件中
+        -s : 提前将我们的cProfile文件进行排序
+        要想查看我们的结果文件：因为我们的cProfile生成的是二进制的文件，我们无法普通的查看，想要查看我们的Python提供了pstats模块用来对我们的结果文件进行查看
+        　python -m pstats log.out - 进入我们的pstats的界面进行详细的查看
+        　sort key:key按照key关键字进行排序
+        　stats:将最后一次修改的结果输出查看
+    2.Python Code:
+        import cProfile
+        cProfile.run('code...','可选参数，要将log导入的文件名')
+
+        import pstats
+        p = pstats.Stats("log文件")
+        p.print_stats() - 输出我们的评测结果
+        p.sort_stats("name,cumtime,tottime,ncalls,percall...") - 排序结果
+    3.可视化生成cProfile评测结果
+        1.gprof2dot.py - Wondderful py script
+        2.grahviz
+        有了上面两个库之后我们可以将我们的cProfile生成的评测结果生成可视化的图片仔细查看相应的准确细节
+        CL:python -m gprof2dot -f pstats log.out | dot -Tpng -o result.png
+        生成了result.png图片过我们查看，这里我将gprof2dot加入到dist-packages中，所以直接-m模块启动脚本就好
+
+Corresponding Class:
+    1.cProfile.Profile:
+        1.enable():开始性能分析
+        2.disable():结束性能分析，在enable和disable中间的所有代码段都会加入我们的评测结果
+        3.dump_stats():将分析写入文件
+    2.pstats.Stats:
+        Stats() - 构造函数，可以接收Profile对象也可以按照字符串变量接收我们的cProfile生成的日志文件
+        print_stats()：将分析结果输出到标准输出
+        dump_stats()：将分析的评测结果写入文件
+        sort_stats():按照关键字排序,返回一个新的Stats对象

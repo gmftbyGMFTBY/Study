@@ -1,0 +1,9 @@
+pull request 的基本流程
+    1. fork 别人的repo到自己的账号下
+    2. clone到本地准备修改
+        如果使用别人的URL clone 的，需要使用
+            git remote set-url origin git@github.com:[username]/[reponame].git
+            这里的remote指向的是我们的自己 fork 的仓库，所有的更新代码全部都push到自己的账户上
+    3. 在本地的仓库上做一些修改,并push新的更新
+    4. 在github中的 repo 中创建新的 pull request 并加入自己的对 pull request 的描述，发起 pull request
+    5. 等待作者审核你的 request 如果审核通过，你就会成为代码的贡献者

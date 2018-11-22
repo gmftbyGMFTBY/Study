@@ -1,0 +1,8 @@
+2017.2.16
+关闭图形界面 : 
+    systemctl disable lightdm.service
+    reboot
+重启图形界面 : 
+    ln -s /lib/systemd/system/lightdm.service /etc/systemd/system/display-manager.service
+    reboot
+

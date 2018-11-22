@@ -1,0 +1,375 @@
+# `sed` notebook 
+
+1. 命令的作用和简要说明
+    sed - Stream Editor 流式文本编辑器，完美的配合正则表达式使用
+
+2. 参考资料
+
+    * `https://www.cnblogs.com/ggjucheng/archive/2013/01/13/2856901.html`
+    * `http://man.linuxde.net/sed`
+    * `https://www.Linux.cn`
+    * `wechat`
+
+3. 必要的解释
+
+    * 处理流程 : 
+      1. 将当前处理的行存储在临时缓冲区中(模式空间)
+      2. 使用sed命令处理缓冲区的内容，处理完成之后价格缓冲区的内容送至屏幕然后处理下一行,**以行为单位**处理文本数据,知道文件的末尾
+      3. 文本的原始内容没有改变，除非我们使用重定向导入到新的文件中否则模式打印在标准输出中 / 或者使用 `-i` 参数选择重写文本
+      4. 主要用来自动编辑一个或者多个文件，可以对文件执行反复的重复性操作，实行转换程序
+      5. `command / script` 指的是我们用来处理输入文件的一串脚本命令 `'s/pattern/dest/p'` 等类似的一种定义的脚本语言
+
+    * 搜索层次
+      1. 使用`/PATTERN/`或者行号范围的文本搜索模式
+      2. 在行内使用 `s` 动作的行式搜索模式
+
+    * 模式空间的工作原理
+
+      1. **在sed处理文件的时候，每一行都被保存在pattern space的临时缓冲区中。除非行被删除或者输出被取消，否则所有被处理过的行都将打印在屏幕上。接着pattern space被清空，并存入新的一行等待处理**
+      2. `hH` / `gG` 动作可以对pattern space的内容进行操作，比如保存patern space的内容到一个特殊的缓冲区中，并从该特殊的缓冲区中提取出之前放入的文本并再次加入到新的文件中
+
+    * 思维上的误区
+
+      1. `sed` 是一行一行的读取的流式编辑器，所以说，千万要记住一点 **`sed`在当前行处理的时候是不会了解到任何之后行的信息**
+
+         这一点在之后的`h | H | g | G`动作中会有所体现
+
+4. sed 的必要的使用格式
+
+    ```shell
+    sed [-nefri]		[n1, [,n2]]function            file(s)     # 指定行数
+    sed [-nefri]        /PATTERN1/,/PATTERN2/function              # 正则表达式指定行范围，这里打印从PATTERN1到PATTERN2之间的所有的行，如果没有出现PATTERN2，打印到文件末尾
+    sed [-nefri]        n1,/PATTERN/function                       # n1行到PATTERN之间的行打印
+    sed [-nefri]        /PATTERN/function              file(s)     # 正则表达式
+    # 针对s动作的用法，第一个正则表达式的目的是找到要执行的行，第二个正则表达式是找到要替换的模式串，第三个字符串是对模式串的替换选择
+    sed 				/SEARCHLINE/s/PATTERN/pattern/ file(s)	   
+    # 或者
+    sed 				/SEARCHLINE/{s/PATTERN/pattern/} file(s)	   
+    ```
+
+    * 其中的`[n1, [,n2]` | `/PATTERN/` 用来指定函数**动作**的行数范围,从1开始计数行或者正则表达式匹配的行
+    * function 代表动作，比如是`a`, `c`, `d`, `i`, `p`, `s`等等(下面介绍)
+
+5. Options
+    1. `-e`  `command` : 多点编辑，可以对一个文本制定多条命令，增加处理的复杂度，**执行命令是按照命令的输入顺序决定的**
+
+    2. `-f` `filename` : 
+
+       将sed的动作和指令command写入一个制定的文件,使用`-f` 参数可以执行文件中的制定的命令
+
+       文本中键入`command`，**文件尽量使用 `.sed` 扩展名**
+
+       ```shell
+       sed -n -f test
+       # file content ----------- #
+       /PATTERN/s/PATTERN/lantian/p
+       ```
+
+    3. `-h` : 显示帮助信息
+
+    4. `-n` : 仅显示经过script处理后的结果,默认和 `p` 动作使用输出改变的行到标准输出
+
+    5. `-V` : 显示版本信息
+
+    6. `-i` : **危险操作**，直接修改源文件的内容，而不是默认输出到标注输出上，只有在确定的时候才可以执行
+
+    7. `-r` : sed 的 `command` 满足标准的正则表达式的语法
+
+6. 符号和参数
+
+    1. `file(s)` : 待处理的文本文件列表
+    2. 命令使用 `;` 分开执行多组命令
+    3. `{}` : 中包裹命令的组块，组块内使用 `;`分隔命令
+    4. 定界符可以随意的使用，一般都是`/`,`:`,`#`
+
+7. sed 常用动作
+    1. `!` : **排除前面的命令**，执行和命令相反的命令，让原来的命令不起作用
+
+        ```shell
+        # files存在的一行不输出，其他的行没有被files匹配到
+        sed -n '/files/!p' test.sh
+
+        # 解决N不处理最后一行的困扰,不是$执行N是最后一行不执行N
+        sed '$!N; P ; D' test.sh
+
+        # 排除第一行，其他的行执行
+        sed -n '1!p' test.sh
+        ```
+
+    2. `a` : append
+        新增，a后面可以接字符串，这些字符串会在当前行的下一行新加入
+
+    3. `b` : branch 分支命令 (**分支 + 循环**)
+
+        ```shell
+        # 如果没有label,跳过所有的命令到脚本结束,address满足的情况下才会执行分支操作
+        # label 是一个长度不超过7个字符，以冒号开头的字符串(在脚本内)
+        # 匹配成功条状到标签处开始继续运行脚本，否则从b开始运行脚本
+        [address]b [label]
+
+        # 忽略某一部分文本块不打印,匹配不打印，不匹配打印
+        sed -n '/files/b ; p' test.sh
+        ```
+
+    4. `t` : test测试跳转，和 `b` 有一些区别，是按照执行情况跳转
+
+        * 如果替换命令成功匹配并替换
+
+        ```shell
+        [address]t label   
+
+        # 如果之前做过替换，之后就不做替换否则就做
+        sed 's/pattern1/PATTERN1/ ; t ;s/pattern2/PATTERN2/' test
+        ```
+
+    5. `c` : 
+        取代，c后面可以直接跟字符串，这些字符串可以去取代n1, n2 之间的行,将选定的行取代成新的字符串文本
+
+    6. `d` : delete
+        删除，删除操作之后一般都不跟字符串
+
+    7. `D` : 多行删除操作
+
+        * 和 `N` 配合使用，如果在用 `N` 之后删除行 `d` 的话，会删除两行，想要只删除第一行请使用 `D`
+
+        * 删除到 '\n' 包括 '\n'
+
+        * **`D` 是一个非常有趣的命令，删除第一行之后会将第二行内容保留在模式空间中继续执行，不会下一次覆盖模式空间,换句话说，D改变了sed处理的流程，原本的流程是必须执行下一次的读入到模式空间的操作，使用D之后就不读入模式空间了，保留当前的模式控件的内容**
+
+          ```shell
+          # 这样会将一般的行丢失，因为没有D的话，模式控件下一次会直接被覆盖
+          sed -n '{N ; P}' test 
+          # 这样只会丢失最后一行,N没有找到之后就退出程序，最后一行不执行之后的P动作，D这里保留了模式空间中N读取的第二行
+          sed -n '{N ; P ; D}' test
+          ```
+
+    8. `i` : insert
+        插入，i后面可以跟字符串，该字符串会在当前行的上一行出现
+
+    9. `p` : print
+        将摸一个资料打印输出，通常会和 `-n` 参数一起使用
+
+    10. `P` : 多行打印
+
+        * 和 `N` , `D` 配合使用，只打印第一行到 '\n' 为止
+
+    11. `s` : search and replace
+         通常该s搭配相应的正则表达式使用
+
+    12. `n` : next
+
+         读取下一行并用新的命令来处理下一行
+
+         ```shell
+         # 找到使用\t开头的行打印下一行
+         sed -n '/\\t/{n;p}' test
+         ```
+
+    13. `N` : Next将下一行宝库换行符号添加到当前的模式空间的尾部，实现多行的合并操作，`n` 的任务是将下一行替换当前的模式空间
+
+         ```shell
+         # 将含files的文本和下一行合并起来并将换行符号替换成空格输出
+         sed -n '/files/{N ; s/\n/ /p}' test.sh 
+         ```
+
+    14. y` : 替换翻译
+
+         按照对应的提供的翻译表翻译，不可以使用正则表达式的元字符
+
+         ```shell
+         # 将前2行的大写PATTERN转换成小写patten并输出显示
+         sed -n -e '1,2/PATTERN/pattern/' -e '1,2p' test
+         ```
+
+    15. `h` | `H`
+
+         **[拷贝 / 追加]** 当前的pattern space内容到特殊的缓冲区holding buffer
+
+         * 小心拷贝的含义就是，下一个匹配到的串会把上一个匹配到的串覆盖
+
+           ```shell
+           # test文件中的匹配的PATTERN文本的字符串不断的在holdign buffer中被替换并将其内容替换\t内容并从pattern space中输出
+           sed -n -e '/PATTERN/h' -e '/\\t/g;p;' test
+           # 和上面有所不同的是，这里使用的是追加，holding buffer中的内容会被不断的追加，最后替换给\t并输出
+           sed -n -e '/PATTERN/H' -e '/\\t/g;p;' test
+           ```
+
+    16. `g` | `G`
+
+       获得holding buffer缓冲区中的内容用来 **[替换 / 追加]** 到pattern space中
+
+    17. `x` : exchange
+
+         互换当前的pattern space 和bolding buffer的内容
+
+    18. `r` :
+
+         将另一个文件中的内容读取进来并追加到匹配行的后面
+
+         ``` shell
+         # 将new_file文件中的内容追加到PATTERN匹配行的后面，多行匹配多行追加
+         sed '/PATTERN/r new_file' test
+         ```
+
+    19. `q` : quit
+
+         当满足一定的条件之后直接退出`sed`程序
+
+8. sed 替换标记 **替换标记是针对s动作的一种使用方式**
+
+    1. `g` : global
+        行内全面替换
+
+    2. `p` : print
+        表示打印行
+
+    3. `w` : write
+        将行写入一个文件
+
+        ```shell
+        # 将所有的匹配的行写入newtest文件中，但是也可以考虑使用重定向
+        sed -n '/PATTERN/s/PATTERN/lantian/w newtest' test 
+        ```
+    4. [n] : number
+        表示在行内替换第 n 个匹配项，可以和 `g` 配合使用，表示替换从第 n 个开始的匹配项
+
+9. sed 元字符集合(正则表达式)
+    1. `^` : 匹配行开始，行头匹配
+
+    2. `$` : 匹配行结束,**或者代表文件最后一行**
+
+       ```shell
+       sed -n 's/^$/&add lantian/'    # 用在s模式中，＆表示替代之前的pattern模式部分整体的替换，这里在其后追加一段字符串
+       ```
+
+    3. `.` : 匹配任意一个非换行符的任意字符
+
+    4. `*`: 匹配0或者多个字符,
+
+    5. `+` : >=1 个字符
+
+    6. `[]` : 匹配一个制定范围内的字符
+
+    7. `[^]` : 和上面相反
+
+    8. `\(..\)` : 
+
+       ```shell
+       # \(..\)识别出来一个模式串并用一个tag 1标号的寄存器表示它，是上述的&的加强版，可以再之后使用多次
+       sed -n 's/\(PATTERN\)/\1 \1/p' test
+       ```
+
+    9. `&` : 用来代指PATTERN中的字符串 **&** -> **lantian**
+
+       一般都是和`s`动作使用
+
+       ```shell
+       sed 's/PATTERN/& fuckyou/' test
+       ```
+
+    10. `\<` | `\>` : 匹配单词的开始和结束
+
+    11. `x\{m\}` : 重复字母x,m次
+
+    12. `x\{m,\}` : 重复**至少**m次
+
+    13. `x\{m, n\}` : 重复至少m次，至多n次
+
+    14. `;` : 用来分开脚本中的多个命令，可以在一个function中执行多个命令
+
+        或者使用分行模式
+
+        ```shell
+        lantian@GMFTBY:~$ sed '
+        > s/1/100/
+        > s/2/200/
+        > s/3/300/' test
+        ```
+
+        **也可以写在文件中，使用 `-f` 制定文件脚本读入**
+
+10. 定界符号
+  `/` 在命令中的意思是定界，但是我们需要 / 表示实际的字符的时候需要转义
+
+  ```shell
+  sed 's/\/bin\/usr\/file/change to something/g' file 	# 搜索字符串 '/bin/usr/file' 并全局替换成 'change to something'
+  ```
+
+11. 用法实例
+    1. ```shell
+        sed 's/book/books/' file  |  sed -n 's/book/books/p' file
+        ```
+
+        * 搜索替换将file文件中的book替换成books
+        * `-n` and `p` 可以打印发生替换的行
+        * `-i` : 参数将会将所有的改动重写回文件中
+
+    2. ```shell
+        sed 's/book/books/pg' file  |  sed 's/book/books/2g' file
+        ```
+
+        * `g` : 会替换行中的所有匹配，不像上面的例子中仅仅替换第一个出现的PATTERN
+        * `pg` : 替换标记可以连续使用,为了标准一点需要写成 `p;g;`
+        * `[n]g` : 从当前行第n个匹配开始进行global全行匹配
+
+    3. 删除
+
+        ```shell
+        sed '2d' file						   # 删除文件第2行
+        nl test | sed '1,5d'                   # 按行罗列出一个文件的内容并删除1~5行
+        sed '2,$d' file                        # 删除第二行开始到文件最后的所有行
+        sed '/PATTERN/d' file                  # 删除含有PATTERN的行
+        sed '/^$/d' file 					   # 删除所有的空白行并生成新的文件输出到标准输出端
+        sed 's/-//' file                       # 删除所有的-变成一个空字符(就是删除)
+        ```
+
+    4. 添加行
+
+        ```shell
+        nl test | sed '2a lantian' file        # 在第2行下插入一行lantian
+        nl test | sed '2a \\tlantian' file      # 允许加入控制符号    
+        nl test | sed '2i lantian' file        # insert到上一行
+        nl test | sed '2i \\t lantian' file 
+        # 可以允许加入多行，但是需要使用\将最后\n转义并且因为开头没有单引号，所以我们的\t控制符号没有必要使用转义，可以直接使用
+        nl test | sed '2i \\t lantian\
+          \t somthing is in here'              
+        ```
+
+    5. 取代
+
+        ```shell
+        nl test | sed '2,5c no 2-5 line has been deleted!'     # 使用相应的字符串取代2~5行
+        ```
+
+    6. 打印
+
+        ```shell
+        nl test | sed '2,5p'                                   # 全部打印,重复打印文件的2,5行
+        nl test | sed -n '2,5p'                                # 只打印文件的2,5行
+        nl test | sed -n '/PATTERN/p'                          # 打印匹配到PATTERN的行
+        ```
+
+        上面的区别在于
+
+        * 不使用`-n`参数的时候，会将所有的行都打印，对于处理的行不只会打印原行还会打印处理后的行，导致处理的行出现重复打印
+        * 使用了`-n`参数的时候，只会将处理的行的处理结果打印出来
+
+    7. `-e`多点编辑
+
+        ```shell
+        # 先执行将PATTERN替换成lantian,然后在将lantian替换成pattern
+        nl test | sed -e '/PATTERN/s/PATTERN/lantian/g' -e 's/lantian/pattern/g'
+        ```
+
+12. `sed`命令的高效场合
+
+    1. 对于超大的文件的修订，我们用文本编辑器打开的话可能会导致卡顿和不流畅，但是使用`sed`命令配合`-i`参数可以快速的对文件进行修改而不需要文本编辑器
+
+    2. 和`shell`变量的配合使用
+
+       * **必须使用双引号**
+
+       * ```shell
+         test=hello
+         sed "s/PATTERN/$test/g" test
+         ```

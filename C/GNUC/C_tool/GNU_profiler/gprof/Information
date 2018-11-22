@@ -1,0 +1,32 @@
+１．Linux系统下对从C++/Python代码进行性能分析：
+    Linux下为我们继承了一个非常有用的性能分析工具，不同于Python的性能分析工具，这个性能分析工具非常的强大并且可以精准的帮我们分析我们的C/C++代码的效率和性能瓶颈在哪里，这个工具叫做GNU Profile - gprof
+
+２．使用：
+    １．gcc / g++ -pg　参数帮助我们生成可执行文件
+    ２．运行可执行文件，成功运行(标准退出或者exit退出)生成gmon.out文件，注意，我们必须要运行这个可执行文件才会生成gmon.out文件，并且我们的gmon.out是针对我们的一次特定的数据的测试生成的，如果我们多次的生成gmon.out，这个文件会被多次的覆盖
+    ３．使用gprof生成对应的分析报告，并且配合我们的gprof2dot.py脚本可以辅助生成运行效果图
+
+３．具体使用：
+    １．编写C/C++代码
+    ２．利用gcc / g++ 编译的时候，添加-pg参数
+    ３．编译结束生成可执行文件，我们运行可执行文件生成对应的gmon.out文件
+    ４．利用gprof生成对应的分析报告：
+        -b:参数会将测试结果的简洁版返回，不包含相应的解释信息
+        gprof -b xxx gmon.out > report.txt
+        上述的命令的含义就是将我们的可执行文件...的单次运行效果gmon.out生成运行测试报告report.txt
+    ５．我们打开该测试报告会发现两个表
+        １．flat profile - 每个函数的运行时间和次数
+            %time - 函数及我们的衍生函数(子函数)的运行时间的百分比
+            cumulative seconds - 函数运行总时间
+            self seconds - 函数不包含子函数执行的总时间
+            calls - 函数的调用次数
+            name - 函数名
+        ２．call graph - 函数的调用关系
+        　　children - 衍生函数的花费的时间
+            name - 函数名
+        我们会发现，对于我们的连接的库我们是没有显示调用的情况的，因为对于库我们没有采用-pg进行编译
+    ６．可视化报告：
+        生成函数调用的png图片显示，但是如果程序非常的庞大我们生成的png图片失败可以转为生成pdf
+        CL:
+            1.gprof ./xxx.out | python -m gprof2dot -n0 -e0 | dot -Tpng -o ....png
+            2.gprof ./xxx.out | python -m gprof2dot -n0 -e0 | dot -Tpdf -o ....pdf

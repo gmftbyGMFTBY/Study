@@ -1,0 +1,322 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 45.02      0.09     0.09   411840     0.00     0.00  Biginteger::Mul(Biginteger const&, Biginteger const&, Biginteger&) const
+ 20.01      0.13     0.04   145225     0.00     0.00  Biginteger::Sub(Biginteger const&, Biginteger const&, Biginteger&) const
+ 10.00      0.15     0.02  1478048     0.00     0.00  Biginteger::Biginteger(Biginteger const&)
+ 10.00      0.17     0.02   632840     0.00     0.00  Biginteger::Biginteger(int, int)
+  5.00      0.18     0.01  1220210     0.00     0.00  __gnu_cxx::__promote_2<int, int, __gnu_cxx::__promote<int, std::__is_integer<int>::__value>::__type, __gnu_cxx::__promote<int, std::__is_integer<int>::__value>::__type>::__type std::pow<int, int>(int, int)
+  5.00      0.19     0.01   846471     0.00     0.00  Biginteger::operator=(Biginteger const&)
+  5.00      0.20     0.01   145233     0.00     0.00  Biginteger::operator-(Biginteger const&) const
+  0.00      0.20     0.00  1209686     0.00     0.00  Biginteger::get_length_digit() const
+  0.00      0.20     0.00   604801     0.00     0.00  Biginteger::CompareNoSign(Biginteger const&, Biginteger const&) const
+  0.00      0.20     0.00   411840     0.00     0.00  Biginteger::operator*(Biginteger const&) const
+  0.00      0.20     0.00   175525     0.00     0.00  int const& std::max<int>(int const&, int const&)
+  0.00      0.20     0.00    30301     0.00     0.00  Biginteger::set_sign(bool)
+  0.00      0.20     0.00    30300     0.00     0.00  Biginteger::Add(Biginteger const&, Biginteger const&, Biginteger&) const
+  0.00      0.20     0.00    30292     0.00     0.00  Biginteger::operator+(Biginteger const&) const
+  0.00      0.20     0.00     3693     0.00     0.05  Biginteger::Div(Biginteger const&, Biginteger const&, Biginteger&, Biginteger&) const
+  0.00      0.20     0.00     2371     0.00     0.05  Biginteger::operator%(Biginteger const&) const
+  0.00      0.20     0.00     1322     0.00     0.05  Biginteger::operator/(Biginteger const&) const
+  0.00      0.20     0.00      103     0.00     0.22  Quick_P_M(Biginteger&, int, Biginteger&)
+  0.00      0.20     0.00       68     0.00     2.54  Quick_P_M(Biginteger&, Biginteger&, Biginteger&)
+  0.00      0.20     0.00       42     0.00     0.00  Biginteger::Compare(Biginteger const&, Biginteger const&) const
+  0.00      0.20     0.00       28     0.00     6.92  Miller_Rabin(Biginteger&)
+  0.00      0.20     0.00       13     0.00     0.00  Biginteger::operator==(Biginteger const&) const
+  0.00      0.20     0.00        8     0.00     0.00  operator<<(std::ostream&, Biginteger&)
+  0.00      0.20     0.00        2     0.00    96.90  Random_Prime(int, int)
+  0.00      0.20     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN10BigintegerC2Ev
+  0.00      0.20     0.00        1     0.00     0.00  _GLOBAL__sub_I_main
+  0.00      0.20     0.00        1     0.00   195.00  Create_Key(int, int, int, Biginteger&, Biginteger&, Biginteger&)
+  0.00      0.20     0.00        1     0.00     1.20  Extend_GCD(Biginteger, Biginteger, Biginteger&, Biginteger&)
+  0.00      0.20     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      0.20     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      0.20     0.00        1     0.00     2.54  Decoding(Biginteger&, Biginteger&, Biginteger&)
+  0.00      0.20     0.00        1     0.00     2.54  Encoding(Biginteger&, Biginteger&, Biginteger&)
+  0.00      0.20     0.00        1     0.00     0.00  Biginteger::Biginteger(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int)
+
+			Call graph
+
+
+granularity: each sample hit covers 2 byte(s) for 5.00% of 0.20 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]    100.0    0.00    0.20                 main [1]
+                0.00    0.19       1/1           Create_Key(int, int, int, Biginteger&, Biginteger&, Biginteger&) [3]
+                0.00    0.00       1/1           Encoding(Biginteger&, Biginteger&, Biginteger&) [19]
+                0.00    0.00       1/1           Decoding(Biginteger&, Biginteger&, Biginteger&) [18]
+                0.00    0.00       3/632840      Biginteger::Biginteger(int, int) [13]
+                0.00    0.00       1/846471      Biginteger::operator=(Biginteger const&) [15]
+                0.00    0.00       1/1           Biginteger::Biginteger(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int) [23]
+                0.00    0.00       5/8           operator<<(std::ostream&, Biginteger&) [36]
+                0.00    0.00       1/13          Biginteger::operator==(Biginteger const&) const [35]
+-----------------------------------------------
+                0.00    0.07    1322/3693        Biginteger::operator/(Biginteger const&) const [10]
+                0.00    0.13    2371/3693        Biginteger::operator%(Biginteger const&) const [7]
+[2]     99.4    0.00    0.20    3693         Biginteger::Div(Biginteger const&, Biginteger const&, Biginteger&, Biginteger&) const [2]
+                0.00    0.11  409638/411840      Biginteger::operator*(Biginteger const&) const [8]
+                0.01    0.05  145192/145233      Biginteger::operator-(Biginteger const&) const [11]
+                0.01    0.01  842642/846471      Biginteger::operator=(Biginteger const&) [15]
+                0.00    0.00   30265/30292       Biginteger::operator+(Biginteger const&) const [20]
+                0.00    0.00   37651/632840      Biginteger::Biginteger(int, int) [13]
+                0.00    0.00   37651/1478048     Biginteger::Biginteger(Biginteger const&) [16]
+                0.00    0.00  459576/604801      Biginteger::CompareNoSign(Biginteger const&, Biginteger const&) const [31]
+-----------------------------------------------
+                0.00    0.19       1/1           main [1]
+[3]     97.5    0.00    0.19       1         Create_Key(int, int, int, Biginteger&, Biginteger&, Biginteger&) [3]
+                0.00    0.19       2/2           Random_Prime(int, int) [4]
+                0.00    0.00       1/1           Extend_GCD(Biginteger, Biginteger, Biginteger&, Biginteger&) [21]
+                0.00    0.00       2/145233      Biginteger::operator-(Biginteger const&) const [11]
+                0.00    0.00       2/411840      Biginteger::operator*(Biginteger const&) const [8]
+                0.00    0.00       4/632840      Biginteger::Biginteger(int, int) [13]
+                0.00    0.00       4/846471      Biginteger::operator=(Biginteger const&) [15]
+                0.00    0.00       1/30292       Biginteger::operator+(Biginteger const&) const [20]
+                0.00    0.00       2/1478048     Biginteger::Biginteger(Biginteger const&) [16]
+                0.00    0.00       3/8           operator<<(std::ostream&, Biginteger&) [36]
+-----------------------------------------------
+                0.00    0.19       2/2           Create_Key(int, int, int, Biginteger&, Biginteger&, Biginteger&) [3]
+[4]     96.9    0.00    0.19       2         Random_Prime(int, int) [4]
+                0.00    0.19      28/28          Miller_Rabin(Biginteger&) [5]
+                0.00    0.00      26/30292       Biginteger::operator+(Biginteger const&) const [20]
+                0.00    0.00      26/846471      Biginteger::operator=(Biginteger const&) [15]
+                0.00    0.00       4/632840      Biginteger::Biginteger(int, int) [13]
+                0.00    0.00       4/1220210     __gnu_cxx::__promote_2<int, int, __gnu_cxx::__promote<int, std::__is_integer<int>::__value>::__type, __gnu_cxx::__promote<int, std::__is_integer<int>::__value>::__type>::__type std::pow<int, int>(int, int) [17]
+-----------------------------------------------
+                0.00    0.19      28/28          Random_Prime(int, int) [4]
+[5]     96.9    0.00    0.19      28         Miller_Rabin(Biginteger&) [5]
+                0.00    0.17      66/68          Quick_P_M(Biginteger&, Biginteger&, Biginteger&) [6]
+                0.00    0.02     103/103         Quick_P_M(Biginteger&, int, Biginteger&) [14]
+                0.00    0.00      65/1322        Biginteger::operator/(Biginteger const&) const [10]
+                0.00    0.00      28/145233      Biginteger::operator-(Biginteger const&) const [11]
+                0.00    0.00     337/846471      Biginteger::operator=(Biginteger const&) [15]
+                0.00    0.00     150/632840      Biginteger::Biginteger(int, int) [13]
+                0.00    0.00      28/1478048     Biginteger::Biginteger(Biginteger const&) [16]
+                0.00    0.00      42/42          Biginteger::Compare(Biginteger const&, Biginteger const&) const [34]
+-----------------------------------------------
+                0.00    0.00       1/68          Encoding(Biginteger&, Biginteger&, Biginteger&) [19]
+                0.00    0.00       1/68          Decoding(Biginteger&, Biginteger&, Biginteger&) [18]
+                0.00    0.17      66/68          Miller_Rabin(Biginteger&) [5]
+[6]     86.5    0.00    0.17      68         Quick_P_M(Biginteger&, Biginteger&, Biginteger&) [6]
+                0.00    0.11    1948/2371        Biginteger::operator%(Biginteger const&) const [7]
+                0.00    0.07    1246/1322        Biginteger::operator/(Biginteger const&) const [10]
+                0.00    0.00    1880/411840      Biginteger::operator*(Biginteger const&) const [8]
+                0.00    0.00    3126/846471      Biginteger::operator=(Biginteger const&) [15]
+                0.00    0.00     136/632840      Biginteger::Biginteger(int, int) [13]
+                0.00    0.00      68/1478048     Biginteger::Biginteger(Biginteger const&) [16]
+-----------------------------------------------
+                0.00    0.00      11/2371        Extend_GCD(Biginteger, Biginteger, Biginteger&, Biginteger&) [21]
+                0.00    0.02     412/2371        Quick_P_M(Biginteger&, int, Biginteger&) [14]
+                0.00    0.11    1948/2371        Quick_P_M(Biginteger&, Biginteger&, Biginteger&) [6]
+[7]     63.9    0.00    0.13    2371         Biginteger::operator%(Biginteger const&) const [7]
+                0.00    0.13    2371/3693        Biginteger::Div(Biginteger const&, Biginteger const&, Biginteger&, Biginteger&) const [2]
+                0.00    0.00    4742/632840      Biginteger::Biginteger(int, int) [13]
+                0.00    0.00    2371/1478048     Biginteger::Biginteger(Biginteger const&) [16]
+-----------------------------------------------
+                0.00    0.00       2/411840      Create_Key(int, int, int, Biginteger&, Biginteger&, Biginteger&) [3]
+                0.00    0.00      11/411840      Extend_GCD(Biginteger, Biginteger, Biginteger&, Biginteger&) [21]
+                0.00    0.00     309/411840      Quick_P_M(Biginteger&, int, Biginteger&) [14]
+                0.00    0.00    1880/411840      Quick_P_M(Biginteger&, Biginteger&, Biginteger&) [6]
+                0.00    0.11  409638/411840      Biginteger::Div(Biginteger const&, Biginteger const&, Biginteger&, Biginteger&) const [2]
+[8]     57.7    0.00    0.12  411840         Biginteger::operator*(Biginteger const&) const [8]
+                0.09    0.00  411840/411840      Biginteger::Mul(Biginteger const&, Biginteger const&, Biginteger&) const [9]
+                0.01    0.00  411840/632840      Biginteger::Biginteger(int, int) [13]
+                0.01    0.00  411840/1478048     Biginteger::Biginteger(Biginteger const&) [16]
+-----------------------------------------------
+                0.09    0.00  411840/411840      Biginteger::operator*(Biginteger const&) const [8]
+[9]     46.7    0.09    0.00  411840         Biginteger::Mul(Biginteger const&, Biginteger const&, Biginteger&) const [9]
+                0.00    0.00  411840/1220210     __gnu_cxx::__promote_2<int, int, __gnu_cxx::__promote<int, std::__is_integer<int>::__value>::__type, __gnu_cxx::__promote<int, std::__is_integer<int>::__value>::__type>::__type std::pow<int, int>(int, int) [17]
+-----------------------------------------------
+                0.00    0.00      11/1322        Extend_GCD(Biginteger, Biginteger, Biginteger&, Biginteger&) [21]
+                0.00    0.00      65/1322        Miller_Rabin(Biginteger&) [5]
+                0.00    0.07    1246/1322        Quick_P_M(Biginteger&, Biginteger&, Biginteger&) [6]
+[10]    35.7    0.00    0.07    1322         Biginteger::operator/(Biginteger const&) const [10]
+                0.00    0.07    1322/3693        Biginteger::Div(Biginteger const&, Biginteger const&, Biginteger&, Biginteger&) const [2]
+                0.00    0.00    2644/632840      Biginteger::Biginteger(int, int) [13]
+                0.00    0.00    3966/1478048     Biginteger::Biginteger(Biginteger const&) [16]
+-----------------------------------------------
+                0.00    0.00       2/145233      Create_Key(int, int, int, Biginteger&, Biginteger&, Biginteger&) [3]
+                0.00    0.00      11/145233      Extend_GCD(Biginteger, Biginteger, Biginteger&, Biginteger&) [21]
+                0.00    0.00      28/145233      Miller_Rabin(Biginteger&) [5]
+                0.01    0.05  145192/145233      Biginteger::Div(Biginteger const&, Biginteger const&, Biginteger&, Biginteger&) const [2]
+[11]    29.5    0.01    0.05  145233         Biginteger::operator-(Biginteger const&) const [11]
+                0.04    0.00  145224/145225      Biginteger::Sub(Biginteger const&, Biginteger const&, Biginteger&) const [12]
+                0.00    0.00  145233/632840      Biginteger::Biginteger(int, int) [13]
+                0.00    0.00  145233/1478048     Biginteger::Biginteger(Biginteger const&) [16]
+                0.00    0.00       9/30300       Biginteger::Add(Biginteger const&, Biginteger const&, Biginteger&) const [22]
+                0.00    0.00  145224/604801      Biginteger::CompareNoSign(Biginteger const&, Biginteger const&) const [31]
+                0.00    0.00       9/30301       Biginteger::set_sign(bool) [33]
+-----------------------------------------------
+                0.00    0.00       1/145225      Biginteger::operator+(Biginteger const&) const [20]
+                0.04    0.00  145224/145225      Biginteger::operator-(Biginteger const&) const [11]
+[12]    20.6    0.04    0.00  145225         Biginteger::Sub(Biginteger const&, Biginteger const&, Biginteger&) const [12]
+                0.00    0.00  145225/1220210     __gnu_cxx::__promote_2<int, int, __gnu_cxx::__promote<int, std::__is_integer<int>::__value>::__type, __gnu_cxx::__promote<int, std::__is_integer<int>::__value>::__type>::__type std::pow<int, int>(int, int) [17]
+                0.00    0.00  145225/175525      int const& std::max<int>(int const&, int const&) [32]
+-----------------------------------------------
+                0.00    0.00       1/632840      Encoding(Biginteger&, Biginteger&, Biginteger&) [19]
+                0.00    0.00       1/632840      Decoding(Biginteger&, Biginteger&, Biginteger&) [18]
+                0.00    0.00       3/632840      main [1]
+                0.00    0.00       4/632840      Random_Prime(int, int) [4]
+                0.00    0.00       4/632840      Create_Key(int, int, int, Biginteger&, Biginteger&, Biginteger&) [3]
+                0.00    0.00      36/632840      Extend_GCD(Biginteger, Biginteger, Biginteger&, Biginteger&) [21]
+                0.00    0.00     103/632840      Quick_P_M(Biginteger&, int, Biginteger&) [14]
+                0.00    0.00     136/632840      Quick_P_M(Biginteger&, Biginteger&, Biginteger&) [6]
+                0.00    0.00     150/632840      Miller_Rabin(Biginteger&) [5]
+                0.00    0.00    2644/632840      Biginteger::operator/(Biginteger const&) const [10]
+                0.00    0.00    4742/632840      Biginteger::operator%(Biginteger const&) const [7]
+                0.00    0.00   30292/632840      Biginteger::operator+(Biginteger const&) const [20]
+                0.00    0.00   37651/632840      Biginteger::Div(Biginteger const&, Biginteger const&, Biginteger&, Biginteger&) const [2]
+                0.00    0.00  145233/632840      Biginteger::operator-(Biginteger const&) const [11]
+                0.01    0.00  411840/632840      Biginteger::operator*(Biginteger const&) const [8]
+[13]    12.6    0.02    0.01  632840         Biginteger::Biginteger(int, int) [13]
+                0.01    0.00  632840/1220210     __gnu_cxx::__promote_2<int, int, __gnu_cxx::__promote<int, std::__is_integer<int>::__value>::__type, __gnu_cxx::__promote<int, std::__is_integer<int>::__value>::__type>::__type std::pow<int, int>(int, int) [17]
+-----------------------------------------------
+                0.00    0.02     103/103         Miller_Rabin(Biginteger&) [5]
+[14]    11.2    0.00    0.02     103         Quick_P_M(Biginteger&, int, Biginteger&) [14]
+                0.00    0.02     412/2371        Biginteger::operator%(Biginteger const&) const [7]
+                0.00    0.00     309/411840      Biginteger::operator*(Biginteger const&) const [8]
+                0.00    0.00     309/846471      Biginteger::operator=(Biginteger const&) [15]
+                0.00    0.00     103/632840      Biginteger::Biginteger(int, int) [13]
+                0.00    0.00     103/1478048     Biginteger::Biginteger(Biginteger const&) [16]
+-----------------------------------------------
+                0.00    0.00       1/846471      main [1]
+                0.00    0.00       1/846471      Encoding(Biginteger&, Biginteger&, Biginteger&) [19]
+                0.00    0.00       1/846471      Decoding(Biginteger&, Biginteger&, Biginteger&) [18]
+                0.00    0.00       4/846471      Create_Key(int, int, int, Biginteger&, Biginteger&, Biginteger&) [3]
+                0.00    0.00      24/846471      Extend_GCD(Biginteger, Biginteger, Biginteger&, Biginteger&) [21]
+                0.00    0.00      26/846471      Random_Prime(int, int) [4]
+                0.00    0.00     309/846471      Quick_P_M(Biginteger&, int, Biginteger&) [14]
+                0.00    0.00     337/846471      Miller_Rabin(Biginteger&) [5]
+                0.00    0.00    3126/846471      Quick_P_M(Biginteger&, Biginteger&, Biginteger&) [6]
+                0.01    0.01  842642/846471      Biginteger::Div(Biginteger const&, Biginteger const&, Biginteger&, Biginteger&) const [2]
+[15]    10.7    0.01    0.01  846471         Biginteger::operator=(Biginteger const&) [15]
+                0.01    0.00  846471/1478048     Biginteger::Biginteger(Biginteger const&) [16]
+-----------------------------------------------
+                0.00    0.00       2/1478048     Create_Key(int, int, int, Biginteger&, Biginteger&, Biginteger&) [3]
+                0.00    0.00      23/1478048     Extend_GCD(Biginteger, Biginteger, Biginteger&, Biginteger&) [21]
+                0.00    0.00      28/1478048     Miller_Rabin(Biginteger&) [5]
+                0.00    0.00      68/1478048     Quick_P_M(Biginteger&, Biginteger&, Biginteger&) [6]
+                0.00    0.00     103/1478048     Quick_P_M(Biginteger&, int, Biginteger&) [14]
+                0.00    0.00    2371/1478048     Biginteger::operator%(Biginteger const&) const [7]
+                0.00    0.00    3966/1478048     Biginteger::operator/(Biginteger const&) const [10]
+                0.00    0.00   30292/1478048     Biginteger::operator+(Biginteger const&) const [20]
+                0.00    0.00   37651/1478048     Biginteger::Div(Biginteger const&, Biginteger const&, Biginteger&, Biginteger&) const [2]
+                0.00    0.00  145233/1478048     Biginteger::operator-(Biginteger const&) const [11]
+                0.01    0.00  411840/1478048     Biginteger::operator*(Biginteger const&) const [8]
+                0.01    0.00  846471/1478048     Biginteger::operator=(Biginteger const&) [15]
+[16]    10.0    0.02    0.00 1478048         Biginteger::Biginteger(Biginteger const&) [16]
+-----------------------------------------------
+                0.00    0.00       1/1220210     Biginteger::Biginteger(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int) [23]
+                0.00    0.00       4/1220210     Random_Prime(int, int) [4]
+                0.00    0.00   30300/1220210     Biginteger::Add(Biginteger const&, Biginteger const&, Biginteger&) const [22]
+                0.00    0.00  145225/1220210     Biginteger::Sub(Biginteger const&, Biginteger const&, Biginteger&) const [12]
+                0.00    0.00  411840/1220210     Biginteger::Mul(Biginteger const&, Biginteger const&, Biginteger&) const [9]
+                0.01    0.00  632840/1220210     Biginteger::Biginteger(int, int) [13]
+[17]     5.0    0.01    0.00 1220210         __gnu_cxx::__promote_2<int, int, __gnu_cxx::__promote<int, std::__is_integer<int>::__value>::__type, __gnu_cxx::__promote<int, std::__is_integer<int>::__value>::__type>::__type std::pow<int, int>(int, int) [17]
+-----------------------------------------------
+                0.00    0.00       1/1           main [1]
+[18]     1.3    0.00    0.00       1         Decoding(Biginteger&, Biginteger&, Biginteger&) [18]
+                0.00    0.00       1/68          Quick_P_M(Biginteger&, Biginteger&, Biginteger&) [6]
+                0.00    0.00       1/632840      Biginteger::Biginteger(int, int) [13]
+                0.00    0.00       1/846471      Biginteger::operator=(Biginteger const&) [15]
+-----------------------------------------------
+                0.00    0.00       1/1           main [1]
+[19]     1.3    0.00    0.00       1         Encoding(Biginteger&, Biginteger&, Biginteger&) [19]
+                0.00    0.00       1/68          Quick_P_M(Biginteger&, Biginteger&, Biginteger&) [6]
+                0.00    0.00       1/632840      Biginteger::Biginteger(int, int) [13]
+                0.00    0.00       1/846471      Biginteger::operator=(Biginteger const&) [15]
+-----------------------------------------------
+                0.00    0.00       1/30292       Create_Key(int, int, int, Biginteger&, Biginteger&, Biginteger&) [3]
+                0.00    0.00      26/30292       Random_Prime(int, int) [4]
+                0.00    0.00   30265/30292       Biginteger::Div(Biginteger const&, Biginteger const&, Biginteger&, Biginteger&) const [2]
+[20]     0.9    0.00    0.00   30292         Biginteger::operator+(Biginteger const&) const [20]
+                0.00    0.00   30292/632840      Biginteger::Biginteger(int, int) [13]
+                0.00    0.00   30292/1478048     Biginteger::Biginteger(Biginteger const&) [16]
+                0.00    0.00   30291/30300       Biginteger::Add(Biginteger const&, Biginteger const&, Biginteger&) const [22]
+                0.00    0.00       1/145225      Biginteger::Sub(Biginteger const&, Biginteger const&, Biginteger&) const [12]
+                0.00    0.00   30292/30301       Biginteger::set_sign(bool) [33]
+                0.00    0.00       1/604801      Biginteger::CompareNoSign(Biginteger const&, Biginteger const&) const [31]
+-----------------------------------------------
+                                  11             Extend_GCD(Biginteger, Biginteger, Biginteger&, Biginteger&) [21]
+                0.00    0.00       1/1           Create_Key(int, int, int, Biginteger&, Biginteger&, Biginteger&) [3]
+[21]     0.6    0.00    0.00       1+11      Extend_GCD(Biginteger, Biginteger, Biginteger&, Biginteger&) [21]
+                0.00    0.00      11/1322        Biginteger::operator/(Biginteger const&) const [10]
+                0.00    0.00      11/2371        Biginteger::operator%(Biginteger const&) const [7]
+                0.00    0.00      11/145233      Biginteger::operator-(Biginteger const&) const [11]
+                0.00    0.00      11/411840      Biginteger::operator*(Biginteger const&) const [8]
+                0.00    0.00      36/632840      Biginteger::Biginteger(int, int) [13]
+                0.00    0.00      24/846471      Biginteger::operator=(Biginteger const&) [15]
+                0.00    0.00      23/1478048     Biginteger::Biginteger(Biginteger const&) [16]
+                0.00    0.00      12/13          Biginteger::operator==(Biginteger const&) const [35]
+                                  11             Extend_GCD(Biginteger, Biginteger, Biginteger&, Biginteger&) [21]
+-----------------------------------------------
+                0.00    0.00       9/30300       Biginteger::operator-(Biginteger const&) const [11]
+                0.00    0.00   30291/30300       Biginteger::operator+(Biginteger const&) const [20]
+[22]     0.1    0.00    0.00   30300         Biginteger::Add(Biginteger const&, Biginteger const&, Biginteger&) const [22]
+                0.00    0.00   30300/1220210     __gnu_cxx::__promote_2<int, int, __gnu_cxx::__promote<int, std::__is_integer<int>::__value>::__type, __gnu_cxx::__promote<int, std::__is_integer<int>::__value>::__type>::__type std::pow<int, int>(int, int) [17]
+                0.00    0.00   30300/175525      int const& std::max<int>(int const&, int const&) [32]
+-----------------------------------------------
+                0.00    0.00       1/1           main [1]
+[23]     0.0    0.00    0.00       1         Biginteger::Biginteger(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int) [23]
+                0.00    0.00       1/1220210     __gnu_cxx::__promote_2<int, int, __gnu_cxx::__promote<int, std::__is_integer<int>::__value>::__type, __gnu_cxx::__promote<int, std::__is_integer<int>::__value>::__type>::__type std::pow<int, int>(int, int) [17]
+-----------------------------------------------
+                0.00    0.00      84/1209686     Biginteger::Compare(Biginteger const&, Biginteger const&) const [34]
+                0.00    0.00 1209602/1209686     Biginteger::CompareNoSign(Biginteger const&, Biginteger const&) const [31]
+[30]     0.0    0.00    0.00 1209686         Biginteger::get_length_digit() const [30]
+-----------------------------------------------
+                0.00    0.00       1/604801      Biginteger::operator+(Biginteger const&) const [20]
+                0.00    0.00  145224/604801      Biginteger::operator-(Biginteger const&) const [11]
+                0.00    0.00  459576/604801      Biginteger::Div(Biginteger const&, Biginteger const&, Biginteger&, Biginteger&) const [2]
+[31]     0.0    0.00    0.00  604801         Biginteger::CompareNoSign(Biginteger const&, Biginteger const&) const [31]
+                0.00    0.00 1209602/1209686     Biginteger::get_length_digit() const [30]
+-----------------------------------------------
+                0.00    0.00   30300/175525      Biginteger::Add(Biginteger const&, Biginteger const&, Biginteger&) const [22]
+                0.00    0.00  145225/175525      Biginteger::Sub(Biginteger const&, Biginteger const&, Biginteger&) const [12]
+[32]     0.0    0.00    0.00  175525         int const& std::max<int>(int const&, int const&) [32]
+-----------------------------------------------
+                0.00    0.00       9/30301       Biginteger::operator-(Biginteger const&) const [11]
+                0.00    0.00   30292/30301       Biginteger::operator+(Biginteger const&) const [20]
+[33]     0.0    0.00    0.00   30301         Biginteger::set_sign(bool) [33]
+-----------------------------------------------
+                0.00    0.00      42/42          Miller_Rabin(Biginteger&) [5]
+[34]     0.0    0.00    0.00      42         Biginteger::Compare(Biginteger const&, Biginteger const&) const [34]
+                0.00    0.00      84/1209686     Biginteger::get_length_digit() const [30]
+-----------------------------------------------
+                0.00    0.00       1/13          main [1]
+                0.00    0.00      12/13          Extend_GCD(Biginteger, Biginteger, Biginteger&, Biginteger&) [21]
+[35]     0.0    0.00    0.00      13         Biginteger::operator==(Biginteger const&) const [35]
+-----------------------------------------------
+                0.00    0.00       3/8           Create_Key(int, int, int, Biginteger&, Biginteger&, Biginteger&) [3]
+                0.00    0.00       5/8           main [1]
+[36]     0.0    0.00    0.00       8         operator<<(std::ostream&, Biginteger&) [36]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [62]
+[37]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN10BigintegerC2Ev [37]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [40]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [62]
+[38]     0.0    0.00    0.00       1         _GLOBAL__sub_I_main [38]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [39]
+-----------------------------------------------
+                0.00    0.00       1/1           _GLOBAL__sub_I_main [38]
+[39]     0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [39]
+-----------------------------------------------
+                0.00    0.00       1/1           _GLOBAL__sub_I__ZN10BigintegerC2Ev [37]
+[40]     0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [40]
+-----------------------------------------------
+
+Index by function name
+
+  [37] _GLOBAL__sub_I__ZN10BigintegerC2Ev [14] Quick_P_M(Biginteger&, int, Biginteger&) [12] Biginteger::Sub(Biginteger const&, Biginteger const&, Biginteger&) const
+  [38] _GLOBAL__sub_I_main    [33] Biginteger::set_sign(bool) [34] Biginteger::Compare(Biginteger const&, Biginteger const&) const
+   [3] Create_Key(int, int, int, Biginteger&, Biginteger&, Biginteger&) [23] Biginteger::Biginteger(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int) [10] Biginteger::operator/(Biginteger const&) const
+  [21] Extend_GCD(Biginteger, Biginteger, Biginteger&, Biginteger&) [16] Biginteger::Biginteger(Biginteger const&) [35] Biginteger::operator==(Biginteger const&) const
+   [5] Miller_Rabin(Biginteger&) [13] Biginteger::Biginteger(int, int) [11] Biginteger::operator-(Biginteger const&) const
+   [4] Random_Prime(int, int) [15] Biginteger::operator=(Biginteger const&) [8] Biginteger::operator*(Biginteger const&) const
+  [39] __static_initialization_and_destruction_0(int, int) [31] Biginteger::CompareNoSign(Biginteger const&, Biginteger const&) const [20] Biginteger::operator+(Biginteger const&) const
+  [40] __static_initialization_and_destruction_0(int, int) [30] Biginteger::get_length_digit() const [7] Biginteger::operator%(Biginteger const&) const
+  [18] Decoding(Biginteger&, Biginteger&, Biginteger&) [22] Biginteger::Add(Biginteger const&, Biginteger const&, Biginteger&) const [32] int const& std::max<int>(int const&, int const&)
+  [19] Encoding(Biginteger&, Biginteger&, Biginteger&) [2] Biginteger::Div(Biginteger const&, Biginteger const&, Biginteger&, Biginteger&) const [17] __gnu_cxx::__promote_2<int, int, __gnu_cxx::__promote<int, std::__is_integer<int>::__value>::__type, __gnu_cxx::__promote<int, std::__is_integer<int>::__value>::__type>::__type std::pow<int, int>(int, int)
+   [6] Quick_P_M(Biginteger&, Biginteger&, Biginteger&) [9] Biginteger::Mul(Biginteger const&, Biginteger const&, Biginteger&) const [36] operator<<(std::ostream&, Biginteger&)

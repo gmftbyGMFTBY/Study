@@ -1,0 +1,6 @@
+1. 我们如果打开正常的ASCII文本出现了错误，在python3中可以使用rb字节流读取，因为有可能编码有问题
+     'utf-8' codec can't decode byte 0x92 in position 66: invalid start byte
+     说明92字节处编码有问题，这里采用字节流读取可以避免
+
+2. 字节流的bytes转string
+    string = bytes.decoding('utf8')

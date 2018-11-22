@@ -1,0 +1,40 @@
+一
+1.连接sql server数据库引擎的时候，选择的服务器的名称是sql2012，实例名称就是sql2012    ×
+2.服务器名为t440下的windows用户teacher使用windows验证登录sql server，数据库中对应的名称是t440/teacher的登录与teacher相关联      ×
+3.sql server身份闫恒windows闭windows更安全   ×
+4.如果需要windows身份验证登录的话，必须在windows身份验证模式验证下登录     ×
+5.可以使用grant命令给图个特定的表查询权限设定一个登录     对
+6.使用master数据库作为模板    ×   model数据库
+7.sql server最小的io单位是页面     正确   
+8.盘区sql server最小的存储分配单位    ..
+9.生成检查点时会将缓存区中的所有的脏数据块写到数据库文件中，数据库文件是一致的    对的
+10.数据库日志文件的作用是为了提高数据库的安全性，因为可以根据数据库的日志文件跟踪访问我们的数据库    ????
+
+二
+1.创建一个数据库登录，如果不特别指定，创建登录的默认数据库是   master
+2.dbowner的正确描述     数据库角色
+3.s1.s2.s3.s4中数据库名是?  s2
+4.将某一个数据库的表的select权限授予某一个用户需要的语句格式
+
+use ....database
+go
+    grant select on AdventureWorks.Person to student as dbo
+go
+
+5.alter server role sysadmin add member urser .     user - 登录名或者用户自定义数据库角色
+6.alter role dbowner add memeber user      user - 数据库用户
+7.grant select to user1 的解释
+
+三  Over!
+补ER图，很重要，打电话售后的那个
+
+四 Over
+补存储过程的代码
+
+五
+写出测试结果
+
+六 简述题 数据库设计
+
+七 其他 Over!
+set count on     影响行数的计数

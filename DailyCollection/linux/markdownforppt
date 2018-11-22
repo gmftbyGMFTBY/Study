@@ -1,0 +1,5 @@
+markdown 写 ppt 的方法和 r markdown 的一致，具体的实例文件在 study/machinelearning/course/david_silver/ppt 下面
+可以找到对应的 markdown 范例
+执行命令
+
+pandoc -t beamer -o test.pdf test.md

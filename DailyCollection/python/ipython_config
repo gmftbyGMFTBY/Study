@@ -1,0 +1,5 @@
+在.ipython/profile_default目录中可以找到对于ipython设置的两个设置文件
+    1. ipython_config.py
+    2. ipython_kernel_config.py
+
+这两个文件分别执行对ipython / jupyter notebook中的环境的加载配置，可以预先导入必要的模块

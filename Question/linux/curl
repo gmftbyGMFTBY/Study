@@ -1,0 +1,16 @@
+2017.1.13
+    curl 爬取北京理工大学的教务处的网站出现失败，cookie是无效的，不知道怎么回事
+    * 不是user-agent的问题，加上了user-agent也不对，总是将登录的源代码发给我
+    * 一直在怀疑是不是表单提交的数据有问题，毕竟表单提交的数据是动态生成的
+    * 有可能是因为 login ticket 导致的问题，参考连接
+        https://www.cnblogs.com/notDog/p/5252973.html
+        http://denger.iteye.com/blog/809170
+    * 不知道login ticket是否会影响登录的唯一性的要求
+    * 不只是北京理工大学的教务处,CSDN标识 login ticket 的标识
+        按照参考文献的说法，一般都会去验证 login ticket 的有效性然后才会处理用户的登录密码和用户的信息
+
+    我的做法，对于没有login ticket的人人网有效
+        curl -c cookie -d "username=xxxx&password=xxxx" [URL]
+        curl -b cookie -L [URL]
+
+    个人怀疑是因为 login ticket 对我上传的post 请求做了一些处理导致cookie中的信息失效

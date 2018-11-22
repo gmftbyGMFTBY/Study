@@ -1,0 +1,7 @@
+2017.10.9
+    因为安装中断或者其他的而原因导致的有关下载的资源锁未释放或者是dpkg的问题解决方案
+    1.apt的锁
+        ps -ef | grep apt
+        kill ...    # 杀死有关的apt进程
+    2.dpkg的问题
+        sudo dpkg --configure -a

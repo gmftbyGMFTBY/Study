@@ -1,0 +1,12 @@
+#python
+*.py[cod]
+*.so
+*.egg
+*egg-info
+*.out
+dist
+build
+
+#C/C++
+*.out
+*.exe

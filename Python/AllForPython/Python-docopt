@@ -1,0 +1,32 @@
+docopt : 优雅创建命令行界面的参数提取
+1. 功能
+    1. docopt 根据你写的文档秒数，可以自动的为你生成解析器，可以非常容易的为你的python程序创建命令行界面(Command Line Interface, CLI)
+    2. docopt 本质上引入了一种命令行参数的形式语言，在代码**最开头**使用的文档字符串可以解析成合适的文档，自动生成对应的 parse
+
+2. API
+    1. 文档字符串的基本格式
+
+        '''Software Name
+
+        The simple description for this 
+
+        Usage:
+          cmd <option>
+          cmd -e <option>
+          cmd -s <option>
+
+        Options:
+          -e --edit         edit the file ...
+          -d --directories  list all the directories
+          -l --list         list ...
+
+        Examples:
+          
+          To edit the file ...
+            cmd ...
+          ...
+        '''
+
+    docopt(doc, argv=None, help=True, version=None, options_first=False)
+    * doc : 文档字符串 __doc__
+    * 

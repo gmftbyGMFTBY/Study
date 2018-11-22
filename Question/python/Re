@@ -1,0 +1,5 @@
+1.2017.8.16
+    如何使用负零宽断言利用正则表达式抽取出下面的指定内容
+    'I say i am walking while you are dancing'
+    抽取出所有的后缀不是ing的单词
+

@@ -1,0 +1,29 @@
+2017.1.24日，我尝试使用其他的设备通过ssh连接我的linux主机，经过多次的查询，确认是防火墙的问题
+1. 问题描述 : 
+    * 可以ping通linux主机，但是无法使用ssh连接
+2. UFW 是 Ubuntu 上的防火墙
+    1. 安装
+        sudo apt-get install ufw / gufw
+    2. 启动防火墙
+        开启防火墙之后，主机可以访问外部，但是外部对主机的访问都被隔离了
+        sudo ufw enable
+        sudo ufw default deny
+    3. 关闭防火墙
+        sudo ufw disable
+    4. 查看防火墙的状态
+        sudo ufw status
+    5. 开启和警用相应的端口
+        sudo ufw allow 80    # 允许外部访问80端口
+        sudo ufw delete allow 80    # 禁止外部访问80端口
+        sudo ufw allow from 192.168.1.1    # 允许你192.168.1.1访问本机的所有端口
+        sudo ufw deny smtp    # 禁止外部访问smtp服务
+        sudo ufw delete allow smtp   # 删除主机上面对应的某一条规则
+    6. 一般来说
+        1. 安全使用
+            sudo apt-get install ufw
+            sudo ufw enable
+            sudo ufw default deny
+        2. 但是如果需要ssh连接或者其他的访问请求
+            sudo ufw disable
+            关闭防火墙或者打开相应的端口即可
+

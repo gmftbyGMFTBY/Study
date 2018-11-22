@@ -1,0 +1,34 @@
+argparse是python标准库中推荐的编写命令行程序的解析器
+
+下面介绍一下简单的用途和用法:
+    
+1.import argparse : 导入命令行解释器模块
+2.parse = argparse.ArgumentParser() : 创建解析器对象
+3.parse.add_argument("-f" , "--[name]" , help = "" , type = "" , default = "")
+    0.-f : 命令行键入的标志
+    1.name : 命令行参数的名称,在5命令行的使用中会使用到
+    2.help : 命令行参数的解释，在-h参数中显示
+    3.type : 命令行参数的数据类型
+    4.default : 命令行参数的默认值
+４.w = parse.parse_args() : 获取命令行信息
+5.使用命令行信息
+    w.[name] : 获取命令行的数据
+
+Note : 
+    １．我们需要注意，-h参数我们不需要显示的执行，我们的-h参数以及打印的内容都是从我们的每一个help参数中默认
+    　我们的-h是自动生成的
+    
+Eg : 
+   #!/usr/bin/python
+   
+   import argparse as ap
+   
+   parse = ap.ArgumentParser()
+   parse.add_argument("-f" ,"--file" , type = int , default = 666)
+   
+   w = parse.parse_args()
+   
+   print("There is no such file called %s " % w.file)
+   
+   python3 xxx.py -f 4
+   There is no such file called 4

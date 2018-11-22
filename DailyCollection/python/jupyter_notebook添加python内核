@@ -1,0 +1,13 @@
+2017.11.16
+    因为NLTK的安装环境和我的jupyter的默认环境不匹配，所以为将anaconda下默认的python发行版加入我们的jupyter notebook中
+    # 如何检验我们的jupyter notebook中的内核环境和使用的环境的不匹配的方法
+    import sys
+    sys.executable
+    1. 查找对应的kernel.json文件的存放目录
+        在~下
+        find . -name 'kernel.json'
+        # 我的测试电脑上的路径是~/.local/share/jupyter/kernels/pythonx
+    2. 新建文件夹(jupyter notebook中的python环境)并编写kernel.json文件
+        编写方式可以参考已有的kernel.json文件
+    3. 如果之后启动jupyter notebook的新加入的python环境失败，可能存在的几种错误
+        1. sudo pip install --upgrade ipykernel    # ipykernel的版本过low，我们需要提升

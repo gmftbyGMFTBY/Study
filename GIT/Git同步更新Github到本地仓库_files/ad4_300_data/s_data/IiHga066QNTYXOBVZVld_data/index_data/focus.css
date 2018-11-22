@@ -1,0 +1,19 @@
+html,body{margin:0;padding:0;}
+.focuswid{width:300px;position:relative;overflow:hidden;height:250px;z-index:11;}
+.flash{height:250px;}
+.flash li{width:100%;height:250px;overflow:hidden;background-position:50% 0;background-repeat:no-repeat;position:absolute;top:0;left:0;}
+
+.menubox{word-spacing:-3em;font-size:0;line-height:0;text-align:center;position:absolute;bottom:15px;right:0;width:100%;}
+.menubox b{margin-right:10px;display:inline-block;*display:inline;*zoom:1;word-spacing:normal;overflow:hidden;width:17px;height:19px;background:url(../images/bg/buttons.png) no-repeat 100% 0;margin:0 5px 0 0;cursor:pointer;margin-left:10px;}
+.menubox b.current{background-position:0 0;}
+.flash{overflow:hidden;margin:0 auto;position:relative;background-position:50% 0;background-repeat:no-repeat;}
+.focus-ins span{width:0;height:0;background:url(../images/bg/arrow.png) no-repeat;position:absolute;top:50%;margin-top:-59px;z-index:99999;cursor:pointer;}
+.focus-ins span.arrlft{left:0;}
+.focus-ins span.arrrgt{background-position:100% 0;right:0;}
+.flash li p{position:absolute;bottom:60px;left:50%;margin:0 0 0 -410px;width:710px;padding:35px 55px;background:url(../images/bg/focusbg.png);overflow:hidden;display:none;}
+.flash li p strong,.flash li p span{position:relative;color:#fff;display:block;}
+.flash li p strong{font-weight:normal;font-size:30px;line-height:36px;}
+.flash li p span{font-size:20px;line-height:25px;display:inline-block;vertical-align:top;padding-top:10px;}
+.flash li .bo{cursor:pointer;width:36px;height:36px;background:url(../images/bg/bofang.png) no-repeat;display:inline-block;vertical-align:top;font-size:0;line-height:0;margin-top:2px;}
+#a1{display:none;position:absolute;left:50%;top:50%;margin:-182px 0 0 -315px;z-index:9999;}
+.overbg{display:none;font-size:0;line-height:0;width:100%;height:100%;position:fixed;left:0;top:0;background:rgba(0,0,0,0.6) none repeat scroll 0 0!important;filter:Alpha(opacity=60);background:#000;z-index:999;}.flash li a{color:#fff;}.flash li a:hover{text-decoration:none;}

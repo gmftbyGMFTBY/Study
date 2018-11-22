@@ -1,0 +1,24 @@
+命令行参数：
+１．-m：
+    在参考文档中的-m的解释是将我们的要执行的脚本当做模块来执行
+    实际的用途中有一个很大的区别：
+    python -m .py
+    python .py
+    而二者最大的区别在于sys.path的路径中的选择不同
+    １．首先前者将我们的键入命令的当前所在路径加入到我们的sys.path中，但是后者只是将我们的.py脚本的所在目录加入到我们的sys.path中
+    ２．这样做的区别在于，我们-m参数可以模块当做参数进行执行，从而帮助我们将外部模块导入到当前的执行的路径中
+    eg:
+        ./module1
+            __init__.py
+            run1.py
+                print "Something here!"
+        ./module2
+            __init__.py
+            run2.py
+                import sys
+                from module1 import run1
+                print sys.path
+        从上述的例子中我们会发信，如果我们利用python -m module.run2(因为是模块导入，用模块的语法来执行)会成功的执行，并且从输出结果中我们会发现，我们
+        将我们键入命令的目录加入到了sys.path中，但是python module/run2.py的执行方式中，我们是会执行失败，因为我们仅仅只是将我们run2.py的所在路径加入到
+        我们的sys.path中，根据这个路径是没有办法查找到module1模块的（测试的前提是module1没有加入sys.path中）
+

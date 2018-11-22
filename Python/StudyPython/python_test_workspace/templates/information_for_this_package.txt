@@ -1,0 +1,4 @@
+The templates is the .py programm to transform the files into the real file
+And in the code of the templates.py:
+'re.sub(pattern,replacement,text)' 
+the replacement means the every pattern in the text,we will use the replacement(str or the function(which return str)) to replace it!

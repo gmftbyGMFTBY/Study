@@ -1,0 +1,533 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><script charset="utf-8" src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/probe.js" async="" mod_name="tanxssp-probe"></script><script src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/ex_002" async=""></script><script charset="utf-8" async="" src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/tanxssp.js"></script><script type="text/javascript" charset="gbk" id="tanx-s-mm_11220363_1101997_26568831" async="" src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/ex"></script>
+<script src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/ca-pub-6625678643128649.js"></script><script src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/hm.js"></script><script type="text/javascript">
+        if (window.location.toString().indexOf("shtml?") > 0) {
+            self.location = window.location.toString().replace(window.location.search.toString(), "");
+        }
+        function doccheckart(json) {
+            if (json[0].result == "1") {
+                self.location = "http://www.360doc.com/noarticle.aspx";
+            }
+        }
+    </script>
+<script src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/jquery1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+        if (navigator.userAgent.indexOf("iPhone") > 0 || navigator.userAgent.indexOf("Android") > 0 || navigator.userAgent.indexOf("iPod") > 0) {  //手机端跳转
+            var patt1 = new RegExp("[0-9]*_[0-9]*");
+            var url = patt1.exec(location.href);
+            if (url != "") {
+                self.location = "http://www.360doc.cn/article/" + url + ".html";
+            }
+        }
+    </script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta content="360doc" name="classification"><link rel="alternate" media="only screen and (max-width: 640px)" href="http://www.360doc.cn/article/9171956_307028720.html"><meta content="git,fetch,android" name="keywords"><meta content="git fetch 的简单用法:更新远程代码到本地仓库" name="description"><meta name="mobile-agent" content="format=html5;url=http://www.360doc.cn/article/9171956_307028720.html"><meta content="git fetch 的简单用法:更新远程代码到本地仓库git fetch 的简单用法:更新远程代码到本地仓库。$ git remote -veoecn https://github.com/eoecn/android-app.git (fetch)eoecn https://github.com/eoecn/android-app.git (push)origin https://github.com/com360/android-app.git (fetch)origin https://github.com/com360/android-app.git (push)su@SUCHANGLI /e/eoe_client/android-app (master)" name="360docabstract"><meta content="www.360doc.com" name="author"><title>
+git fetch 的简单用法:更新远程代码到本地仓库
+</title>
+<script src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/showarticlefollow20160329.js" type="text/javascript" charset="utf-8"></script>
+<script src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/jQuery.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?d86954201130d615136257dde062a503";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+<link rel="stylesheet" type="text/css" href="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/wzhead-cleaned.css"><link rel="stylesheet" type="text/css" href="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/newArticle20160509.css">
+<script type="text/javascript" language="javascript">
+        window.onerror = ignoreError;
+        function ignoreError() {
+            return true;
+        }
+    </script>
+<link href="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/newheader.css" rel="stylesheet" type="text/css"><script src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/share.js"></script><script type="text/javascript" src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/EssayforIE120425.js"></script><link href="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/a" rel="styleSheet" type="text/css"></head>
+<body onmouseup="setDragEnd()" onclick="delAllDiv(event)"><iframe style="width: 0px; height: 0px; display: none;" src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/acbeacon2.html"></iframe>
+<span id="LayerLogin"></span>
+<div style="position: fixed; width: 100%; z-index: 1000;">
+<div class="header" style="background-color: #ffffff;">
+<div class="header_1">
+<a href="http://www.360doc.com/index.html">
+<img src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/nlogo.jpg" class="f_left"></a>
+<div class="mylibrary">
+<a id="userInfoUrl" href="http://www.360doc.com/login.aspx?reurl=http://www.360doc.com/content/13/0814/10/9171956_307028720.shtml" class="a1">
+<div class="h_user">
+<img id="divuserinfonew" src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/dingtu.gif"><span></span>
+</div>
+我的图书馆
+</a>
+<ul class="hm_list hm_account" style="display: none;">
+<li><a href="http://www.360doc.com/myindex.aspx">首页</a></li>
+<li><a href="http://www.360doc.com/myfiles.aspx?app=1&amp;type=3">馆藏</a></li>
+<li><a href="http://www.360doc.com/myreadroom.aspx">阅览室</a></li>
+<li><a href="http://www.360doc.com/mycontacts.aspx">通讯录</a></li>
+<li><a href="javascript:void(0);" onclick="displaylogin();">退出帐号</a></li>
+</ul>
+</div>
+<div class="headmail f_left" style="display: none;">
+<p class="h_icon1" id="newMsg"></p>
+<span class="h_border"></span>
+<ul class="hm_list" id="msgtips">
+<li id="msgicon"><a href="http://www.360doc.com/mymsg.aspx?app=2">查看信箱</a></li>
+<li id="sysmsgicon"><a href="http://www.360doc.com/mymsg.aspx?app=9">系统消息</a></li>
+<li id="sysicon"><a href="http://www.360doc.com/mymsg.aspx?app=4">官方通知</a></li>
+<li class="hm_color2" style="background-color: #f4f4f4"><a href="http://www.360doc.com/mymsg.aspx?app=6">设置</a></li>
+</ul>
+</div>
+<div class="headtalker f_left" style="display: none;">
+<p class="h_icon1" id="newDialog"></p>
+<span class="h_border"></span>
+<ul class="hm_list">
+<li id="li1chat"><a href="javascript:void(0)" onclick="initchatnew()">开始对话</a></li>
+<li id="li2chat" style="display: none;"><a href="javascript:void(0)" style="color: #141414;">有<span>11</span>人和你对话，<span onclick="initchatnew()" style="color: #4578b4">查看</span>&nbsp;<span onclick="clearinfochat()" style="color: #4578b4">忽略</span></a></li>
+<li><a href="http://www.360doc.com/mycontacts.aspx?app=8">历史对话记录</a></li>
+<li class="hm_color2" style="background-color: #f4f4f4"><a href="http://www.360doc.com/mycontacts.aspx?app=7">通知设置</a></li>
+</ul>
+</div>
+<a href="http://www.360doc.com/advice.html" target="_blank" class="head_talk f_right">留言交流</a>
+<div class="headsearch f_right">
+<div class="zcomdiv">
+<input class="headsearch_inp f_left" value="搜文章 找馆友" type="text">
+<span class="headsearch_btn f_right" id="searchlinkid"></span>
+</div>
+<div class="headsearch_select" style="display: none;">
+<p class="hs_title">请选择搜索范围</p>
+<a href="javascript:goSearch();" class="cur">含&nbsp;<span></span>&nbsp;的文章</a>
+<a href="javascript:goSearch();">昵称为&nbsp;<span></span>&nbsp;的馆友</a>
+<a href="javascript:goSearch();">兴趣为&nbsp;<span></span>&nbsp;的馆友</a>
+</div>
+</div>
+</div>
+</div>
+<div class="arti_type_shadow" style="display: block;"></div>
+</div>
+<div style="height: 68px; _height: 0px; width: 100%;"></div>
+<div class="clear360doc"></div>
+<div class="doc360article_content" style="width: 1016px;">
+<div style="height: 90px; padding-top: 13px;">
+<script async="" src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/adsbygoogle.js"></script><ins class="adsbygoogle" style="display: inline-block; width: 970px; height: 90px" data-ad-client="ca-pub-6625678643128649" data-ad-slot="2709112222" data-adsbygoogle-status="done"><ins id="aswift_0_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:970px;background-color:transparent;"><ins id="aswift_0_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:970px;background-color:transparent;"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;width:970px;height:90px;" width="970" height="90" frameborder="0"></iframe></ins></ins></ins><script> (adsbygoogle = window.adsbygoogle || []).push({ }); </script>
+</div>
+<p class="clearboth"></p>
+<div class="a_left" style="width: 686px;">
+<div id="bgchange" style="width: 660px;">
+<div class="fontsize_bgcolor_controler">
+<div class="a_bgcolor">
+<img src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/bgcolor.jpg">
+<div class="a_colorlist">
+<span class="a_color1" onclick="artStatistics('20-11-1');">
+<img src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/yes.gif"></span>
+<span class="a_color2" onclick="artStatistics('20-11-2');">
+<img src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/yes.gif"></span>
+<span class="a_color3" onclick="artStatistics('20-11-3');">
+<img src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/yes.gif"></span>
+<span class="a_color4" onclick="artStatistics('20-11-4');">
+<img src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/yes.gif"></span>
+<span class="a_color5" onclick="artStatistics('20-11-5');">
+<img src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/yes.gif"></span>
+<span class="a_color6 cur" onclick="artStatistics('20-11-6');">
+<img src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/yes.gif"></span>
+</div>
+</div>
+<div class="a_fontsize">
+<img src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/fontSize.jpg">
+<div class="fschange">
+<label>
+<input name="font_Size" id="" value="18" onclick="artStatistics('20-10-1');" type="radio">大
+</label>
+&nbsp;
+<label>
+<input name="font_Size" id="" value="16" onclick="artStatistics('20-10-2');" checked="checked" type="radio">中
+</label>
+&nbsp;
+<label>
+<input name="font_Size" id="" value="14" onclick="artStatistics('20-10-3');" type="radio">小
+</label>
+</div>
+</div>
+</div>
+<h2 id="titiletext">git fetch 的简单用法:更新远程代码到本地仓库</h2>
+<div class="article_data">
+<div class="article_data_left">
+2013-08-14
+<span class="a_username">&nbsp;<a href="http://www.360doc.com/userhome/9171956" id="savernickname" target="_blank" onclick="artStatistics('20-7-1');">lifei_szdz</a>
+</span>
+<span id="articleinfo">
+<span id="docsource" class="a_from">&nbsp;<a href="http://my.eoe.cn/com360/archive/3533.html" target="_blank" onclick="artStatistics('20-12');">文章来源</a></span><span id="360doc_Readnum">&nbsp;&nbsp;阅&nbsp;91145&nbsp;</span><span id="360docResaveCount"><span onclick="ShowSaverUser();artStatistics('20-13');" id="360doc_saverNum" style="cursor: pointer;">&nbsp;转&nbsp;<span style="cursor:pointer;" onclick="javascript:ShowSaverUser();">94</span></span>
+<span id="360doc_saverUser"><div id="sameArtOuter" style="display:none;position: absolute; height:305px;width:144px;left:0px;margin-top:15px;z-index:100000;"><div id="sameArt" style=" overflow-y: auto;  height:300px;overflow-x: hidden; z-index: 100;right:0px;margin-top:-10px;" onclick="event.cancelBubble=true;"></div></div></span>
+</span>
+</span>
+</div>
+<div id="resavelayer1" class="bdsharebuttonbox article_data_right bdshare-button-style0-16" data-bd-bind="1503547619662"><div class="zcommond"><a class="p2" href="javascript:void(0);" onclick="SaveArt();artStatistics('20-3-1');">转藏到我的图书馆</a><div class="s2 f_right" onclick="setTimeout(function(){$('.article_data_right .sharelist_new').slideToggle(0);},10);"><span onclick="artStatistics('20-8-2');"></span></div><a class="p1" href="javascript:void(0);" onclick="shareWeixin();artStatistics('20-8-5');">微信</a> <span class="s1" onclick="setTimeout(function(){$('.article_data_right .sharelist_new').slideToggle(0);},10);artStatistics('20-8-1');" onmouseover="this.style.color='#0f659c'" onmouseout="this.style.color=''" style="">分享：</span></div><div class="sharelist_new" id="fenxiangLayer" style="display: none;"> <a class="slbg1" href="javascript:void(0);" data-cmd="qzone" onclick="artStatistics('20-8-7');">QQ空间</a> <a class="slbg2" href="javascript:void(0);" data-cmd="sqq" onclick="artStatistics('20-8-9');">QQ好友</a> <a class="slbg3" href="javascript:void(0);" data-cmd="tsina" onclick="artStatistics('20-8-11');">新浪微博</a><a class="slbg5" href="javascript:void(0);" onclick="showdivemail1();artStatistics('20-8-15');">推荐给朋友</a> </div><div style="position: absolute;display:none;z-index:1;left:143px;" id="fuzhitishidiv"></div></div>
+</div>
+<div id="articlecontent" class="article_container" onmousedown="newhighlight = true;" onmouseup="NewHighlight(event);">
+<table>
+<tbody>
+<tr>
+<td id="artContent">
+<div style="width: 656px; margin: 0; padding: 0; height: 0;"></div>
+<div class="blog-title clearfix"><h2 class="show-title">git fetch 的简单用法:更新远程代码到本地仓库</h2><p><font>作者：com360</font><font>更新于 05月10日</font><font>访问（<span>1486</span>）</font><font>评论（<a href=""><span id="flcomments">10</span></a>）</font></p></div><div class="blog-content clearfix"><article id="3533"><div class="desc rich-content"><div class="markdown"><p>Git中从远程的分支获取最新的版本到本地方式如下，<br>
+如何更新下载到代码到本地，请参阅ice的博客<a href="http://my.eoe.cn/iceskysl/archive/3195.html?f_section=fav">基于Github参与eoe的开源项目指南</a><br>
+方式一<br>
+1. 查看远程仓库</p>
+<table class="highlighttable"><tbody><tr>
+<td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="n">$</span> <span class="n">git</span> <span class="n">remote</span> <span class="o">-</span><span class="n">v</span>
+<span class="n">eoecn</span>   <span class="nl">https:</span><span class="c1">//github.com/eoecn/android-app.git (fetch)</span>
+<span class="n">eoecn</span>   <span class="nl">https:</span><span class="c1">//github.com/eoecn/android-app.git (push)</span>
+<span class="n">origin</span>  <span class="nl">https:</span><span class="c1">//github.com/com360/android-app.git (fetch)</span>
+<span class="n">origin</span>  <span class="nl">https:</span><span class="c1">//github.com/com360/android-app.git (push)</span>
+<span class="n">su</span><span class="nd">@SUCHANGLI</span> <span class="o">/</span><span class="n">e</span><span class="o">/</span><span class="n">eoe_client</span><span class="o">/</span><span class="n">android</span><span class="o">-</span><span class="n">app</span> <span class="o">(</span><span class="n">master</span><span class="o">)</span>
+</pre></div>
+</td>
+</tr></tbody></table><p>从上面的结果可以看出，远程仓库有两个，一个是eoecn，一个是origin<br>
+2 ,从远程获取最新版本到本地</p>
+<table class="highlighttable"><tbody><tr>
+<td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="n">$</span> <span class="n">git</span> <span class="n">fetch</span> <span class="n">origin</span> <span class="n">master</span>
+<span class="n">From</span> <span class="nl">https:</span><span class="c1">//github.com/com360/android-app</span>
+ <span class="o">*</span> <span class="n">branch</span>            <span class="n">master</span>     <span class="o">-&gt;</span> <span class="n">FETCH_HEAD</span>
+<span class="n">su</span><span class="nd">@SUCHANGLI</span> <span class="o">/</span><span class="n">e</span><span class="o">/</span><span class="n">eoe_client</span><span class="o">/</span><span class="n">android</span><span class="o">-</span><span class="n">app</span> <span class="o">(</span><span class="n">master</span><span class="o">)</span>
+</pre></div>
+</td>
+</tr></tbody></table><p>$ git fetch origin master 这句的意思是：从远程的origin仓库的master分支下载代码到本地的origin master<br>
+3. 比较本地的仓库和远程参考的区别</p>
+<table class="highlighttable"><tbody><tr>
+<td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="n">$</span> <span class="n">git</span> <span class="n">log</span> <span class="o">-</span><span class="n">p</span> <span class="n">master</span><span class="o">..</span> <span class="n">origin</span><span class="o">/</span><span class="n">master</span>
+<span class="n">su</span><span class="nd">@SUCHANGLI</span> <span class="o">/</span><span class="n">e</span><span class="o">/</span><span class="n">eoe_client</span><span class="o">/</span><span class="n">android</span><span class="o">-</span><span class="n">app</span> <span class="o">(</span><span class="n">master</span><span class="o">)</span>
+</pre></div>
+</td>
+</tr></tbody></table><p>因为我的本地仓库和远程仓库代码相同所以没有其他任何信息<br>
+4. 把远程下载下来的代码合并到本地仓库，远程的和本地的合并</p>
+<table class="highlighttable"><tbody><tr>
+<td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="n">$</span> <span class="n">git</span> <span class="n">merge</span> <span class="n">origin</span><span class="o">/</span><span class="n">master</span>
+<span class="n">Already</span> <span class="n">up</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">date</span><span class="o">.</span>
+<span class="n">su</span><span class="nd">@SUCHANGLI</span> <span class="o">/</span><span class="n">e</span><span class="o">/</span><span class="n">eoe_client</span><span class="o">/</span><span class="n">android</span><span class="o">-</span><span class="n">app</span> <span class="o">(</span><span class="n">master</span><span class="o">)</span>
+</pre></div>
+</td>
+</tr></tbody></table><p>我的本地参考代码和远程代码相同，所以是Already up-to-date</p>
+<p>以上的方式有点不好理解，大家可以使用下面的方式，并且很安全<br>
+方式二<br>
+1.查看远程分支，和上面的第一步相同<br>
+2. 从远程获取最新版本到本地</p>
+<table class="highlighttable"><tbody><tr>
+<td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="n">$</span> <span class="n">git</span> <span class="n">fetch</span> <span class="n">origin</span> <span class="nl">master:</span><span class="n">temp</span>
+<span class="n">From</span> <span class="nl">https:</span><span class="c1">//github.com/com360/android-app</span>
+ <span class="o">*</span> <span class="o">[</span><span class="k">new</span> <span class="n">branch</span><span class="o">]</span>      <span class="n">master</span>     <span class="o">-&gt;</span> <span class="n">temp</span>
+<span class="n">su</span><span class="nd">@SUCHANGLI</span> <span class="o">/</span><span class="n">e</span><span class="o">/</span><span class="n">eoe_client</span><span class="o">/</span><span class="n">android</span><span class="o">-</span><span class="n">app</span> <span class="o">(</span><span class="n">master</span><span class="o">)</span>
+</pre></div>
+</td>
+</tr></tbody></table><p>git fetch origin master:temp 这句命令的意思是：从远程的origin仓库的master分支下载到本地并新建一个分支temp</p>
+<ol>
+<li>比较本地的仓库和远程参考的区别</li>
+</ol><table class="highlighttable"><tbody><tr>
+<td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="n">$</span> <span class="n">git</span> <span class="n">diff</span> <span class="n">temp</span>
+<span class="n">su</span><span class="nd">@SUCHANGLI</span> <span class="o">/</span><span class="n">e</span><span class="o">/</span><span class="n">eoe_client</span><span class="o">/</span><span class="n">android</span><span class="o">-</span><span class="n">app</span> <span class="o">(</span><span class="n">master</span><span class="o">)</span>
+</pre></div>
+</td>
+</tr></tbody></table><p>命令的意思是：比较master分支和temp分支的不同<br>
+由于我的没有区别就没有显示其他信息<br>
+4. 合并temp分支到master分支</p>
+<table class="highlighttable"><tbody><tr>
+<td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="n">$</span> <span class="n">git</span> <span class="n">merge</span> <span class="n">temp</span>
+<span class="n">Already</span> <span class="n">up</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">date</span><span class="o">.</span>
+<span class="n">su</span><span class="nd">@SUCHANGLI</span> <span class="o">/</span><span class="n">e</span><span class="o">/</span><span class="n">eoe_client</span><span class="o">/</span><span class="n">android</span><span class="o">-</span><span class="n">app</span> <span class="o">(</span><span class="n">master</span><span class="o">)</span>
+</pre></div>
+</td>
+</tr></tbody></table><p>由于没有区别，所以显示Already up-to-date.<br>
+合并的时候可能会出现冲突，有时间了再把如何处理冲突写一篇博客补充上。<br>
+5.如果不想要temp分支了，可以删除此分支</p>
+<table class="highlighttable"><tbody><tr>
+<td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="n">$</span> <span class="n">git</span> <span class="n">branch</span> <span class="o">-</span><span class="n">d</span> <span class="n">temp</span>
+<span class="n">Deleted</span> <span class="n">branch</span> <span class="nf">temp</span> <span class="o">(</span><span class="n">was</span> <span class="n">d6d48cc</span><span class="o">).</span>
+<span class="n">su</span><span class="nd">@SUCHANGLI</span> <span class="o">/</span><span class="n">e</span><span class="o">/</span><span class="n">eoe_client</span><span class="o">/</span><span class="n">android</span><span class="o">-</span><span class="n">app</span> <span class="o">(</span><span class="n">master</span><span class="o">)</span>
+</pre></div>
+</td>
+</tr></tbody></table><p>如果该分支没有合并到主分支会报错，可以用以下命令强制删除git branch -D &lt;分支名&gt;</p>
+<p>总结：方式二更好理解，更安全，对于pull也可以更新代码到本地，相当于fetch+merge，多人写作的话不够安全。<br>
+如有错误请指正 </p></div></div></article></div><div class="eoe_statement"><p>声明：eoe文章著作权属于作者，受法律保护，转载时请务必以超链接形式附带如下信息</p><p>原文作者： <a href="http://my.eoe.cn/com360" target="_blank" title="com360">com360</a></p><p>原文地址： <a href="http://my.eoe.cn/com360/archive/3533.html" target="_blank" title="原文地址">http://my.eoe.cn/com360/archive/3533.html</a></p></div>
+</td>
+<script>
+                                    var html = document.getElementById("artContent").innerHTML;
+                                    document.getElementById("artContent").innerHTML = html;
+
+                                </script>
+</tr>
+</tbody>
+</table>
+<div id="viewerPlaceHolder" style="width: 717px; height: 700px; display: none; margin: 0 auto;">
+</div>
+</div>
+<table>
+<tbody>
+<tr>
+<td>
+<ul></ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div></div>
+<span></span>
+<a></a>
+<p style="margin: 0; padding: 0;"></p>
+<p class="clearboth"></p>
+<div class="bdsharebuttonbox bottombtn bdshare-button-style0-16" data-bd-bind="1503547619662">
+<div class="zcommond" style="overflow: visible;">
+<a href="javascript:void(0);" class="btn_collect" onclick="SaveArt();artStatistics('20-3-2');">转藏到我的图书馆</a>
+<a id="flowimg3" href="javascript:void(0);" class="btn_good" onclick="Showflowerlayer('sendedLayer1');">献花（<span id="articleflowernum">0</span>）
+<span id="flowernumadd" style="display: none;">+1</span>
+</a>
+<span class="span1 f_left" onclick="setTimeout(function(){$('.bottombtn .sharelist_new').slideToggle(0);},10);artStatistics('20-8-3');" onmouseover="this.style.color='#0f659c'" onmouseout="this.style.color=''">分享：</span>
+<a class="sharewx f_left" href="javascript:void(0);" onclick="shareWeixin();artStatistics('20-8-6');">微信</a>
+<div class="s2 f_left" onclick="setTimeout(function(){$('.bottombtn .sharelist_new').slideToggle(0);},10);artStatistics('20-8-4');"><span></span></div>
+</div>
+<div class="sharelist_new" id="fenxiangLayer2" style="display: none;">
+<a class="slbg1" href="javascript:void(0);" data-cmd="qzone" onclick="artStatistics('20-8-8');">QQ空间</a>
+<a class="slbg2" href="javascript:void(0);" data-cmd="sqq" onclick="artStatistics('20-8-10');">QQ好友</a>
+<a class="slbg3" href="javascript:void(0);" data-cmd="tsina" onclick="artStatistics('20-8-12');">新浪微博</a>
+<a class="slbg5" href="javascript:void(0);" onclick="showdivemail1();artStatistics('20-8-16');">推荐给朋友</a>
+</div>
+</div>
+<div class="bottom_controler">
+<p class="bottom_cleft">
+来自：
+<span class="a_username" style="width: auto;">
+<a href="http://www.360doc.com/userhome/9171956" id="savernickname2" target="_blank" onclick="artStatistics('20-7-2');">lifei_szdz</a>
+</span>
+&gt;
+<span id="cname" class="a_from"><a href="http://www.360doc.com/userhome.aspx?userid=9171956&amp;cid=202" target="_blank" onclick='artStatistics("20-6");'>《git》</a></span>
+</p>
+<div class="bottom_cright">
+<a href="https://www.baidu.com/s?wd=git+fetch+android&amp;tn=SE_hldp01010_6r0gix1f" target="_blank" class="a1" onclick="artStatistics('20-19');">以文找文</a>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="javascript:void(0);" class="a2" onclick="showAlertLayer1();artStatistics('20-18');">举报</a>
+</div>
+</div>
+<div class="prev_next">
+<p id="lastart" class="p1" style="display: block;"> 上一篇：<a onclick='artStatistics("20-9-5");' href="http://www.360doc.com/content/13/0814/10/9171956_307022167.shtml" target="_blank">Git创建与管理远程分支</a></p>
+<p id="nextart" class="p2" style="display: block;"> 下一篇：<a onclick='artStatistics("20-9-6");' href="http://www.360doc.com/content/13/0814/10/9171956_307029305.shtml" target="_blank">Git 获取远程分支</a></p>
+</div>
+</div>
+<p class="clearboth"></p>
+<div style="width: 676px; float: left;">
+<div class="str_border" style="border: none; position: relative; z-index: 2;">
+<strong>猜你喜欢</strong>
+</div>
+<ul class="youlike" style="margin-top: -18px; position: relative; z-index: 1;">
+<div style="width: 676px; height: 280px; border: 0;" id="divyoulikead"><iframe id="youlikead" style="width: 676px; height: 280px; border: 0;" scrolling="no" src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/adbaiduyoulike.html" frameborder="0"></iframe></div>
+</ul>
+<div class="zcommond" style="padding: 10px 0 5px;">
+<div class="bottom_article f_left">
+<div class="str_border">
+<strong>类似文章</strong>
+<a href="http://www.360doc.com/relevant/307028720_more.shtml" target="_blank" class="a_more f_right" onclick="artStatistics(" 20-9-8');'="">更多</a>
+</div>
+<ul class="barticle_list">
+<li><span><a href="http://www.360doc.com/content/13/1024/10/8504707_323712757.shtml" target="_blank" onclick='artStatistics("20-9-7");'>Git使用笔记</a></span></li>
+<li><span><a href="http://www.360doc.com/content/15/0207/09/281812_446846727.shtml" target="_blank" onclick='artStatistics("20-9-7");'>Git 少用 Pull 多用 Fetch 和 Merge</a></span></li>
+<li><span><a href="http://www.360doc.com/content/15/0207/09/18624365_446855499.shtml" target="_blank" onclick='artStatistics("20-9-7");'>六百字读懂 Git</a></span></li>
+<li><span><a href="http://www.360doc.com/content/15/1228/09/7853380_523620031.shtml" target="_blank" onclick='artStatistics("20-9-7");'>Git操作小记</a></span></li>
+<li><span><a href="http://www.360doc.com/content/15/0615/17/7991404_478317567.shtml" target="_blank" onclick='artStatistics("20-9-7");'>git远程仓库维护</a></span></li>
+<li><span><a href="http://www.360doc.com/content/14/0224/15/14451193_355299674.shtml" target="_blank" onclick='artStatistics("20-9-7");'>git 使用详解（10）</a></span></li>
+<li><span><a href="http://www.360doc.com/content/14/1029/17/18578054_420936926.shtml" target="_blank" onclick='artStatistics("20-9-7");'>git clone 远程分支</a></span></li>
+<li><span><a href="http://www.360doc.com/content/12/1113/16/10388890_247623920.shtml" target="_blank" onclick='artStatistics("20-9-7");'>建本地 repo server --- 超复杂型 -- 备...</a></span></li>
+</ul>
+</div>
+<div class="bottom_article f_right">
+<div class="str_border">
+<strong>精选文章</strong>
+</div>
+<ul class="barticle_list">
+<li><span><a onclick="artStatistics('20-9-9');" href="http://www.360doc.com/content/13/0423/01/401163_280163111.shtml" target="_blank">开车时遇到地震怎么办?</a></span></li>
+<li><span><a onclick="artStatistics('20-9-9');" href="http://www.360doc.com/content/13/0828/20/12555139_310455917.shtml" target="_blank">乳腺增生已影响到胸疼,中医只用两穴轻松搞定</a></span></li>
+<li><span><a onclick="artStatistics('20-9-9');" href="http://www.360doc.com/content/13/0501/11/4240596_282130320.shtml" target="_blank">《如何阅读一本书》的思维导图</a></span></li>
+<li><span><a onclick="artStatistics('20-9-9');" href="http://www.360doc.com/content/13/1026/23/3397672_324344081.shtml" target="_blank">灰常灰常全面的excel表格公式---坐办公室的白领们赶紧收藏</a></span></li>
+<li><span><a onclick="artStatistics('20-9-9');" href="http://www.360doc.com/content/13/1122/05/1835337_331142198.shtml" target="_blank">让您人脉关系发达的实用技巧</a></span></li>
+<li><span><a onclick="artStatistics('20-9-9');" href="http://www.360doc.com/content/13/1203/22/11269421_334145919.shtml" target="_blank">喝这些中药茶补肝强肾</a></span></li>
+<li><span><a onclick="artStatistics('20-9-9');" href="http://www.360doc.com/content/13/0618/01/155793_293526891.shtml" target="_blank">中国最美的100句诗</a></span></li>
+<li><span><a onclick="artStatistics('20-9-9');" href="http://www.360doc.com/content/14/0425/21/14256335_372088716.shtml" target="_blank">法国为什么没有剩女</a></span></li>
+</ul>
+</div>
+</div>
+<div id="divunderad"><iframe id="underZcommondAd" style="width: 676px; height: 100px;" scrolling="no" src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/underad.html" frameborder="0"></iframe></div>
+<div id="ReflectionPart"><div style="margin: 0px 0px;"><div class="plbox" style="height:auto;"><div style="padding-left:6px;margin-top:10px;padding-bottom:14px;"><div style="height: 23px;font-size:16px;font-weight:bold;" class="titwx">发表评论</div><div class="deluwx" style="margin-top:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请&nbsp;<span><a onclick="ReflectionLoginform();artStatistics('20-4-1');" href="javascript:void(0);">登录</a></span>&nbsp;或者&nbsp;<span><a onclick="InsertLogData(4);artStatistics('20-4-2');" href="http://www.360doc.com/register.aspx?refer=53&amp;reurl=showweb/0/0/54400091122.aspx" target="_blank">注册</a></span>&nbsp;后再进行评论</div><div class="rt360" style="height: 26px;margin:-22px 170px 0 0;_display:inline;"><span class="dsfwz">社交帐号登录：</span><a class="dsftb sf1" href="javascript:void(0);" onclick="ArtLoginTypeID=13;toSNSLogin('smb');artStatistics('20-4-3');_hmt.push(['_trackEvent','loginsina','clicknum','wenzhangyeremark']);" title="新浪微博"></a><a class="dsftb sf2 " onclick="ArtLoginTypeID=13;toSNSLogin('qq');artStatistics('20-4-4');_hmt.push(['_trackEvent','loginqq','clicknum','wenzhangyeremark']); " href="javascript:void(0);" title="腾讯QQ"></a><a class="dsftb sf3" href="javascript:void(0);" onclick="ArtLoginTypeID=13;toSNSLogin('wx');artStatistics('20-4-5');_hmt.push(['_trackEvent','loginrenren','clicknum','wenzhangyeremark']);" title="微信"></a></div></div></div></div></div>
+<div style="padding-top: 15px; padding-left: 15px;" id="Reflction"><div id="360docRefTN" class="wenzhang_bt" style="display:none;"></div><div id="360docRefCT"></div><div id="360docRefPB" style="display: none;"></div></div>
+</div>
+</div>
+<div class="a_right">
+<div class="user_info">
+<div class="user_photo f_left">
+<p class="user_photopic">
+<a href="http://www.360doc.com/userhome/9171956" id="userphotourl" target="_blank" onclick="artStatistics('20-7-4');">
+<img src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/003.gif" id="userphoto" width="58" height="58">
+</a>
+</p>
+<a href="javascript:void(0);" onclick="docTalk();artStatistics('20-15');" class="user_talk" title="与TA对话"></a>
+</div>
+<div class="user_data f_right">
+<div class="user_data_name">
+<a href="http://www.360doc.com/userhome/9171956" id="nickname" target="_blank" onclick="artStatistics('20-7-3');">lifei_szdz</a>
+<img src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/user_name_tag.gif" alt="图书馆">
+</div>
+<p id="userdegree"><img src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/userstar1.gif"><img src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/userstar1.gif"><img src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/userstar1.gif"><img src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/userstar2.gif"><img src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/userstar3.gif"></p>
+<div class="user_data_num">
+<a id="spanfollowstatus" class="gz_no"></a>
+<script type="text/javascript">isfollow(9171956);</script>
+<span id="follownum">416</span>&nbsp;&nbsp;&nbsp;&nbsp;
+<span>馆藏</span>&nbsp;<span id="artnum">1271</span>
+</div>
+</div>
+</div>
+<div class="his_her"><ul class="his_her_type"><li class="f_left curone">TA的最新馆藏</li></ul><div class="his_her_div" style="height:190px;"><ul class="his_her_list"><li><div><span></span><a href="http://www.360doc.com/content/17/0821/10/9171956_680800383.shtml" target="_blank" onclick="artStatistics('20-9-3');">C/C++可变参数，“##</a></div><div><span></span><a href="http://www.360doc.com/content/17/0818/09/9171956_680081049.shtml" target="_blank" onclick="artStatistics('20-9-3');">Linux ELF格式分析</a></div><div><span></span><a href="http://www.360doc.com/content/17/0818/00/9171956_680028155.shtml" target="_blank" onclick="artStatistics('20-9-3');">ELF文件的加载和动态链接过程</a></div><div><span></span><a href="http://www.360doc.com/content/17/0817/23/9171956_680020945.shtml" target="_blank" onclick="artStatistics('20-9-3');">elf文件格式实例解析</a></div><div><span></span><a href="http://www.360doc.com/content/17/0817/19/9171956_679965286.shtml" target="_blank" onclick="artStatistics('20-9-3');">elf格式分析</a></div><div><span></span><a href="http://www.360doc.com/content/17/0817/18/9171956_679958909.shtml" target="_blank" onclick="artStatistics('20-9-3');">elf文件格式 | 任苹蜻的博客</a></div></li></ul></div></div>
+<div class="clear360doc" style="padding-top: 10px; height: 260px;">
+<div id="divifartad1">
+<script>
+            var strow = document.body.offsetWidth;
+            var strsw = document.body.scrollWidth;
+            var strsc = window.screen.width;
+
+            function aliad1() {
+                document.write('<a style="display:none!important" id="tanx-a-mm_11220363_1101997_10218757"></a>');
+                tanx_s = document.createElement("script");
+                tanx_s.type = "text/javascript";
+                tanx_s.charset = "gbk";
+                tanx_s.id = "tanx-s-mm_11220363_1101997_10218757";
+                tanx_s.async = true;
+                tanx_s.src = "http://p.tanx.com/ex?i=mm_11220363_1101997_10218757";
+                tanx_h = document.getElementsByTagName("head")[0];
+                if (tanx_h) tanx_h.insertBefore(tanx_s, tanx_h.firstChild);
+            }
+
+            function aliad2() {
+                document.write('<a style="display:none!important" id="tanx-a-mm_11220363_1101997_26568831"></a>');
+                tanx_s = document.createElement("script");
+                tanx_s.type = "text/javascript";
+                tanx_s.charset = "gbk";
+                tanx_s.id = "tanx-s-mm_11220363_1101997_26568831";
+                tanx_s.async = true;
+                tanx_s.src = "http://p.tanx.com/ex?i=mm_11220363_1101997_26568831";
+                tanx_h = document.getElementsByTagName("head")[0];
+                if (tanx_h) tanx_h.insertBefore(tanx_s, tanx_h.firstChild);
+            }
+
+
+            if (strsc <= 1024) {
+                aliad1();
+            }
+            else {
+                //300宽
+                aliad2();
+            }
+        </script><ins style="display:inline-block;padding:0;margin:0;width:300px;height:250px;*zoom:1;*display:inline; position:relative;" id="tanxssp-outer-conmm_11220363_1101997_26568831"><div id="tanxssp_con_mm_11220363_1101997_26568831" style="overflow:hidden;display:inline-block;position:relative;width:300px;height:250px;*display:inline;*zoom:1;font:12px/1.5 tahoma,'Hiragino Sans GB','microsoft yahei',sans-serif;"><iframe id="tanxssp-outer-iframemm_11220363_1101997_26568831" style="width: 300px; height: 250px;" border="0" scrolling="no" marginwidth="0" allowtransparency="true" marginheight="0" frameborder="0"></iframe><a style="display:none !important;" id="tanx_frameanchor_mm_11220363_1101997_26568831" data-mid="17534123"></a><a id="iconmm_11220363_1101997_26568831" title="我也要申请橱窗推广" target="_blank" href="http://pro.taobao.com/index.htm?spm=a2320.7388781.1998051528.5.JOvNkN" style="overflow:hidden;width:15px;height:13px;right:20px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;">   <span id="icon_smallmm_11220363_1101997_26568831" style="border-right:2px solid #FBE008;float:none;width:13px;display:block;height:13px;box-sizing:content-box"><img src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/TB1DmcoJXXXXXavXpXXXXXXXXXX-26-26.png" style="width:13px;height:13px;margin:auto;display:block;" border="0"></span>   <span id="icon_bigmm_11220363_1101997_26568831" style="float:none;width:60px;height:13px;display: none;"><img src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/TB1Lt7aJXXXXXcjXVXXXXXXXXXX-117-26.png" style="width:60px;height:13px;margin:auto;display:block;" border="0/"></span></a><a id="sxmm_11220363_1101997_26568831" href="javascript:;" style="width:20px;height:13px;right:0px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;margin:0;">   <span id="sx1mm_11220363_1101997_26568831" style="float:none;width:20px;display:block;height:13px;"><img src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/TB1tWvVJFXXXXc_aXXXXXXXXXXX-40-26.png" style="width:20px;height:13px;margin:auto;display:block;min-height:13px;" border="0/"></span><div id="sxtipmm_11220363_1101997_26568831" style="display:none;position:absolute;left:-38px;bottom:13px;"><img src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/TB1upAiJXXXXXa5aXXXXXXXXXXX-116-30.png" style="width:58px;height:15px;margin:auto;display:block;min-height:15px;" border="0"></div></a></div></ins><a style="display:none!important" id="tanx-a-mm_11220363_1101997_26568831"></a>
+</div>
+<div style="height: 10px;">
+</div>
+</div>
+<div class="his_her" id="recommendArt" style="margin-top: 5px;">
+<div class="str_border" style="margin: 0;">
+<span style="font-size: 14px; float: left;">喜欢该文的人也喜欢</span>
+<a style="float: right;" class="a_more" onclick="artStatistics('20-9-4');" href="http://www.360doc.com/readroom.html" target="_blank">更多</a>
+</div>
+<div class="his_her_div" style="height: 264px;">
+<ul class="his_her_list">
+<li id="recommendArtLists"><div><span></span><a href="http://www.360doc.com/content/13/0814/10/9171956_307029305.shtml" target="_blank" onclick="artStatistics('20-9-1');">Git 获取远程分支</a></div><div><span></span><a href="http://www.360doc.com/content/14/0503/08/9200790_374121550.shtml" target="_blank" onclick="artStatistics('20-9-1');">[转载]ECSHOP 源码分析（install/index.php1）</a></div><div><span></span><a href="http://www.360doc.com/content/10/0813/01/1147381_45735193.shtml" target="_blank" onclick="artStatistics('20-9-1');">狂犬病阴云笼罩巴厘岛</a></div><div><span></span><a href="http://www.360doc.com/content/12/0108/10/7492958_178038604.shtml" target="_blank" onclick="artStatistics('20-9-1');">Git查询获取远程分支</a></div><div><span></span><a href="http://www.360doc.com/content/12/0510/10/9171956_210024904.shtml" target="_blank" onclick="artStatistics('20-9-1');">WebOS系列</a></div><div><span></span><a href="http://www.360doc.com/content/12/0510/10/9171956_210024417.shtml" target="_blank" onclick="artStatistics('20-9-1');">Webkit内核探究【2】——Webkit CSS实现</a></div><div><span></span><a href="http://www.360doc.com/content/12/0510/10/9171956_210023633.shtml" target="_blank" onclick="artStatistics('20-9-1');">Webkit内核探究【1】——Webkit简介</a></div><div><span></span><a href="http://www.360doc.com/content/13/0309/10/9171956_270327751.shtml" target="_blank" onclick="artStatistics('20-9-1');">android init.rc readme</a></div><div><span></span><a href="http://www.360doc.com/content/13/0309/10/9171956_270323410.shtml" target="_blank" onclick="artStatistics('20-9-1');">Android 的 init.rc 文件简介</a></div></li>
+</ul>
+</div>
+</div>
+<div class="clear360doc" style="padding-top: 10px;" id="divifartad2"><iframe id="ifartad2" scrolling="no" src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/ad2_300.html" width="300px" height="250" frameborder="0"></iframe></div>
+<br>
+<div id="divifartrightsogou"><iframe id="ifartrightsogou" scrolling="no" src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/artrightadsogou300.html" width="300px" height="190" frameborder="0"></iframe></div>
+<div class="clear360doc" id="divad5" style="padding-top: 11px; width: 300px; top: 80px; left: 886px; position: fixed;">
+<div id="divad4" style="">
+<div id="divifartad"><iframe id="ifartad" scrolling="no" src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/ad4_300.html" width="300px" height="250px" frameborder="0"></iframe></div>
+<div class="ggwz">
+<a href="javascript:void(0);" onclick="closead(2);">关闭</a>
+</div>
+<div style="height: 13px;">
+</div>
+</div>
+<div style="clear: both;" id="divad6">
+<div id="adfloatbaidu"><iframe id="ifartadfloadbaidu" scrolling="no" style="width: 250px; margin: 0px auto;" src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/ad5.html" width="250px" height="250px" frameborder="0"></iframe></div>
+<div class="ggwz" style="left: 25px;">
+<a href="javascript:void(0);" onclick="closead(3);">关闭</a>
+</div>
+<div style="height: 13px;">
+</div>
+</div>
+<div style="height: 75px;">
+</div>
+</div>
+</div>
+</div>
+<p class="clearboth"></p>
+<input id="artid" value="307028720" type="hidden">
+<input id="docarttitle" value="git+fetch+%e7%9a%84%e7%ae%80%e5%8d%95%e7%94%a8%e6%b3%95%3a%e6%9b%b4%e6%96%b0%e8%bf%9c%e7%a8%8b%e4%bb%a3%e7%a0%81%e5%88%b0%e6%9c%ac%e5%9c%b0%e4%bb%93%e5%ba%93" type="hidden">
+<input id="firstartid" value="307028720" type="hidden">
+<input id="subclassid" value="-1" type="hidden">
+<input id="recommendart1" value="323712757" type="hidden">
+<input id="recommendart2" value="252659084" type="hidden">
+<input id="isowner" value="False" type="hidden">
+<input id="artreadroomid" value="0" type="hidden">
+<script src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/showarticle.js" type="text/javascript" charset="utf-8"></script>
+<script>GerLookingUserInfo(1,9171956,1,0,'-1',-1,10,0);OutputSource('http://my.eoe.cn/com360/archive/3533.html','');OutputLastNextArt('Git%e5%88%9b%e5%bb%ba%e4%b8%8e%e7%ae%a1%e7%90%86%e8%bf%9c%e7%a8%8b%e5%88%86%e6%94%af','http://www.360doc.com/content/13/0814/10/9171956_307022167.shtml',0);OutputLastNextArt('Git+%e8%8e%b7%e5%8f%96%e8%bf%9c%e7%a8%8b%e5%88%86%e6%94%af','http://www.360doc.com/content/13/0814/10/9171956_307029305.shtml',1);</script>
+<script type="text/javascript" src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/newheader.js"></script>
+<script type="text/javascript" src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/addStatistics.js"></script>
+<script src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/getstatusv2.asc" type="text/javascript" charset="utf-8" async="async"></script>
+<script type="text/javascript">
+        var baiduImagePlus = {
+            noLogo: true,
+            unionId: 'u2617463',
+            maxMiniAdCount: 0,
+            formList: [{ formId: 10 }]
+        };
+    </script>
+<script type="text/javascript" src="Git%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0Github%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93_files/i.js"></script>
+
+
+<iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" style="display: none;" frameborder="0"></iframe><div style="display: none;"><iframe src="javascript:document.write('');" id="UploadContentIframe" name="UploadContentIframe" width="1" height="1"></iframe></div><div style="display: none;"><form id="UploadContentForm" name="UploadContentForm" action="http://dsp.brand.sogou.com/log_print" target="UploadContentIframe" enctype="application/x-www-form-urlencoded" method="POST"><input name="url" value="http://www.360doc.com/content/13/0814/10/9171956_307028720.shtml" type="text"><textarea name="title">git fetch 的简单用法:更新远程代码到本地仓库</textarea><textarea name="mypos"></textarea><textarea name="metakeywords">git,fetch,android</textarea><textarea name="metadescription">git fetch 的简单用法:更新远程代码到本地仓库</textarea><input name="lastmodified" value="08/24/2017 09:30:50" type="text"><input name="charset" value="UTF-8" type="text"><textarea name="maincontent">Git
+中从远程的分支获取最新的版本到本地方式如下，如何更新下载到代码到本地，请参阅ice的博客基于Github参与eoe的开源项目指南方式一1. 
+查看远程仓库从上面的结果可以看出，远程仓库有两个，一个是eoecn，一个是origin2 ,从远程获取最新版本到本地$ git fetch 
+origin master 这句的意思是：从远程的origin仓库的master分支下载代码到本地的origin master3. 
+比较本地的仓库和远程参考的区别因为我的本地仓库和远程仓库代码相同所以没有其他任何信息4. 
+把远程下载下来的代码合并到本地仓库，远程的和本地的合并我的本地参考代码和远程代码相同，所以是Already 
+up-to-date以上的方式有点不好理解，大家可以使用下面的方式，并且很安全方式二1.查看远程分支，和上面的第一步相同2. 
+从远程获取最新版本到本地git fetch origin master:temp 
+这句命令的意思是：从远程的origin仓库的master分支下载到本地并新建一个分支temp命令的意思是：比较master分支和temp分支的不
+同由于我的没有区别就没有显示其他信息4. 合并temp分支到master分支由于没有区别，所以显示Already 
+up-to-date.合并的时候可能会出现冲突，有时间了再把如何处理冲突写一篇博客补充上。5.如果不想要temp分支了，可以删除此分支如果该分支
+没有合并到主分支会报错，可以用以下命令强制删除git branch -D 
+&lt;分支名&gt;总结：方式二更好理解，更安全，对于pull也可以更新代码到本地，相当于fetch+merge，多人写作的话不够安全。如有错
+误请指正 </textarea></form></div><div id="goTop2" style="left: 1206px; display: block;"><div id="goTop"><a href="#" id="go_top" onclick="artStatistics('20-20');"></a></div><div id="goTop1"><a href="javascript:void(0);" id="go_top1"></a></div><div></div></div></body></html>

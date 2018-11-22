@@ -1,0 +1,85 @@
+利用C/C++编写Python的动态链接库（linux - so）
+
+１．工具：
+    1.distutils模块
+    2.swig包装工具
+    
+２．简介：
+    1.我们为什么需要扩展Python代码？
+        1.优秀代码复用
+        2.优化效率瓶颈
+        3.保证核心代码的私密性（编译性语言的优点，pyc文件是一个折中方案）
+    2.我们怎么实现我们的Python的C/C++扩展
+        1.因为我们的当前使用的Python就是使用C/C++编写的，我们一利用相应的Python C API的接口实现我们的数据的转化，这种思路中，我们将C/C++看做是一个
+        工具，我们将参数传递给C/C++代码，然后利用我们的扩展程序处理数据病将我们的结果返还给我们的主调Python程序，实现我们的扩展
+        2.使用swig工具：
+        这种方案的优点在于，我们要是使用我们的API来进行扩展变成的话，每一个函数我们斗宿扼要编写一套静态函数，导致我们效率很低下，并且API语法对于目前的我来说
+        并不是必须的，我们可以使用swig自动的实现这些工作，毕竟对于现在的我来说，结果闭过程更重要——所谓实用主义
+
+３．流程：
+    1.编写C/C++代码：
+    2.编写swig脚本：
+        脚本的模式如下：
+        test.i
+        
+        %module extension-name
+        
+        %{
+        #include <iostream>
+        #include ...
+        extern int function();
+        ...
+        %}
+        
+        extern int function();
+        ...
+        
+        如上就是我们的需要的脚本的模式，有这么几个注意点
+        1.extension-name是我们的最终的要在python中调用的名称
+        2.在花括号内的使我们的C/C++需要的连接库以及我们的要被python导入的实现的功能函数（记得加分号）
+        3.在最后我们需要再把相应的库函数声明一遍
+        4.swig脚本的后缀是i
+     
+   3.调用swig脚本生成对于对应的.py和wrap.cxx文件
+       swig -c++ -python xxx.i
+       １．这里必须是先c++后python
+       ２．如果是c的话，不需要c++参数
+    
+   4.编写setup.py文件
+       脚本的模式如下
+       setup.py
+       
+       from distutils.core import setup , Extension
+       example_module = Extension("_extension-name" , sources = ['...wrap.cxx','xxx.cpp']) / 如果是c程序扩展不是c++的话，我们可以直接制定sources是.c和.i接口文件,然后直接执行我们的 python3 setup.py build_ext --inplace
+       setup(name='extension-name',version="0.1",author="",description="",ext_modules = [example_module],py_modules=['extension-name'])
+           
+       如上就是我们的setup脚本的具体的内容
+       １．example_module生成扩展库的信息，名称前面必须要有一个下划线，后面是需要的文件，一个是原C/C++文件，另一个是我们的包装文件
+       ２．setup函数最重要的就是ext_modules参数，内容是我们的example_module是我们的制定的动态库
+       
+   5.运行setup.py脚本生成动态连接库
+       python3 setup.py build_ext --inplace
+       
+   6.打开python交互是界面或者我们运行自己的python代码就可以实现调用我们的动态库，记住要使用好路径和模块的名称
+
+
+   7.其他方法（主要）和注意事项：
+       1.C:
+           1.编写C代码
+           2.编写swig .i脚本：
+               %module import-name
+               %{
+               同上
+               %}
+           3.swig -python .i　生成对应的_warp.c文件
+           4.命令行编译：
+               1.gcc -fpic -c .c  #生成1.o文件
+               2.gcc -fpic -I /usr/include/python3.5 -c _wrap.c   #生成2.o文件
+               3.gcc -shared 1.o 2.o -o _import-name.so    #生成.so文件
+           5.python调用：
+               确定好路径之后，使用相对路径(推荐)或者绝对路径就可以访问到_import-name的动态链接文件
+           6.注意事项：
+               1.在.i文件中的import-name决定了我们的生成的.so文件的名称，只不过要在前面必须加上_下划线
+               2.-fpic选项是我们创建动态链接文件的必备选项
+      2.C++:和C的注意事项一样，只不过我们在swig编译的时候，需要加上-c++参数制定生成的目标
+             

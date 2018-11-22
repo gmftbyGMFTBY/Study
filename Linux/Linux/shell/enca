@@ -1,0 +1,11 @@
+# enca 是 Linux下用来探测和转换编码的方便工具
+
+# 检查文件编码，当然file命令也可以做到，这里没有什么意义
+enca -L zh_CN file
+
+# 将文件编码转换,文件编码转化成UTF-8
+enca -L zh_CN -x UTF-8 file
+enca -L zh_CN -x UTF-8 file new_file
+
+# 将文件的编码批量转换
+enca -L zh_CN -x UTF-8 test/*

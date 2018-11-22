@@ -1,0 +1,19 @@
+2017.1.24
+    局域网远程访问jupyter notebook
+    1. 需要ssh可以连通的情况下
+    2. 服务器linux系统jupyter设置
+        1. jupyter notebook --generate-config
+        2. ipython :
+            输入验证密码,并粘贴
+            from notebook.auth import passwd
+            passwd()
+        3. vim .jupyter/jupyter_notebook_config.py
+            c.NotebookApp.ip='*'
+            c.NotebookApp.password = u'sha:ce...刚才复制的那个密文'
+            c.NotebookApp.open_browser = False
+            c.NotebookApp.port =8888 #随便指定一个端口
+        4. 服务器启动jupyter 
+            jupyter notebook
+    3. 客户linux系统
+        ip:port 可以访问，需要之前的验证密码就可以登录jupyter的界面进行操作
+        

@@ -1,0 +1,9 @@
+cd /Users/jean-louisbouquard/Enseignement/BIT_teaching/optimization/opti_courses
+echo "Solve the problem f2d_15_01.dat with a time limit of 120 s"
+echo " "
+echo "glpsol -m mathmod2.mod -d glp_15_01.dat -o gl2_15_01.res --tmlim 120 > tr2_15_01.res"
+glpsol -m mathmod2.mod -d glp_15_01.dat -o gl2_15_01.res --tmlim 120 > tr2_15_01.res
+echo " "
+more gl2_15_01.res
+echo " "
+more tr2_15_01.res

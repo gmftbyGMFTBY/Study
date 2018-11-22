@@ -1,0 +1,17 @@
+在实际中，我们常常会出先要将我们的指定的数据库的内容导出来给他人或者需要我们将数据库在本地进行备份的工作，或者需要我们将已经存在的数据库文件加载进我们的数据中
+
+Linux操作系统下：
+这时候就需要我们的mysqldump命令：
+1.导出数据库：
+    1.导出数据库：
+        命令：mysqldump -u $user -p $DatabaseName > Database.sql
+    2.导出表结构：
+        命令：mysqldump -u $user -p --tables $Database table > Table.table.sql   #--tables参数可加可不加
+    3.-d参数：如果我们只是想要导出数据库或者表结果不导出数据的话，我们需要家-d参数，否则就必须不加该参数
+2.导入数据库：
+    1.命令：
+    mysql -u root -p olddatabase < database.sql   #注意olddatabase必须要存在
+    2.导入表结构命令：
+    Terminal -> use database; -> source .table.sql 文件导入
+
+

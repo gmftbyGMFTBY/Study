@@ -1,0 +1,52 @@
+## curl notebook
+
+1. 搜索网页并打印到标准输出
+    ```curl www.sina.com```
+
+2. 搜索网页或者文件的内容并缓冲到文件中,**支持正则表达式**
+    ```curl www.sina.com -o filename
+       curl www.sina.com -O filename    # 保留远端文件的名称,但是需要具体到某一个文件
+    ```
+
+3. 有些网页时301错误的话，我们需要自动跳转到一个新的网页
+    ````curl -L www.sina.com```
+
+4. 显示http头信息
+    ```curl -i www.sina.com    # 显示response并打印网页源代码```
+    ```curl -I www.sina.com    # 只显示response```
+
+5. 显示http的详细通讯过程
+    ```curl -v www.sina.com```
+    ```curl --trace output.txt www.sina.com```
+
+6. 发送表单信息
+    1. GET : 
+        利用CSDN的搜索功能发送GET请求
+        ```curl so.csdn.net/so/search/s.do?q=java -o test.html```
+    2. POST : 
+        * `-X`参数可以支持更多的http动词，比如POST等等
+        * `-d`参数可以支持对POST动作的数据提交
+        ```curl -X POST -d "username=xxx&password=xxxx" [URL]```
+7. 文件上传
+    * upload / press 都是提交的form表中的input代码的name字段，用这个字段来上传标识
+    ```curl --form upload=loaclfilename --form press=xxx [URL]```
+
+8. User Agent字段
+    ```curl --user-agent "[User Agent]" [URL]```
+
+9. cookie
+    1. 保存服务器返回的cookie
+        ```curl -c cookies [URL]```
+    2. 上传cookie
+        ```curl -b cookies [URL]```
+    3. 
+        # 先获得cookie并保存在本地,检查cookie文件中是否是True有效的
+       ```curl -c cookie --dump-header head.txt -d "username=xxx&password=xxx" [URL]```
+        # 将之前获得的cookie使用-b参数携带访问网站，实现模拟登录,但是实际中我利用这种方法访问教务处却出现问题，不知道怎么解决，网上也没有相关的问题可供参考，所以我先记录着等待解决，这几天也会一直思考这个问题，好像也不是User-Agent的问题，感觉某不着头脑
+       ```curl -b cookie -L --dump-header head2.txt [URL]
+
+10. 增加和修改http头
+    ```curl --header "Content-Type:xxxx..." [URL]```
+
+11. 声明来源
+    ```curl --referer www.sina.com```

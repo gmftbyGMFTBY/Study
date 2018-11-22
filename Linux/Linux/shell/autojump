@@ -1,0 +1,32 @@
+Autojump : a quickest way to navigate Linux File System
+
+1. 激活autojump:
+    1. autojump工具必须要在终端激活才可以使用
+    2. 激活autojump
+        1. source /usr/share/autojump/autojump.sh
+        2. 持久化
+            vim .bashrc
+            source /usr/share/autojump/autojump.sh
+
+2. autojump测试使用
+    1. autojump使用必须要跳跃和前往之前前往过的目录
+        可以不用一次直达，会对目录内容进行拼接
+    2. j函数是autojump的封装
+    3. 版本号
+        autojump -v / j -v
+    4. 目录跳跃
+        j dir
+        jc dir
+        jo dir    # 跳跃至指定目录并打开对应的文件管理器
+    5. 统计信息
+        表示在某几个目录中的停留时间和已经存在的**记录跳跃点**
+        j --stat
+    6. 日志记录和目录数据库
+        1. 日志记录和目录数据库存放在目录
+            /home/lantian/.local/share/autojump
+        2. 帮助
+            j --help
+
+3. 注意事项
+    1. autojump可以在激活之后记录跳跃点到目录数据库中，也只能进入去过的目录
+    2. 特殊字符开头的目录可能会无法访问(-)

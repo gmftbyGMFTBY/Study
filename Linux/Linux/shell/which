@@ -1,0 +1,15 @@
+# 表示对应的可执行文件的地址
+
+# 显示一个对应的匹配的可执行文件的用户目录地址
+which executable_file
+
+# 显示多个匹配项
+which -a executable_file
+    which -a which
+        /usr/bin/which
+        /bin/which
+    which which
+        /usr/bin/which
+
+# 检查多个文件
+which enca which cheat

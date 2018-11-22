@@ -1,0 +1,238 @@
+"笔记
+"set nobackup 取消备份
+"set noswapfile   取消交换区
+"set encoding=utf-8  设置编码
+set cursorline  "设置高亮当前行
+
+
+"set something for python
+"set filetype=python
+"au BufNewFile,BufRead *.py,*.pyw setf python
+"set helplang=cn "chinese help manual for python
+"syntax enable
+"syntax on
+"set number
+"colorscheme desert "set color
+"set guifont=Consolas:h12:cANSI  "English text
+"set guifontwide=SimSun-ExtB:h12:cGB2312
+"set tabstop=4   "Tab = four spaces
+"set expandtab   "Tab -> spaces which changed
+"set autoindent   "\n -> auto indent
+"set autoread    "When file was changed outside the file ,notify and renew
+"set history=400    "Vim memory the number of the history change
+"set nocompatible    "Vim keyboard only
+"set confirm    "When process file which need to memory or readonly #warn#
+"set smartindent    "smart indent
+"set shiftwidth=4
+autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
+autocmd FIleType python set omnifunc=pythoncomplete#Complete
+
+"Start the file auto search to run the different ways to indent the file
+set history=1000
+filetype on
+filetype indent on
+
+
+
+"搜索的模式
+"高亮搜索结果
+set hlsearch
+"忽略大小写的搜索
+set ignorecase
+"逐步搜索
+set incsearch
+
+set nocompatible
+set autoread
+set shortmess=atI    "Delete the boring Somuli help message
+
+"set something for C/C++
+set encoding=utf-8      "setting code
+set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936     "setting cod
+set fileencodings=utf-8,ucs-bom,chinese     "setting code
+set langmenu=zh_CN.UTF-8  "language setting
+set nu      "set number of the head of the line
+set ruler
+set showcmd
+syntax enable
+syntax on
+colorscheme delek       "set the scheme for my vim
+set showmatch
+set confirm    "When process file which need to memory or readonly #warn#
+set autoindent
+set cindent
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+set expandtab
+
+
+"<F5> - Compile C/C++/Python/Java
+"<F6> - Run C/C++/Python/Java
+func! CompileGcc()
+	exec "w"
+	let compilecmd="!gcc "
+	let compileflag="-o %< "
+	if search("mpi\.h") != 0
+		 let compilecmd = "!mpicc "
+    endif
+	if search("glut\.h") != 0
+         let compileflag .= " -lglut -lGLU -lGL "
+    endif
+	if search("cv\.h") != 0
+	     let compileflag .= " -lcv -lhighgui -lcvaux "
+    endif
+    if search("omp\.h") != 0
+	     let compileflag .= " -fopenmp "
+    endif										    
+    if search("math\.h") != 0
+	     let compileflag .= " -lm "
+    endif
+	exec compilecmd." % ".compileflag
+endfunc
+func! CompileGpp()
+	exec "w"
+	let compilecmd="!g++ "
+	let compileflag="-o %< "
+	if search("mpi\.h") != 0
+		let compilecmd = "!mpic++ "
+	endif
+    if search("glut\.h") != 0
+		let compileflag .= " -lglut -lGLU -lGL "
+	endif
+	if search("cv\.h") != 0
+		let compileflag .= " -lcv -lhighgui -lcvaux "
+	endif
+	if search("omp\.h") != 0
+	    let compileflag .= " -fopenmp "
+	endif
+	if search("math\.h") != 0
+	    let compileflag .= " -lm "
+	endif
+	exec compilecmd." % ".compileflag
+endfunc
+
+func! RunPython()
+	exec "!python3 %"
+endfunc
+
+func! CompileJava()
+	exec "!javac %"
+endfunc
+
+func! Runshell()
+    exec "!bash %"
+endfunc
+
+
+func! CompileCode()
+	exec "w"
+	if &filetype == "cpp"
+		exec "call CompileGpp()"
+	elseif &filetype == "c"
+		exec "call CompileGcc()"
+	elseif &filetype == "python"
+	    exec "call RunPython()"
+	elseif &filetype == "java"
+	    exec "call CompileJava()"
+    elseif &filetype == "sh"
+        exec "call Runshell()"
+	endif
+endfunc
+
+func! RunResult()
+	exec "w"
+	if search("mpi\.h") != 0
+		exec "!mpirun -np 4 ./%<"
+	elseif &filetype == "cpp"
+		exec "! ./%<"
+	elseif &filetype == "c"
+		exec "! ./%<"
+    elseif &filetype == "python"
+		exec "call RunPython()"
+    elseif &filetype == "java"
+		exec "!java %<"
+    elseif &filetype == "sh"
+        exec "call Runshell()"
+	endif
+endfunc
+
+func! DebugC()
+    exec "w"
+    if &filetype == "cpp"
+        exec "!g++ -g % && gdb a.out"
+    elseif &filetype == "c"
+        exec "!gcc -g % && gdb a.out"
+    endif
+endfunc
+
+" pyflakes for python3 on <F4>
+func! Pyflakes()
+    exec "w"
+    exec "!pyflakes %"
+endfunc
+
+map <F5> :call CompileCode()<CR>
+imap <F5> <ESC>:call CompileCode()<CR>
+vmap <F5> <ESC>:call CompileCode()<CR>
+map <F6> :call RunResult()<CR>
+map <F4> :call Pyflakes()<CR>
+map <F7> :call DebugC()<CR>
+
+
+" FOR [,(, {
+
+inoremap ( ()<LEFT>
+inoremap [ []<LEFT>
+inoremap { {}<LEFT>
+inoremap " ""<LEFT>
+inoremap ' ''<LEFT>
+inoremap < <><LEFT>
+
+"function! RemovePairs()
+"    let s:line = getline(".")
+"    let s:previous_char = s:line[col(".")-1]
+"
+"    if index(["(","[","{"],s:previous_char) != -1
+"        let l:original_pos = getpos(".")
+"        execute "normal %"
+"        let l:new_pos = getpos(".")
+"        " only right (
+"        if l:original_pos == l:new_pos
+"            execute "normal! a\<BS>"
+"           return
+"        end
+"
+"        let l:line2 = getline(".")
+"        if len(l:line2) == col(".")
+"            execute "normal! v%xa"
+"        else
+"            execute "normal! v%xi"
+"        end
+"    else
+"        execute "normal! a\<BS>"
+"    end
+"endfunction
+
+"function! RemoveNextDoubleChar(char)
+"    let l:line = getline(".")
+"    let l:next_char = l:line[col(".")]
+"
+"    if a:char == l:next_char
+"        execute "normal! l"
+"    else
+"        execute "normal! i" . a:char . ""
+"    end
+"endfunction
+
+"inoremap <BS> <ESC>:call RemovePairs()<CR>a
+"inoremap ) <ESC>:call RemoveNextDoubleChar(')')<CR>a
+"inoremap ] <ESC>:call RemoveNextDoubleChar(']')<CR>a
+"inoremap } <ESC>:call RemoveNextDoubleChar('}')<CR>a
+"inoremap > <ESC>:call RemoveNextDoubleChar('>')<CR>a
+
+"JavaScript for Vim
+"打开javascript折叠
+let b:javascript_fold=1
+"打开javascript对dom,html,css支持
+let javascript_enable_domhtmlcss=1

@@ -1,0 +1,82 @@
+１．Config:
+    git config --global user.name "..."
+    git config --global user.email "..."
+２．Create:
+    １．创建版本库：版本库又可以叫做版本仓库，任何一个目录都可以称得上是一个空一个版本库(Git的管理下),我们需要做的就是生成Git的管理系统而已
+    ２．git init:
+        生成了Git的仓库，并且我们通过 ls -la 会发现目录下多了一个.git隐藏目录
+    ３．git add [FILES]：我们一次只能添加一份到暂存区
+    ４．git commit -m "Words for commit"：我们一次可以将暂存区的所有的add文件一次提交
+    ５．git status:
+        查看当前的git控制的状态 add?commit?
+    ６．git diff:
+        注意该命令要在add和commit前使用，我们的diff命令只判断当前的文件状态和上一次最新的add或者commit的状态的区别,但是文件的增加看不出来,可以添加两commit_id来判断两个版本库的差别
+    ７．版本回退:
+        １．git log:
+            这里就显示出来我们的git commit -m 之后的字符串的作用了，我们如果版本修改了很多很多遍，我们忘记了修改的具体的细节，但是可以通过commit的提交的简要的信息可以掌握这个版本的具体的情况，还可以显示该版本的修改者和修改日期
+            这里如果想要简要的查看版本的情况，可以添加参数--pretty=oneline
+            并且这里的前面的数字代表的是我们的当前的版本号，因为存在多人操作的可能性，我们的版本号非常的长的，但是我们在版本回退的时候只需要前置的一些数字即可，我们的Git会进行自动的查找
+        ２.版本回退：
+            我们的每一次的commit都会在当前的master分支上创造一条时间线，我们的现在认为这个HEAD指向额是我们的当前的时间点就好
+            当前的版本是HEAD，之前是HEAD^,HEAD^^...HEAD~[number]
+            git reset --hard HEAD^/HEAD^^.../HEAD~[n]/commit id
+            这里的--hard参数我们先用着
+            git reflog - 记录我们的git中的每一次命令和对应的版本号没从而帮助我们实现定点的回溯版本
+        ３．工作区和暂存区:
+            １．工作区:
+                我们建立了git的目录可以是一个工作区
+            ２．版本库：
+                工作区下的.git文件称为工作区的版本库
+                版本库中有很多的有用的东西，例如被称为stagen(index)的暂存区，以及git为我们创建的第一个分支master以及指向master的指针HEAD
+            ３．关系：
+                add - 将工作区修改的内容添加到暂存区
+                commit - 将暂存区的文件修改内容添加到当前分支，因为git为我们创建了一个唯一的master分支，所以我们的commit是提交到master上的，所有的修改都累计到我们的暂存区，然后同意提交一次修改的工作区的版本
+                如果工作区没有任何的修改，我们的工作区就是干净的,clear
+        ４．撤销修改；
+            １．没有add:
+                １．手动的清楚我们的修改至和最新一次的add或者commit一致
+                ２．git checkout -- [file]清楚文件的修改至上一次的版本
+            ２．add没有commit:
+                git reset HEAD [file]撤销我们add至工作区,注意这个是针对具体文件的撤销，我们只撤销了具体的file文件的修改，其他的文件的修改韩式在暂存区中
+                git checkout -- [file]撤销工作区修改至最新的版本
+            ３．commit:
+                commit到我们的本地的仓库没有问题，我们只需要回退版本就可以
+                git reset --hard HEAD^/HEAD^^/.../commit_id
+            ４．push到远程仓库:
+                Game Over!
+    ８．远程仓库 - GitHub & Git：
+        １．GitHub账号设置:
+            １．SSH Key:我们在本地生成RSA密钥对，并将我们的公钥发布到我们的GitHub上，然后我们本地push相应的修改内容一并同步到远程的GitHub账号上,GitHub支持我们添加多个公钥，绑定多台电脑
+            ２．Create a new repo:
+            我们在GitHub上创建一个新的版本库(repo)，记录下我们的名字
+        ２．Push:
+            １．关联本地版本库：
+            　　我们已经在GitHub上创建了一个新的版本库，我们现在需要和本地的版本库相关联
+                git remote add origin git@github.com:[username]/[reponame].git
+                如果需要变更目标地址需要用到命令如下
+                git remote set-url origin git@github.com:[username]/[reponame].git
+            ２．push更新我们的GitHub上的版本库：
+                git push -u origin master  //第一次将当前的主分支提交到我们的远程的版本库上
+                git push origin master  //因为-u参数的原因，我们之后的push只需要写明远程库和当前的版本库即可
+        ３．Clone from GitHub:
+            我们不仅仅可先在GitHub上创建一个空的版本库然后将本地的绑定在更新，我们还可以从远程的版本库中克隆下来一个版本库然后在更新
+            就像我们将别人的公开的代码那袭来自己查看并修改一样
+            git clone git@github.com:[username]/[reponame].git
+            该命令将我们的远程建立的版本库同步到当前文件夹下
+
+
+    9.给github账户添加多个ssh连接公钥:
+        1.cd ~/.ssh/
+        2.ssh-keygen -t rsa -C "你的github用户名"
+        3.一路回车到底，生成两个文件,id_rsa.pub公钥文件 , id_rsa私钥文件
+        4.将公钥文件复制到github的ssh-add上
+        5.检查步骤:
+            ssh -T git@github.com   // 本机电脑尝试利用ssh连接github
+            如果出现ssh_agent的错误可以使用以下两个语句添加ssh到电脑中
+            eval "$(ssh-agent -s)"
+            ssh-add
+    10.Git上传被拒绝的解决思路
+	首先,我们需要认识到,我们的提交被拒绝的原因在于别的机器push或者在github上直接操作已经更新过了我们的远程仓库,我们需要对本地的仓库进行更新然后在提交
+	    1.git pull
+        2.git push ....
+    git pull 相当于从远端下载最新提交merge到本地，是最方便的(相对于fetch来说)

@@ -1,0 +1,2 @@
+2017.10.17
+python的selenium模块很奇怪，有时候运行获取driver.current_url是正确的有时候会出现莫名其妙的错误，这里存疑，等待解答

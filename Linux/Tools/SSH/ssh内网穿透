@@ -1,0 +1,15 @@
+[参考资料](https://blog.mythsman.com/2017/01/14/1/)
+
+1. 内网B连接公网服务器A
+   将内网B的22号端口映射到公网A的1111端口上，二者建立通信
+ssh -NfR 1111:localhost:22 user_on_A@A_IP -p 22
+
+2. A 上检查是否开启的反向ssh
+ss -ant | grep 1111
+
+3. 在A中ssh到自己的 1111 端口即可登录内网主机
+ssh user_on_B@localhost -p 1111
+
+4. 持久连接，反向ssh可能不稳定，如果端口可以使用autossh自动续连
+autossh -M 2222 -NfR 1111:localhost:22 user_on_A@A_IP -p 22
+

@@ -1,0 +1,4 @@
+2017.2.25
+    dpkg: 依赖关系问题使得 sogoupinyin 的安装工作不能继续:
+    记下来使用
+    sudo apt-get install -f    # 修复即可

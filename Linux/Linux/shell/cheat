@@ -1,0 +1,17 @@
+1. cheat是为Linux用户发行的具有交互式备忘录应用程序，可以提供显示笔记(命令行)
+2. cheat重要配置
+    * .bashrc中加入 EDITOR 环境变量保证自定义编辑的命令的默认编辑器
+    * 可以更改个人自定义的cheat到一个新的目录中，需要在.bashrc中定义环境变量 DEFAULT_CHEAT_DIR
+    * 可以指定多个生效目录 : 
+        CHEATPATH 环境变量
+        export CHEATPATH='$CHEATPATH:/path/to/more/cheats'
+3. 必要的参数
+    * -d : 可以查看对应的指定好的cheat目录，包括默认的系统加载的cheat目录(python下)
+    * cheat name_of_cmd : 查询对应的命令的备忘录
+    * -e : 根据定义的默认的编辑器对备忘录做出修改和补充
+    * -v : 查看版本
+    * -h : 帮助界面
+    * -l : 显示已经存在的所有备忘录
+
+4. BUG和软件的注意事项
+    * 自定义的目录下不要存放子目录，只能是文件

@@ -1,0 +1,70 @@
+MAIN:
+Pdb - Python Debugger
+Pdb是Python的标准模块，支持我们类似与C/C++中的gdb的相关的功能（虽然有所欠缺，但是非常的优秀）
+
+1.
+首先阐明我发现的一个缺陷：
+    在C/C++中，我们可以使用run < xxx.dat的形式对调试文件重定向输入
+    但是在Pdb中不存在这样的机制，我们无论在何处进行的重定向默认是一个调试命令的批处理文件
+    
+2.以下的自学总结来自于官方文档：
+    1.pdb是一款集成在python内部的交互式的调试器（模块），支持我们设置断点和行集单步调试，可以允许用户自由的检查栈空间，产看源代码，自由的调试占空间的数据和代码，支持事后检查的机制
+    2.pdb为了实现功能扩展，底层采用cmd和bdb两个类来实现
+    3.调用pdb的常用的方式：
+        1.调试模块中的函数：
+            在交互式的解释器下
+            import pdb
+            import your-module
+            pdb.run("your-module.function( arg ... )")实现我们的调用调试器
+            另外，我们如果要调试的对象或者函数，模块如果出现了core dumped的情况的话，我们还可以：
+            your-module.xxxx
+            -> Core dumped
+            pdb.pm() - 利用事后检查机制，进入我们的异常栈中进行调试检查
+            
+            上述的方法中需要注意一点，就是如果我们进入pdb界面中如果没有发现call这样的额字样，我们需要输入命令s来启动调用就可以啦
+        2.调试整个模块：
+            在命令行下：
+            pythonx.x -m pdb py-script.py
+            启动我们的pdb检查机制，该状态下默认开启事后检查机制，每一次的自动开启保留上一次的pdb调试状态
+        3.中断运行：
+            在我们的要检查调试的脚本中，我们加入语句
+            import pdb
+            pdb.set_trace()的时候，在我们运行该语句处的时候会自动的启动pdb界面开始调试
+    4.常用命令：
+        1.help / h : 打开pdb帮助界面，现实所有的命令以便帮助调试
+        2.run / restart : 启动调试或者重新调试，启动调试的函数的参数是字符串，其中表示的是我们的要调试的模块或者相应的函数
+        3.set_trace : 在上述已经描述过了，表示开始调试
+        4.runcall : 和run类似，但是不是采用字符串的形式，而是采用函数对象的形式，后面的参数是要调试的函数的参数列表，在交互式中使用
+        5.!expression : 执行表达式
+        6.w / where : 查看当前的所有的栈空间，并用 > 显示我们当前所在的栈的位置 , 从旧到新打印，新栈控件的在下面
+        7.d / down : 切换到下一个栈空间，新的栈空间
+        8.u / up : 切换到上一个栈空间，旧的栈空间
+        9.b / break : 设置断点
+            b filename.function / b filename:lineno / b lineno(当前文件) / b
+            函数入口设置断点　　　　 行设置               行设置               显示所有的断点
+        10.tbreak : 用法和b相同，但是是一次性断点
+        11.cl / clear : cl bpnumber / cl 清空制定断点或者清空所有断点，后者会进行询问
+        12.disable / enable : 禁用和启用断点
+        13.condition : condition bpnumber condition-expression : 给断点加上启动的状态，满足状态才会启动断点，删除这个状态只需要改为相应的永真即可
+        14.commands : 为断点加入触发器，设定调试的命令集合，最后用end最为结束，清楚这个断点的触发器只需要重新设定并只追加end即可
+        15.step / s : 单步，进入函数
+        16.next / n : 单步，跳过函数
+        17.until : until lineno 一直运行到指定的行
+        18.r / return : 跳出函数
+        19.c / continue : 运行至下一个断点
+        20.j / jump : 跳跃执行，重复执行代码或者忽略执行代码，但是不运行中途跳入for或者finally/else语句中
+        21.l / list : 
+            罗列源代码，默认现实当前行的上下５行，l lineno / l lineno1,lineno2
+            -> : 当前行位置
+            >> : 异常位置
+        22.ll / longlist : 全部罗列
+        23.a / args : 现实当前栈空间的参数（函数参数）
+        24.p / print / pp / pprint : 打印变量，相当于是执行print函数，pp高效打印
+        25.whatis : 显示引用的数据类型
+        26.source : 函数名作为参数，可以现实函数的所有源代码
+        27.display / undisplay : 添加动态监视器，设定表达式 display expression,在当前的栈先，如果该表达式（变量）的值改变了显示新旧值状态
+        28.interact : 在pdb中启动交互式解释器，调试检查pdb中的全局的所有的变量
+        29.alias : 自定义命令
+            alias name commands-expression
+            设定name的命令的形式,使用python的表达式语句
+            可以为命令设定参数，%1,%2...%*来进行替换

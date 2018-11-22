@@ -1,0 +1,7 @@
+1.为指定的 python 版本安装确定额python包
+    eg : python3.6 -m pip install xxxxx
+
+2.IPython 和 python　只要是用版本的可以共用目录下的包
+
+3.pip show xxxxx  可以查看安装的包的详细的信息
+

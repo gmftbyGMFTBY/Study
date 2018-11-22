@@ -1,0 +1,16 @@
+标签管理：
+    我们通常在查找我们的以前commit的版本的时候，是不会随便的说版本的commit_id的，这时候我们就需要一个具体的指向一个commit的标签(指针)来显著的标记一个特定的commit
+打标签:
+    git tag [tagname] - 默认的tag是达到最新的commit上的
+    git tag [tagname] [commit_id] - 对摸一个commit版本打标签
+    git tag - 查看所有的标签，字母排序
+    git show [tagename] - 查看具体的tag的信息
+    git tag的参数：
+        -a [tagename]
+        -m [说明性的文字]
+    git tag -d [tagename] - 删除特定的标签
+    因为我们创建的标签都是在本地，我们想要将tag推到远程需要用命令：
+    git push origin [tagname]
+    git push origin --tags - 全部推送
+    远程标签的删除:
+        git push origin :refs/tags/[tagname]

@@ -1,0 +1,9 @@
+cd /Users/jean-louisbouquard/Enseignement/BIT_teaching/optimization/opti_courses
+echo "Solve the relaxed (continuous) problem f2d_40_10.dat"
+echo " "
+echo "glpsol -m mathmod2.mod -d glp_40_10.dat -o lp2_40_10.res --nomip > ly2_40_10.res"
+glpsol -m mathmod1.mod -d glp_40_10.dat -o lp2_40_10.res --nomip > ly2_40_10.res
+echo " "
+more lp2_40_10.res
+# echo " "
+# more ly2_40_10.res

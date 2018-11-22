@@ -1,0 +1,86 @@
+## Python-threading
+
+Python多线程库
+
+```python
+import threading
+```
+
+---
+
+1. Python线程库基础使用函数
+
+   * `threading.active_count()` : 当前共有多少个线程
+   * `threading.enumerate()` : 线程句柄列表
+   * `threading.current_thread()` : 当前进程句柄
+   * `thread = threading.Thread(target = func_name, name = 'T1', args = (arg1, arg2, arg3, ..., q))` : 定义新的线程
+   * `thread.start()` : 定义线程启动
+
+2. `join`的应用
+
+   * 在没有`join`子线程的时候，多线程之间是同时的竞争，不存在同步的关系
+
+   * `join` : 
+
+     ```python
+     thread.join()
+     ```
+
+     * `join` : 之后的工作任务需要等待`join`结束才可以继续进行，所谓的同步
+
+   * 运行中都有什么线程
+
+     * 主线程(创建子线程的线程)
+
+     * 子线程
+
+       子线程如果使用`join`将会阻塞
+
+       1. 父进程
+       2. 之后要开启的其他子线程(因为主线程被阻塞，无法执行之后的其他的子线程的创建和其他的操作)
+
+3. `Queue`功能
+
+   1. 多线程的结果是没有返回值的，我们需要将运算结果放置在一个消息队列里，供其他的线程和进程读取，返回值实现
+
+   2. 使用
+
+      ```python
+      import queue    # Queue / queue 都是线程安全的队列
+
+      # 子进程的返回值加入到这个线程安全队列中，必须将队列按照参数传入
+      threading.Thread(target = job, args=(data, q))
+
+      # 获取一个值
+      q.get()
+
+      # 加入一个值
+      q.put()
+      ```
+
+4. GIL
+
+   1. 线程并不是平均分配的，一次只有一个线程在内部做一个特定的处理操作
+   2. 内不是不断的切换
+   3. 建议 : 
+      * I/O密集型 : 多线程
+      * 计算密集型 : 多进程
+
+5. `Lock`锁
+
+   1. 前一个线程的结果对后一个线程的运算结果有影响的时候，必须要对线程做同步
+
+   2. 应用
+
+      ```python
+      lock = threading.Lock()
+      # ----
+      # 中间的code中的变量一次只能被一个线程访问到，其他的线程禁止处理
+      lock.acquire()
+      # code
+      lock.release()
+      ```
+
+      ​
+
+      ​

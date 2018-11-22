@@ -1,0 +1,14 @@
+2017.1.10
+    在python中，获得当前执行的主脚本的方法
+    1. __file__ : 
+        * 相对路径 : 使用相对路径加载的时候
+        * 绝对路径
+            import os
+            os.path.realpath(__file__)
+            或者
+            我们通常如果使用包的方式导入的话，__file__就是绝对路径
+        * import math
+          math.__file__
+          这样的使用方式我们可以用来查询包的存放的物理地址，实际上这就是上面提到的import的绝对路径的使用方式
+    2. import sys
+       sys.argv[0]
