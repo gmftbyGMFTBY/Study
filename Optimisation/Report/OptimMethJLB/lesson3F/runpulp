@@ -1,4 +1,0 @@
-cd /Users/jean-louisbouquard/Enseignement/BIT_teaching/optimization/opti_courses
-echo "Solve the pb f2d_10_05.dat using GLPK - PULP - Python"
-echo " "
-./f2sumT.py
