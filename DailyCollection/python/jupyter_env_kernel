@@ -1,0 +1,2 @@
+# 把当前的内核加入到 jupyter 可以识别的名单里面，jupyter 就可以使用虚拟的环境的 kernel
+python -m ipykernel install --user
